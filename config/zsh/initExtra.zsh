@@ -1,0 +1,26 @@
+zstyle ':completion:*:*:docker:*' option-stacking yes
+zstyle ':completion:*:*:docker-*:*' option-stacking yes
+eval $(thefuck --alias)
+EDITOR="nvim"
+
+# adapted from https://github.com/spwhitt/nix-zsh-completions/issues/32#issuecomment-705315356
+function _nix() {
+  local ifs_bk="$IFS"
+  local input=("${(Q)words[@]}")
+  IFS=$'\n'$'\t'
+  local res=($(NIX_GET_COMPLETIONS=$((CURRENT - 1)) "$input[@]"))
+  IFS="$ifs_bk"
+  local tpe="$res[1]"
+  local suggestions=(${res:1})
+  if [[ "$tpe" == filenames ]]; then
+    compadd -fa suggestions
+  else
+    compadd -a suggestions
+  fi
+}
+
+export PATH=$PATH:$(go env GOPATH)/bin
+
+compdef _nix nix
+source ~/.config/zsh/p10k.zsh
+source ~/.config/zsh/work.zsh
