@@ -28,7 +28,7 @@
     # Enable the X11 windowing system.
     enable = true;
     # Enable the GNOME 3 Desktop Environment.
-    desktopManager.gnome3.enable = true;
+    desktopManager.gnome.enable = true;
     displayManager = {
       autoLogin = {
         enable = true;
@@ -40,7 +40,7 @@
   };
 
   # Allow VNC via GNOME Remote Desktop
-  services.gnome3.gnome-remote-desktop.enable = true;
+  services.gnome.gnome-remote-desktop.enable = true;
   networking.firewall.allowedTCPPorts = [ 5900 ];
 
   # Disable sleeping for this box as it'll be used via ssh most of the time
