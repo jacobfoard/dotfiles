@@ -7,8 +7,8 @@
     nixpkgs-master.url = "github:nixos/nixpkgs/master";
 
     # Stable for when shit is broken
-    nixpkgs-stable-darwin.url = "github:nixos/nixpkgs/nixpkgs-20.09-darwin";
-    nixos-stable.url = "github:nixos/nixpkgs/nixos-20.09";
+    nixpkgs-stable-darwin.url = "github:nixos/nixpkgs/nixpkgs-21.05-darwin";
+    nixos-stable.url = "github:nixos/nixpkgs/nixos-21.05";
 
     flake-utils.url = "github:numtide/flake-utils";
     darwin = {
@@ -17,7 +17,8 @@
     };
 
     home-manager = {
-      url = "github:nix-community/home-manager/master";
+      # url = "github:nix-community/home-manager/master";
+      url = "github:jshholland/home-manager/master";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -50,7 +51,7 @@
               stable = nixpkgs-stable.legacyPackages.${system};
 
               # Temporaray overides for packages we use that are currently broken on `unstable`
-              thefuck = final.stable.thefuck;
+              thefuck = prev.thefuck.overrideAttrs (old: { doInstallCheck = false; });
 
               # Install colorscheme via input so it just works
               vimPlugins = prev.vimPlugins // {

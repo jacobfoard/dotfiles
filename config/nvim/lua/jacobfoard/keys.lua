@@ -96,10 +96,6 @@ Utils.tab = function()
         vim.api.nvim_feedkeys(t("<Plug>(vsnip-jump-next)"), "i", true)
       end
       return ""
-    elseif vim.fn["UltiSnips#CanExpandSnippet"]() == 1 then
-      return t("<C-R>=UltiSnips#ExpandSnippet()<CR>")
-    elseif vim.fn["UltiSnips#CanJumpForwards"]() == 1 then
-      return t("<C-R>=UltiSnips#JumpForwards()<CR>")
     end
     return t "<Tab>"
   end

@@ -1,3 +1,5 @@
+zstyle ':completion:*' use-cache on
+zstyle ':completion:*' cache-path ~/.zsh/cache-path
 zstyle ':completion:*:*:docker:*' option-stacking yes
 zstyle ':completion:*:*:docker-*:*' option-stacking yes
 eval $(thefuck --alias)
@@ -24,3 +26,13 @@ export PATH=$PATH:$(go env GOPATH)/bin
 compdef _nix nix
 source ~/.config/zsh/p10k.zsh
 source ~/.config/zsh/work.zsh
+
+flakifiy() {
+  if [ ! -e flake.nix ]; then
+    nix flake new -t github:nix-community/nix-direnv .
+  elif [ ! -e .envrc ]; then
+    echo "use flake" > .envrc
+    direnv allow
+  fi
+  ${EDITOR:-vim} flake.nix
+}

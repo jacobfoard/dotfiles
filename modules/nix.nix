@@ -2,7 +2,7 @@
 
 {
   nix = {
-    package = pkgs.nixFlakes;
+    package = pkgs.nixUnstable;
     binaryCaches = [
       "https://cache.nixos.org/"
       "https://nix-community.cachix.org"

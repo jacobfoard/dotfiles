@@ -35,6 +35,7 @@
         r = "cd `git rev-parse --show-toplevel`";
         dots = "~/code/github.com/jacobfoard/dotfiles";
         jf = "~/code/github.com/jacobfoard";
+        gmi = "pwd | sed 's;.*code/;;' | xargs go mod init";
       };
 
       initExtraFirst = builtins.readFile ../config/zsh/initExtraFirst.zsh;

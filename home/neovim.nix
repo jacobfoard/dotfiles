@@ -34,7 +34,7 @@ in
       tree-sitter
 
       # Language servers
-      # TODO: See if will work on darwin
+      # TODO: This doesn't work on darwin, but probably could with some effort
       # omnisharp-roslyn
       mono
       dotnet-sdk_5
@@ -44,6 +44,7 @@ in
       nodePackages.vscode-json-languageserver
       nodePackages.yaml-language-server
       rnix-lsp
+      rust-analyzer
     ] ++ lib.optional (!stdenv.isDarwin) sumneko-lua-language-server;
   };
 

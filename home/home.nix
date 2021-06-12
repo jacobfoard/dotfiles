@@ -14,7 +14,11 @@
 
     direnv = {
       enable = true;
-      enableNixDirenvIntegration = true;
+      nix-direnv = {
+        enable = true;
+        enableFlakes = true;
+      };
+      # enableNixDirenvIntegration = true;
     };
 
     htop = {
@@ -66,6 +70,7 @@
   ] ++ lib.optionals stdenv.isDarwin [
     cocoapods
     m-cli # useful macOS CLI commands
+    bazel_4
   ] ++ lib.optionals stdenv.isLinux [ ];
 
   # This value determines the Home Manager release that your configuration is compatible with. This

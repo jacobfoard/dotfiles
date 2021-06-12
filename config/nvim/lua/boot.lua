@@ -34,7 +34,6 @@ require("packer").startup(function()
   use "hrsh7th/nvim-compe"
   use "hrsh7th/vim-vsnip"
   use "hrsh7th/vim-vsnip-integ"
-  use "SirVer/ultisnips"
   use "onsails/lspkind-nvim"
   use "glepnir/lspsaga.nvim"
   use "RRethy/vim-illuminate"
