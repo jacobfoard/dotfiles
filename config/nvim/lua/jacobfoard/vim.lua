@@ -13,6 +13,7 @@ endfunction
 command! NixFmt call NixFmt()
 command! PackerFmt call PackerFmt()
 command! OpenDiagnostics lua vim.lsp.diagnostic.set_loclist()
+command! Spectre lua require('spectre').open()
 
 function! TermCD()
   let currDir = getcwd()

@@ -11,6 +11,12 @@
           IdentityAgent = "~/.gnupg/S.gpg-agent.ssh";
         };
       };
+      cerf = {
+        hostname = "10.0.0.36";
+        extraOptions = {
+          SetEnv = "IS_REMOTE=true";
+        };
+      };
     };
   };
 }

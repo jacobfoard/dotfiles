@@ -1,4 +1,4 @@
-. /nix/store/yhl7zlbnw5lp5i96dwdwc3466l7hk4zy-set-environment
+. /nix/store/h67gy9gbjpy26nwg1a0gw6alk61wwaji-set-environment
 export GPG_TTY=$(tty)
 if [ -z $IS_REMOTE ]; then
   export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)

@@ -56,6 +56,9 @@ local servers = {
   vimls = {},
   yamlls = {},
   rnix = {},
+  tsserver = {},
+  rust_analyzer = {},
+  sourcekit = {},
   
   jsonls = {
     commands = {
