@@ -2,9 +2,10 @@ require("jacobfoard.prefs")
 
 -- Packer get installed via nix so we don't need to bootstrap
 require("packer").startup(function()
-    use 'wbthomason/packer.nvim'
+  use "wbthomason/packer.nvim"
   -- Theme stuff
-  use "glepnir/galaxyline.nvim"
+  -- use "glepnir/galaxyline.nvim"
+  use "windwp/windline.nvim"
   -- use {"jacobfoard/vim-code-dark", branch = "personal-changes"}
   use "lewis6991/gitsigns.nvim"
   use "APZelos/blamer.nvim"
@@ -17,6 +18,8 @@ require("packer").startup(function()
 
   -- use "sheerun/vim-polyglot"
   use "LnL7/vim-nix"
+
+  use "iamcco/markdown-preview.nvim"
 
   -- Highlight colors inline like #ffffff
   use "norcalli/nvim-colorizer.lua"
@@ -43,7 +46,7 @@ require("packer").startup(function()
   use "ray-x/lsp_signature.nvim"
 
   use "folke/which-key.nvim"
-
+  use "lambdalisue/pastefix.vim"
 
   -- Misc
   -- use {"fatih/vim-go", run = ":GoUpdateBinaries", ft = "go"}
@@ -82,5 +85,4 @@ require("jacobfoard.tmux")
 require("jacobfoard.tree")
 require("jacobfoard.treesitter")
 require("jacobfoard.vim")
-
 

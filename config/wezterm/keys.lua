@@ -17,7 +17,7 @@ wezterm.on("navigateUp", function(window, pane) handleNavigation("Up", window, p
 wezterm.on("navigateDown", function(window, pane) handleNavigation("Down", window, pane) end)
 
 return {
-  {key  = "MediaNextTrack", action = "ShowTabNavigator"},
+  {key = "MediaNextTrack", action = "ShowTabNavigator"},
   -- tmux things
   {key = "w", mods = "LEADER", action = "ShowTabNavigator"},
   {key = "z", mods = "LEADER", action = "TogglePaneZoomState"},

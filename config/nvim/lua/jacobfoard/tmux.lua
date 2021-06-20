@@ -1,5 +1,5 @@
 local map = vim.api.nvim_set_keymap
-local opts = { noremap = true, silent = true }
+local opts = {noremap = true, silent = true}
 
 map("n", "<C-Left>", "<CMD>lua require('Navigator').left()<cr>", opts)
 map("n", "<C-Down>", "<CMD>lua require('Navigator').down()<cr>", opts)

@@ -1,6 +1,6 @@
 function lsp_organize_imports()
-  local context = { source = { organizeImports = true } }
-  vim.validate { context = { context, "table", true } }
+  local context = {source = {organizeImports = true}}
+  vim.validate {context = {context, "table", true}}
 
   local params = vim.lsp.util.make_range_params()
   params.context = context

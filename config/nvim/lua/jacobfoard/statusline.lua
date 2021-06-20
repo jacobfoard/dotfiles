@@ -1,203 +1,221 @@
-local gl = require("galaxyline")
-local utils = require("utils")
-local u = utils.u
-local gls = gl.section
-gl.short_line_list = {"NvimTree", "defx", "packer", "vista"}
+local windline = require("windline")
+local helper = require("windline.helpers")
+local sep = helper.separators
+local b_components = require("windline.components.basic")
+local state = _G.WindLine.state
+local vim_components = require("windline.components.vim")
+local HSL = require("wlanimation.utils")
 
--- Colors
-local colors = {
-  bg = "#000000",
-  fg = "#f8f8f2",
-  section_bg = "#38393f",
-  yellow = "#f1fa8c",
-  cyan = "#8be9fd",
-  green = "#50fa7b",
-  orange = "#ffb86c",
-  magenta = "#ff79c6",
-  blue = "#3da1e4",
-  red = "#ff5555",
+local lsp_comps = require("windline.components.lsp")
+local git_comps = require("windline.components.git")
+
+local hl_list = {
+  Black = {"white", "black"},
+  White = {"black", "white"},
+  Normal = {"NormalFg", "NormalBg"},
+  Inactive = {"InactiveFg", "InactiveBg"},
+  Active = {"ActiveFg", "ActiveBg"},
+}
+local basic = {}
+
+local airline_colors = {}
+
+airline_colors.a = {
+  NormalSep = {"blue", "black"},
+  InsertSep = {"green", "black"},
+  VisualSep = {"yellow", "black"},
+  ReplaceSep = {"magenta", "black"},
+  CommandSep = {"red", "black"},
+  Normal = {"black", "blue"},
+  Insert = {"black", "green"},
+  Visual = {"black", "yellow"},
+  Replace = {"black", "magenta"},
+  Command = {"black", "red"},
 }
 
--- Local helper functions
-local buffer_not_empty = function() return not utils.is_buffer_empty() end
-
-local checkwidth = function() return utils.has_width_gt(40) and buffer_not_empty() end
-
-local mode_color = function()
-  local mode_colors = {
-    n = colors.cyan,
-    i = colors.green,
-    c = colors.orange,
-    V = colors.magenta,
-    [""] = colors.magenta,
-    v = colors.magenta,
-    R = colors.red,
-    t = colors.blue,
-    s = colors.orange,
-  }
-
-  return mode_colors[vim.fn.mode()]
-end
-
-local sep = {
-  right_filled = u "e0b2",
-  left_filled = u "e0b0",
-  right = u "e0b3",
-  left = u "e0b1",
+airline_colors.b = {
+  NormalSep = {"black", "blue"},
+  InsertSep = {"black", "green"},
+  VisualSep = {"black", "yellow"},
+  ReplaceSep = {"black", "magenta"},
+  CommandSep = {"black", "red"},
+  Sep = {"black", "black"},
+  Normal = {"blue", "black"},
+  Insert = {"green", "black"},
+  Visual = {"yellow", "black"},
+  Replace = {"magenta", "black"},
+  Command = {"red", "black"},
 }
--- Left side
-gls.left[1] = {
-  ViMode = {
-    provider = function()
-      local alias = {
-        n = "NORMAL",
-        i = "INSERT",
-        c = "COMMAND",
-        V = "VISUAL",
-        [""] = "VISUAL",
-        v = "VISUAL",
-        R = "REPLACE",
-        t = "TERMINAL",
-        s = "SELECTION",
+
+airline_colors.c = {
+  NormalSep = {"blue", "black"},
+  InsertSep = {"green", "black"},
+  VisualSep = {"yellow", "black"},
+  ReplaceSep = {"magenta", "black"},
+  CommandSep = {"red", "black"},
+  Normal = {"black", "blue"},
+  Insert = {"black", "green"},
+  Visual = {"black", "yellow"},
+  Replace = {"black", "magenta"},
+  Command = {"black", "red"},
+}
+
+basic.divider = {b_components.divider, hl_list.Black}
+
+local hide_in_width = function() return vim.fn.winwidth(0) > 100 end
+
+basic.section_a = {
+  hl_colors = airline_colors.a,
+  text = function()
+    return {
+      {" " .. state.mode[1] .. " ", state.mode[2]},
+      {sep.right_filled, state.mode[2] .. "Sep"},
+    }
+  end,
+}
+
+basic.section_b = {
+  hl_colors = airline_colors.b,
+  text = function()
+    return {
+      {" ", state.mode[2]},
+      {b_components.file_icon(""), "default"},
+      {" ", ""},
+      {b_components.file_name(""), ""},
+      {b_components.file_modified(" "), ""},
+      {sep.right_filled, state.mode[2] .. "Sep"},
+    }
+  end,
+}
+
+local get_git_branch = git_comps.git_branch()
+
+basic.section_c = {
+  hl_colors = airline_colors.c,
+  text = function()
+    local branch_name = get_git_branch()
+    if #branch_name > 2 then
+      return {
+        {" ", state.mode[2]},
+        {git_comps.git_branch({icon = ""}), state.mode[2]},
+        {" ", ""},
+        {sep.right_filled, state.mode[2] .. "Sep"},
       }
-      vim.api.nvim_command("hi GalaxyViMode guifg=" .. mode_color())
-      return alias[vim.fn.mode()] .. " "
-    end,
-    highlight = {colors.bg, colors.bg},
-    separator = sep.left_filled,
-    separator_highlight = {colors.bg, colors.section_bg},
+    end
+    return {{sep.right_filled, state.mode[2] .. "Sep"}}
+  end,
+}
+
+basic.section_x = {
+  hl_colors = airline_colors.b,
+  text = function()
+    return {
+      {sep.left, "Sep"},
+      {b_components.file_type({icon = false}), state.mode[2]},
+      {" ", ""},
+      {b_components.file_size(), ""},
+      {" ", ""},
+    }
+  end,
+}
+
+basic.section_z = {
+  hl_colors = airline_colors.a,
+  text = function()
+    return {
+      {sep.left_filled, state.mode[2] .. "Sep"},
+      {" ", state.mode[2]},
+      {b_components.progress, ""},
+      {" ", ""},
+      {b_components.line_col, "Sep"},
+    }
+  end,
+}
+
+basic.lsp_diagnos = {
+  name = "diagnostic",
+  hl_colors = {red = {"red", "black"}, yellow = {"yellow", "black"}, blue = {"blue", "black"}},
+  text = function()
+    if hide_in_width() and lsp_comps.check_lsp() then
+      return {
+        {" ", "red"},
+        {lsp_comps.lsp_error({format = "  %s", show_zero = true}), "red"},
+        {lsp_comps.lsp_warning({format = "  %s", show_zero = true}), "yellow"},
+        {lsp_comps.lsp_hint({format = "  %s", show_zero = true}), "blue"},
+      }
+    end
+    return {" ", "red"}
+  end,
+}
+
+basic.git = {
+  name = "git",
+  hl_colors = {green = {"green", "black"}, red = {"red", "black"}, blue = {"blue", "black"}},
+  text = function()
+    if hide_in_width() and git_comps.is_git() then
+      return {
+        {git_comps.diff_added({format = "  %s"}), "green"},
+        {git_comps.diff_removed({format = "  %s"}), "red"},
+        {git_comps.diff_changed({format = "  %s"}), "blue"},
+      }
+    end
+    return ""
+  end,
+}
+
+local quickfix = {
+  filetypes = {"qf", "Trouble"},
+  active = {
+    {"🚦 Diagnostics ", {"white", "black"}},
+    {helper.separators.right_filled, {"black", "black_light"}},
+    {function() return vim.fn.getqflist({title = 0}).title end, {"cyan", "black_light"}},
+    {" Total : %L ", {"cyan", "black_light"}},
+    {helper.separators.right_filled, {"black_light", "InactiveBg"}},
+    {" ", {"InactiveFg", "InactiveBg"}},
+    basic.divider,
+    {helper.separators.right_filled, {"InactiveBg", "black"}},
+    {"🧛 ", {"white", "black"}},
   },
+  show_in_active = true,
 }
-gls.left[2] = {
-  FileIcon = {
-    provider = "FileIcon",
-    condition = buffer_not_empty,
-    highlight = {require("galaxyline.provider_fileinfo").get_file_icon_color, colors.section_bg},
+
+local explorer = {
+  filetypes = {"fern", "NvimTree", "lir"},
+  active = {
+    {"  ", {"white", "black"}},
+    {helper.separators.right_filled, {"black", "black_light"}},
+    {b_components.divider, ""},
+    {b_components.file_name(""), {"white", "black_light"}},
   },
+  show_in_active = true,
 }
-gls.left[3] = {
-  FileName = {
-    provider = {"FileName", "FileSize"},
-    condition = buffer_not_empty,
-    highlight = {colors.fg, colors.section_bg},
-    separator = sep.left_filled,
-    separator_highlight = {colors.section_bg, colors.bg},
+
+local default = {
+  filetypes = {"default"},
+  active = {
+    basic.section_a,
+    basic.section_b,
+    basic.section_c,
+    basic.git,
+    basic.lsp_diagnos,
+    basic.divider,
+    {vim_components.search_count(), {"cyan", "black"}},
+    {lsp_comps.lsp_name(), {"white", "black"}},
+    basic.section_x,
+    basic.section_z,
   },
-}
-gls.left[4] = {
-  GitIcon = {
-    provider = function() return "  " end,
-    condition = buffer_not_empty,
-    highlight = {colors.red, colors.bg},
-  },
-}
-gls.left[5] = {
-  GitBranch = {
-    provider = "GitBranch",
-    condition = buffer_not_empty,
-    highlight = {colors.fg, colors.bg},
-  },
-}
-gls.left[6] = {
-  DiffAdd = {
-    provider = "DiffAdd",
-    condition = checkwidth,
-    icon = " ",
-    highlight = {colors.green, colors.bg},
-  },
-}
-gls.left[7] = {
-  DiffModified = {
-    provider = "DiffModified",
-    condition = checkwidth,
-    icon = " ",
-    highlight = {colors.orange, colors.bg},
-  },
-}
-gls.left[8] = {
-  DiffRemove = {
-    provider = "DiffRemove",
-    condition = checkwidth,
-    icon = " ",
-    highlight = {colors.red, colors.bg},
-  },
-}
-gls.left[9] = {
-  LeftEnd = {
-    provider = function() return sep.left_filled end,
-    condition = buffer_not_empty,
-    highlight = {colors.bg, colors.blue},
-  },
-}
-gls.left[10] = {
-  Space = {provider = function() return " " end, highlight = {colors.section_bg, colors.blue}},
-}
-gls.left[11] = {
-  DiagnosticError = {
-    provider = "DiagnosticError",
-    icon = "  ",
-    highlight = {colors.bg, colors.blue},
-  },
-}
-gls.left[12] = {
-  Space = {provider = function() return " " end, highlight = {colors.section_bg, colors.blue}},
-}
-gls.left[13] = {
-  DiagnosticWarn = {
-    provider = "DiagnosticWarn",
-    icon = "  ",
-    highlight = {colors.orange, colors.blue},
-  },
-}
-gls.left[14] = {
-  Space = {provider = function() return " " end, highlight = {colors.section_bg, colors.blue}},
-}
-gls.left[15] = {
-  DiagnosticInfo = {
-    provider = "DiagnosticInfo",
-    icon = "  ",
-    highlight = {colors.fg, colors.section_bg},
-    separator = sep.left_filled,
-    separator_highlight = {colors.blue, colors.bg},
+  in_active = {
+    {b_components.full_file_name, hl_list.Inactive},
+    {b_components.divider, hl_list.Inactive},
+    {b_components.line_col, hl_list.Inactive},
+    {b_components.progress, hl_list.Inactive},
   },
 }
 
--- Right side
-gls.right[1] = {
-  FileFormat = {
-    provider = function() return vim.bo.filetype end,
-    highlight = {colors.fg, colors.section_bg},
-    separator = sep.right_filled,
-    separator_highlight = {colors.section_bg, colors.bg},
-  },
-}
-gls.right[2] = {
-  LineInfo = {
-    provider = "LineColumn",
-    highlight = {colors.fg, colors.section_bg},
-    separator = " | ",
-    separator_highlight = {colors.bg, colors.section_bg},
-  },
-}
-
--- Short status line
-gls.short_line_left[1] = {
-  BufferType = {
-    provider = "FileTypeName",
-    highlight = {colors.fg, colors.section_bg},
-    separator = sep.right_filled,
-    separator_highlight = {colors.section_bg, colors.bg},
-  },
-}
-
-gls.short_line_right[1] = {
-  BufferIcon = {
-    provider = "BufferIcon",
-    highlight = {colors.yellow, colors.section_bg},
-    separator = sep.right_filled,
-    separator_highlight = {colors.section_bg, colors.bg},
-  },
-}
-
--- Force manual load so that nvim boots with a status line
-gl.load_galaxyline()
+windline.setup({
+  statuslines = {default, quickfix, explorer},
+  colors_name = function(colors)
+    colors.blue = "#00afff"
+    return colors
+  end,
+})

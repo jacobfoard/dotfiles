@@ -18,7 +18,6 @@
     ];
 
     masApps = {
-      "1Password" = 1333542190;
       Clocker = 1056643111;
       Slack = 803453959;
       Tailscale = 1475387142;
@@ -26,6 +25,8 @@
     };
 
     casks = [
+      "1password"
+      "1password-cli"
       "bettertouchtool"
       "element"
       "firefox"
