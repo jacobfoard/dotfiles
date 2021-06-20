@@ -1,14 +1,14 @@
 local wezterm = require("wezterm");
 
-local function u(code)
-  return utf8.char("0x"..code)
-end
+local function u(code) return utf8.char("0x" .. code) end
 
 -- Todo figure out why this errors
 wezterm.on("update-weather", function(min)
   -- if min == "31" then
-  local success, stdout, stderr = wezterm.run_child_process(
-                                    {"curl", "wttr.in/Redwood City?format=3"})
+  local success, stdout, stderr = wezterm.run_child_process({
+    "curl",
+    "wttr.in/Redwood City?format=3",
+  })
   -- local success, stdout, stderr = wezterm.run_child_process({"ls"})
   -- wezterm.log_info(success)
   wezterm.log_info(stdout)

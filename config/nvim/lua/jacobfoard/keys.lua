@@ -45,6 +45,7 @@ mapper("n", "nt", "<cmd>NvimTreeToggle<cr>")
 
 mapper("n", "<leader>w", "<cmd>lua require'hop'.hint_words()<cr>")
 mapper("n", "<leader>w", "<cmd>lua require'hop'.hint_words()<cr>")
+mapper("n", "<leader>t", "<cmd>TroubleToggle<cr>")
 
 local remap = vim.api.nvim_set_keymap
 local npairs = require("nvim-autopairs")

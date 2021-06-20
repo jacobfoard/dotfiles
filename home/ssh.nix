@@ -17,6 +17,10 @@
           SetEnv = "IS_REMOTE=true";
         };
       };
+      cohen = {
+        hostname = "10.0.0.11";
+        user = "root";
+      };
     };
   };
 }

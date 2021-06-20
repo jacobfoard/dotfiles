@@ -8,7 +8,8 @@ local autocmds = {
   },
   format = {
     {"BufWritePost", "*.nix", ":NixFmt"},
-    {"BufWritePost", "*.pkr.hcl", ":PackerFmt"}
+    {"BufWritePost", "*.pkr.hcl", ":PackerFmt"},
+    {"BufWritePost", "*.bzl,*.bazel,BUILD,WORKSPACE", ":BazelFmt"},
   },
 }
 

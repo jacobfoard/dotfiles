@@ -9,19 +9,25 @@ require("status-line");
 return {
   color_scheme = colors.color_scheme,
   color_schemes = colors.color_schemes,
-   colors = {
+  colors = {
     tab_bar = {
 
       -- The color of the strip that goes along the top of the window
       background = "#0b0022",
-    }
+    },
   },
   font_size = 15,
   line_height = 1.1,
-  font = wezterm.font("OperatorMonoSSmLig Nerd Font", {weight = "Light"}),
-  font_locator = "ConfigDirsOnly",
-  font_dirs = {"fonts"},
-  freetype_load_target = "Light",
+  -- font = wezterm.font_with_fallback({
+  -- {family = "OperatorMonoSSmLig Nerd Font", weight = "Light"},
+  -- "Hack Nerd Font",
+  -- "JetBrains Mono",
+  -- "Noto Color Emoji",
+  -- }),
+  -- font = wezterm.font("OperatorMonoSSmLig Nerd Font", {weight = "Light"}),
+  -- font_locator = "ConfigDirsOnly",
+  -- font_dirs = {"fonts"},
+  -- freetype_load_target = "Light",
   leader = {key = "a", mods = "CTRL", timeout_milliseconds = 1000},
   keys = keys,
 

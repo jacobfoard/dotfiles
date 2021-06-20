@@ -10,6 +10,12 @@ function! PackerFmt()
   silent edit!
 endfunction
 
+function! BazelFmt()
+  silent execute '!buildifier %'
+  silent edit!
+endfunction
+
+command! BazelFmt call BazelFmt()
 command! NixFmt call NixFmt()
 command! PackerFmt call PackerFmt()
 command! OpenDiagnostics lua vim.lsp.diagnostic.set_loclist()

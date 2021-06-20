@@ -33,16 +33,21 @@ in
       # tree-sitter generate 
       tree-sitter
 
+      # needed for iamcco/markdown-preview.nvim
+      nodejs
+      yarn
+
       # Language servers
       # TODO: This doesn't work on darwin, but probably could with some effort
       # omnisharp-roslyn
       mono
       dotnet-sdk_5
       nodePackages.bash-language-server
-      nodePackages.typescript-language-server
+      nodePackages.typescript-server
       nodePackages.vim-language-server
       nodePackages.vscode-json-languageserver
       nodePackages.yaml-language-server
+      nodePackages.diagnostic-languageserver
       rnix-lsp
       rust-analyzer
     ] ++ lib.optional (!stdenv.isDarwin) sumneko-lua-language-server;
