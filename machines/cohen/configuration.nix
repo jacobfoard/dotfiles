@@ -45,11 +45,11 @@
     hybrid-sleep.enable = false;
   };
 
-  fileSystems."/nas" =
-    {
-      device = "10.0.0.10:/volume1/NAS";
-      fsType = "nfs";
-    };
+  # fileSystems."/nas" =
+  #   {
+  #     device = "10.0.0.10:/volume1/NAS";
+  #     fsType = "nfs";
+  #   };
 
   sound.enable = true;
   # hardware.pulseaudio.enable = true;
