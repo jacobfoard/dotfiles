@@ -57,6 +57,12 @@ in
   # Can't use this right now so it is symlinked to lua/boot.lua 
   # and referenced by init.vim
   # xdg.configFile."nvim/init.lua".source = ../config/nvim/init.lua;
-  xdg.configFile."nvim/init.vim".text = "set termguicolors";
+  xdg.configFile."nvim/init.vim".text =
+    ''
+      set termguicolors
+    '';
 }
+
+
+
 

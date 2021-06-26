@@ -5,6 +5,8 @@ local b_components = require("windline.components.basic")
 local state = _G.WindLine.state
 local vim_components = require("windline.components.vim")
 local HSL = require("wlanimation.utils")
+local animation = require("wlanimation")
+local efffects = require("wlanimation.effects")
 
 local lsp_comps = require("windline.components.lsp")
 local git_comps = require("windline.components.git")
@@ -79,9 +81,9 @@ basic.section_b = {
   text = function()
     return {
       {" ", state.mode[2]},
-      {b_components.file_icon(""), "default"},
+      {b_components.file_icon(""), ""},
       {" ", ""},
-      {b_components.file_name(""), ""},
+      {b_components.file_name(""), ""},
       {b_components.file_modified(" "), ""},
       {sep.right_filled, state.mode[2] .. "Sep"},
     }
@@ -127,7 +129,7 @@ basic.section_z = {
       {" ", state.mode[2]},
       {b_components.progress, ""},
       {" ", ""},
-      {b_components.line_col, "Sep"},
+      {b_components.line_col, ""},
     }
   end,
 }
@@ -213,9 +215,12 @@ local default = {
 }
 
 windline.setup({
-  statuslines = {default, quickfix, explorer},
-  colors_name = function(colors)
-    colors.blue = "#00afff"
-    return colors
-  end,
+    colors_name = function(colors)
+        colors.blue = "#00afff"
+
+        return colors
+    end,
+    statuslines = {
+        default,
+    },
 })

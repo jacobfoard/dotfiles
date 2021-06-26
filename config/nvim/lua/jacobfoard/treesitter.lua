@@ -20,6 +20,9 @@ g.indent_blankline_use_treesitter = true
 g.indent_blankline_show_current_context = true
 g.indent_blankline_context_patterns = {
   "class",
+  "import_spec_list",
+  "call_expression",
+  "composite_literal",
   "struct",
   "function",
   "arguments",
@@ -33,3 +36,4 @@ g.indent_blankline_context_patterns = {
   "select",
 }
 g.indent_blankline_show_end_of_line = true
+g.indent_blankline_char = "▏"

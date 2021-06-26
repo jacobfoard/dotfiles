@@ -22,5 +22,5 @@ function lsp_organize_imports()
   end
 end
 
-vim.cmd [[autocmd BufWritePre *.go lua vim.lsp.buf.formatting()]]
+vim.cmd [[autocmd BufWritePre *.go lua vim.lsp.buf.formatting_seq_sync()]]
 vim.cmd [[autocmd BufWritePre *.go lua lsp_organize_imports()]]
