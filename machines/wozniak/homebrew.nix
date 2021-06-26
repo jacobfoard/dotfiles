@@ -18,6 +18,7 @@
     ];
 
     masApps = {
+      Amphetamine = 937984704;
       Clocker = 1056643111;
       Slack = 803453959;
       Tailscale = 1475387142;
