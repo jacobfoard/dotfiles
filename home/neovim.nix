@@ -28,14 +28,13 @@ in
 
     extraPackages = with pkgs; [
       neovim-remote
-      gcc # needed for tree-sitter
-      # this also needs some sort of node access for 
-      # tree-sitter generate 
-      tree-sitter
 
-      # needed for iamcco/markdown-preview.nvim
+      # needed for tree-sitter
+      gcc
+      libcxx
+      tree-sitter
       nodejs
-      yarn
+
 
       # Language servers
       # TODO: This doesn't work on darwin, but probably could with some effort

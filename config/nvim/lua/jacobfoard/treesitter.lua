@@ -8,7 +8,8 @@ treesitter.setup {
   textobjects = {enable = true},
   indent = {enable = true},
   ensure_installed = "maintained", -- one of "all", "maintained" (parsers with maintainers), or a list of languages
-  ignore_install = { "php", "cuda", "elixir", "cmake", "hcl"},
+  -- These are broken due to some weird c/cc errors
+  ignore_install = {"php", "cuda", "elixir", "cmake"},
 }
 
 local opt = vim.api.nvim_command

@@ -29,7 +29,7 @@ source ~/.config/zsh/work.zsh
 
 flakifiy() {
   if [ ! -e flake.nix ]; then
-    nix flake new -t github:nix-community/nix-direnv .
+    nix flake new -t github:jacobfoard/dotfiles .
   elif [ ! -e .envrc ]; then
     echo "use flake" > .envrc
     direnv allow

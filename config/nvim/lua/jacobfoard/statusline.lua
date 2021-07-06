@@ -215,12 +215,10 @@ local default = {
 }
 
 windline.setup({
-    colors_name = function(colors)
-        colors.blue = "#00afff"
+  colors_name = function(colors)
+    colors.blue = "#00afff"
 
-        return colors
-    end,
-    statuslines = {
-        default,
-    },
+    return colors
+  end,
+  statuslines = {default},
 })

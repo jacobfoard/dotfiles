@@ -18,7 +18,6 @@
         enable = true;
         enableFlakes = true;
       };
-      # enableNixDirenvIntegration = true;
     };
 
     htop = {
