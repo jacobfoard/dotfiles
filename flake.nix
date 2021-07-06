@@ -105,9 +105,13 @@
       ];
     in
     {
+      defaultTemplate = {
+        path = ./template;
+        description = "nix flake new -t github:jacobfoard/dotfiles .";
+      };
+
       defaultIso = self.nixosConfigurations.defaultIso.config.system.build.isoImage;
       linodeIso = self.nixosConfigurations.linodeIso.config.system.build.isoImage;
-
 
       darwinConfigurations = {
         # darwin requires an inital bootstrapping
