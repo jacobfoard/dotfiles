@@ -29,6 +29,8 @@ require("packer").startup(function()
   use "nvim-telescope/telescope-project.nvim"
   use "windwp/nvim-spectre"
 
+  use "pwntester/octo.nvim"
+
   -- LSP/Snippet Related Things
   use "neovim/nvim-lspconfig"
   use "folke/lua-dev.nvim"
@@ -60,7 +62,7 @@ require("packer").startup(function()
   use "nvim-treesitter/nvim-treesitter"
   use "nvim-treesitter/playground"
   use "p00f/nvim-ts-rainbow"
-  use {"lukas-reineke/indent-blankline.nvim", branch = "lua"}
+  use {"lukas-reineke/indent-blankline.nvim"}
 
   -- Dadbod
   use "tpope/vim-dadbod"

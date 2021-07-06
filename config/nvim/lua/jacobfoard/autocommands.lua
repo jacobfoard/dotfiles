@@ -5,6 +5,7 @@ local autocmds = {
     {"FileType", "gitcommit,gitrebase,gitconfig", "set bufhidden=delete"},
     {"TextYankPost", "*", "silent! lua vim.highlight.on_yank()"},
     {"TermOpen", "*", "setlocal nonu"},
+    {"BufNewFile,BufRead", "*.json", "setlocal filetype=jsonc"},
   },
   format = {
     {"BufWritePost", "*.nix", ":NixFmt"},

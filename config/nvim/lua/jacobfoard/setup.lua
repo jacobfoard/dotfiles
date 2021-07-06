@@ -18,3 +18,5 @@ require("spectre").setup()
 require("Navigator").setup({auto_save = "current", disable_on_zoom = true})
 require("todo-comments").setup()
 require("which-key").setup({triggers = {"<leader>", "g"}})
+require("octo").setup()
+

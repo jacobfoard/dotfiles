@@ -220,7 +220,7 @@
             ncurses
             sops
             fontconfig
-            luaformatter
+            # pkgs.stable.luaformatter
           ];
         };
       });
