@@ -6,6 +6,7 @@ local autocmds = {
     {"TextYankPost", "*", "silent! lua vim.highlight.on_yank()"},
     {"TermOpen", "*", "setlocal nonu"},
     {"BufNewFile,BufRead", "*.json", "setlocal filetype=jsonc"},
+    {"BufNewFile,BufRead", "*.pkr.hcl", "setlocal filetype=hcl"},
   },
   format = {
     {"BufWritePost", "*.nix", ":NixFmt"},

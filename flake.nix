@@ -39,7 +39,8 @@
     };
   };
 
-  outputs = { self, nixpkgs, nixos, darwin, home-manager, flake-utils, sops-nix, ... }@inputs:
+
+  outputs = { self, nixpkgs, nixos, darwin, home-manager, flake-utils, sops-nix, nixpkgs-stable-darwin, nixos-stable, ... }@inputs:
     let
       overlays = with inputs; [
         neovim-nightly-overlay.overlay
@@ -211,6 +212,8 @@
     flake-utils.lib.eachDefaultSystem (system:
       let
         pkgs = nixpkgs.legacyPackages.${system};
+        stable-pkgs = if system == "x86_64-darwin" then nixpkgs-stable-darwin else nixos-stable;
+        stable = stable-pkgs.legacyPackages.${system};
       in
       {
         devShell = pkgs.mkShell {
@@ -220,7 +223,7 @@
             ncurses
             sops
             fontconfig
-            # pkgs.stable.luaformatter
+            stable.luaformatter
           ];
         };
       });

@@ -4,7 +4,6 @@ require("jacobfoard.prefs")
 require("packer").startup(function()
   use "wbthomason/packer.nvim"
   -- Theme stuff
-  -- use "glepnir/galaxyline.nvim"
   use "windwp/windline.nvim"
   -- use {"jacobfoard/vim-code-dark", branch = "personal-changes"}
   use "lewis6991/gitsigns.nvim"
@@ -16,17 +15,13 @@ require("packer").startup(function()
   use "t9md/vim-choosewin"
   use {"kyazdani42/nvim-tree.lua", requires = {"kyazdani42/nvim-web-devicons"}}
 
-  -- use "sheerun/vim-polyglot"
   use "LnL7/vim-nix"
-
-  use "iamcco/markdown-preview.nvim"
 
   -- Highlight colors inline like #ffffff
   use "norcalli/nvim-colorizer.lua"
 
   -- Telescope Replaces FZF
   use {"nvim-telescope/telescope.nvim", requires = {"nvim-lua/popup.nvim", "nvim-lua/plenary.nvim"}}
-  use "nvim-telescope/telescope-project.nvim"
   use "windwp/nvim-spectre"
 
   use "pwntester/octo.nvim"
@@ -47,22 +42,21 @@ require("packer").startup(function()
   use "folke/lsp-trouble.nvim"
   use "ray-x/lsp_signature.nvim"
 
-  use "folke/which-key.nvim"
-  use "lambdalisue/pastefix.vim"
+  -- use "lambdalisue/pastefix.vim"
 
   -- Misc
-  -- use {"fatih/vim-go", run = ":GoUpdateBinaries", ft = "go"}
   -- use "crispgm/nvim-go"
   use "tomtom/tcomment_vim"
   use "tpope/vim-eunuch"
   use "tpope/vim-abolish"
   use "beauwilliams/focus.nvim"
+  use "folke/which-key.nvim"
 
   -- Treesitter
   use "nvim-treesitter/nvim-treesitter"
   use "nvim-treesitter/playground"
   use "p00f/nvim-ts-rainbow"
-  use {"lukas-reineke/indent-blankline.nvim"}
+  use "lukas-reineke/indent-blankline.nvim"
 
   -- Dadbod
   use "tpope/vim-dadbod"
