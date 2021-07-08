@@ -33,10 +33,6 @@
       flake = false;
     };
 
-    ts-server = {
-      url = "github:theia-ide/typescript-language-server";
-      flake = false;
-    };
   };
 
 
@@ -64,15 +60,6 @@
                   version = inputs.codedark.lastModifiedDate;
                   src = inputs.codedark;
                 };
-              };
-
-              nodePackages = prev.nodePackages // {
-                typescript-server = prev.nodePackages.typescript-language-server.overrideAttrs (old: {
-                  name = "typescript-server";
-                  packageName = "typescript-server";
-                  src = inputs.ts-server;
-                  version = "0.5.2";
-                });
               };
             }
         )
@@ -223,10 +210,8 @@
         devShell = pkgs.mkShell {
           nativeBuildInputs = with pkgs; [
             tree
-            nodejs
             ncurses
             sops
-            fontconfig
             stable.luaformatter
           ];
         };

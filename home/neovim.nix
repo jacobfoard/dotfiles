@@ -42,7 +42,7 @@ in
       mono
       dotnet-sdk_5
       nodePackages.bash-language-server
-      nodePackages.typescript-server
+      nodePackages.typescript-language-server
       nodePackages.vim-language-server
       nodePackages.vscode-json-languageserver
       nodePackages.yaml-language-server
