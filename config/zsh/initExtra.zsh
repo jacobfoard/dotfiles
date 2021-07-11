@@ -36,3 +36,13 @@ flakifiy() {
   fi
   ${EDITOR:-vim} flake.nix
 }
+
+gh () {
+  if [[ -n $1 ]]
+  then
+    /usr/bin/env gh "$@"
+  else
+    ~/code/github.com
+  fi
+}
+

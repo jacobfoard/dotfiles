@@ -6,6 +6,7 @@
       git-lfs
       gitAndTools.delta
       gitAndTools.gh
+      gitAndTools.git-filter-repo
     ];
 
     programs.git =
@@ -46,7 +47,7 @@
           };
 
           alias = {
-            browse = "!gh repo view --web";
+            browse = "!gh browse --branch $(git rev-parse --abbrev-ref HEAD)";
           };
 
 

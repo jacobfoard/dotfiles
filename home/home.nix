@@ -58,6 +58,10 @@
     unzip
     wget
     yubikey-manager
+    youtube-dl
+
+    python3
+    python3.pkgs.pyyaml
     # wezterm
 
     google-cloud-sdk

@@ -11,6 +11,7 @@
     nixos-stable.url = "github:nixos/nixpkgs/nixos-21.05";
 
     flake-utils.url = "github:numtide/flake-utils";
+
     darwin = {
       url = "github:LnL7/nix-darwin";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -26,32 +27,51 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    sops-nix.url = github:Mic92/sops-nix;
-
     codedark = {
       url = "github:jacobfoard/vim-code-dark/personal-changes";
       flake = false;
     };
 
+    thefuck = {
+      url = "github:nvbn/thefuck?ref=3.30";
+      flake = false;
+    };
+
+    mango.url = "git+ssh://git@github.com/greenpark/mango.git?ref=main";
+    phoenix.url = "git+ssh://git@github.com/greenpark/phoenix.git?ref=main";
   };
 
 
-  outputs = { self, nixpkgs, nixos, darwin, home-manager, flake-utils, sops-nix, nixpkgs-stable-darwin, nixos-stable, ... }@inputs:
+  outputs = { self, nixpkgs, nixos, darwin, home-manager, flake-utils, mango, phoenix, ... }@inputs:
     let
       overlays = with inputs; [
         neovim-nightly-overlay.overlay
+        # (self: super:
+        #   {
+        #     nixUnstable = super.nixUnstable.override {
+        #       patches = [ ./unset-is-macho.patch ];
+        #     };
+        #   })
         (
           final: prev:
             let
               system = prev.stdenv.system;
               nixpkgs-stable = if system == "x86_64-darwin" then nixpkgs-stable-darwin else nixos-stable;
             in
-            {
+            rec {
+              mango_gpsd = mango.defaultPackage.${system};
+              golines = phoenix.packages.${system}.golines;
+              graphite = phoenix.packages.${system}.graphite-cli;
+
               master = nixpkgs-master.legacyPackages.${system};
               stable = nixpkgs-stable.legacyPackages.${system};
 
               # Temporaray overides for packages we use that are currently broken on `unstable`
-              thefuck = prev.thefuck.overrideAttrs (old: { doInstallCheck = false; });
+              thefuck = prev.thefuck.overrideAttrs (old: {
+                src = inputs.thefuck;
+                version = "3.30";
+                doInstallCheck = false;
+              });
 
               # Install colorscheme via input so it just works
               vimPlugins = prev.vimPlugins // {
@@ -63,6 +83,7 @@
               };
             }
         )
+        (import ./packages/sumneko_mac.nix)
       ];
 
       nixpkgsConfig = with inputs; {
@@ -78,17 +99,23 @@
 
       # Modules shared by most `nix-darwin` personal configurations.
       nixDarwinCommonModules = { user }: [
-        # Include extra `nix-darwin`
-        # self.darwinModules.programs.nix-index
-        # self.darwinModules.security.pam
         home-manager.darwinModules.home-manager
+        # phoenix.darwinModules.sops
+        # sops-nix.nixosModules.sops
         {
           nixpkgs = nixpkgsConfig;
           users.users.${user}.home = "/Users/${user}";
           home-manager.useGlobalPkgs = true;
           home-manager.users.${user} = homeManagerCommonConfig;
+          # sops.defaultSopsFile = ./secrets.yaml;
+          # sops.gnupgHome = "/Users/jacobfoard/.gnupg";
+          # # disable import host ssh keys
+          # sops.sshKeyPaths = [ ];
+          # sops.secrets.github = {
+          #   owner = "jacobfoard";
+          #   path = "/etc/github";
+          # };
         }
-        sops-nix.nixosModules.sops
       ];
     in
     {
@@ -103,6 +130,7 @@
       darwinConfigurations = {
         # darwin requires an inital bootstrapping
         bootstrap = darwin.lib.darwinSystem {
+          system = "x86_64-darwin";
           modules = [
             ./darwin/bootstrap.nix
             {
@@ -112,6 +140,7 @@
         };
 
         Wozniak = darwin.lib.darwinSystem {
+          system = "x86_64-darwin";
           modules = nixDarwinCommonModules { user = "jacobfoard"; } ++ [
             ./machines/wozniak/configuration.nix
             {
@@ -203,7 +232,7 @@
     flake-utils.lib.eachDefaultSystem (system:
       let
         pkgs = nixpkgs.legacyPackages.${system};
-        stable-pkgs = if system == "x86_64-darwin" then nixpkgs-stable-darwin else nixos-stable;
+        stable-pkgs = if system == "x86_64-darwin" then inputs.nixpkgs-stable-darwin else inputs.nixos-stable;
         stable = stable-pkgs.legacyPackages.${system};
       in
       {
@@ -211,9 +240,8 @@
           nativeBuildInputs = with pkgs; [
             tree
             ncurses
-            sops
-            stable.luaformatter
           ];
         };
-      });
+      }
+    );
 }

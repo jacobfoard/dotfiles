@@ -20,6 +20,15 @@
   programs.zsh.enable = true;
   programs.bash.enable = true; # default shell on catalina
 
+  environment.pathsToLink = [ "/share/zsh" ];
+  programs.zsh.enableCompletion = false;
+
+  system.activationScripts.postActivation.text = ''
+    ${pkgs.nixUnstable}/bin/nix store \
+     --experimental-features 'nix-command' \
+     diff-closures /run/current-system "$systemConfig"
+  '';
+
   # Used for backwards compatibility, please read the changelog before changing.
   # $ darwin-rebuild changelog
   system.stateVersion = 4;

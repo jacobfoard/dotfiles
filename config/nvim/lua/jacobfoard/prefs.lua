@@ -1,7 +1,10 @@
 local opt = vim.api.nvim_command
 
 for _, value in pairs(vim.fn.getcompletion("", "color")) do
-  if value == "codedark" then vim.g.colors_name = "codedark" end
+	if value == "codedark" then
+		vim.g.colors_name = "codedark"
+		opt("colorscheme codedark")
+	end
 end
 
 opt("set termguicolors")
@@ -31,6 +34,7 @@ opt("set termguicolors")
 opt("set inccommand=split")
 opt("set updatetime=500 ")
 opt("set viminfo='100,<1000,s10,h")
+opt("set exrc")
 
 vim.env.GIT_EDITOR = "nvr -cc split --remote-wait"
 vim.env.EDITOR = "nvr -cc split --remote-wait"

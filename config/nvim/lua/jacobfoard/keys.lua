@@ -1,8 +1,10 @@
 local map = vim.api.nvim_set_keymap
 
 local mapper = function(mode, key, result, isLua)
-  if isLua then result = "<cmd>lua " .. result .. "<CR>" end
-  map(mode, key, result, {noremap = true, silent = true})
+	if isLua then
+		result = "<cmd>lua " .. result .. "<CR>"
+	end
+	map(mode, key, result, { noremap = true, silent = true })
 end
 
 mapper("n", "<C-p>", "require'telescope'.extensions.project.project{}", true)
@@ -46,63 +48,3 @@ mapper("n", "nt", "<cmd>NvimTreeToggle<cr>")
 mapper("n", "<leader>w", "<cmd>lua require'hop'.hint_words()<cr>")
 mapper("n", "<leader>w", "<cmd>lua require'hop'.hint_words()<cr>")
 mapper("n", "<leader>t", "<cmd>TroubleToggle<cr>")
-
-local remap = vim.api.nvim_set_keymap
-local npairs = require("nvim-autopairs")
-
-local t = function(str) return vim.api.nvim_replace_termcodes(str, true, true, true) end
-
-_G.Utils = {}
-
-Utils.check_backspace = function()
-  local curr_col = vim.fn.col(".")
-  local is_first_col = vim.fn.col(".") - 1 == 0
-  local prev_char = vim.fn.getline("."):sub(curr_col - 1, curr_col - 1)
-
-  if is_first_col or prev_char:match("%s") then
-    return true
-  else
-    return false
-  end
-end
-
-Utils.completion_confirm = function()
-  if vim.fn.pumvisible() ~= 0 then
-    if vim.fn.complete_info()["selected"] ~= -1 then
-      return vim.fn["compe#confirm"](npairs.esc(""))
-    else
-      vim.fn.nvim_select_popupmenu_item(0, false, false, {})
-      return vim.fn["compe#confirm"](npairs.esc("<c-n>"))
-    end
-  else
-    return npairs.check_break_line_char()
-  end
-end
-
-remap("i", "<CR>", "v:lua.Utils.completion_confirm()", {expr = true, noremap = true})
-
-Utils.tab = function()
-  if vim.fn.pumvisible() ~= 0 then
-    if vim.fn.complete_info()["selected"] ~= -1 then
-      return vim.fn["compe#confirm"](npairs.esc(""))
-    else
-      vim.fn.nvim_select_popupmenu_item(0, false, false, {})
-      return vim.fn["compe#confirm"](npairs.esc("<c-n>"))
-    end
-  else
-    if vim.fn["vsnip#available"](1) == 1 then
-      if vim.fn["vsnip#expandable"]() == 1 then
-        vim.fn["vsnip#expand"]()
-      else
-        vim.api.nvim_feedkeys(t("<Plug>(vsnip-jump-next)"), "i", true)
-      end
-      return ""
-    end
-    return t "<Tab>"
-  end
-end
-
-remap("i", "<Tab>", "v:lua.Utils.tab()", {expr = true, noremap = true})
-remap("i", "<S-Tab>", "pumvisible() ? \"<C-p>\" : \"<S-Tab>\"", {noremap = true, expr = true})
-remap("i", "<C-Space>", "compe#confirm()", {noremap = true, expr = true, silent = true})
-remap("i", "<C-p>", "compe#complete()", {noremap = true, expr = true, silent = true})

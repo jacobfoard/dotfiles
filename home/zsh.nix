@@ -5,7 +5,8 @@
     programs.zsh = {
       enable = true;
       enableAutosuggestions = true;
-      enableCompletion = true;
+      enableCompletion = false;
+      enableSyntaxHighlighting = true;
       autocd = true;
 
       history = {
@@ -36,6 +37,7 @@
         dots = "~/code/github.com/jacobfoard/dotfiles";
         jf = "~/code/github.com/jacobfoard";
         gmi = "pwd | sed 's;.*code/;;' | xargs go mod init";
+        gl = "~/code/gitlab.com";
       };
 
       initExtraFirst = builtins.readFile ../config/zsh/initExtraFirst.zsh;
@@ -73,6 +75,7 @@
       enable = true;
       enableZshIntegration = true;
     };
+
     xdg.configFile."zsh/p10k.zsh".source = ../config/zsh/p10k.zsh;
   };
 }

@@ -1,4 +1,4 @@
-{ pkgs, lib, ... }:
+{ pkgs, lib, config, ... }:
 
 {
   imports = [
@@ -32,7 +32,15 @@
     kubetail
     tmux
     istioctl
+    ninja
+    mango_gpsd
+    graphite
+    asciinema
+    openssl
   ];
+
+  # environment.etc.demo.text = config.system.activationScripts.setup-secrets.text;
+  # config.sops.secrets.github.path;
 
   # Fonts
   fonts = {

@@ -17,6 +17,7 @@ in
     plugins = with pkgs.vimPlugins; [
       packer-nvim
       codedark
+      (nvim-treesitter.withPlugins (plugins: pkgs.tree-sitter.allGrammars))
     ];
 
 
@@ -27,7 +28,7 @@ in
     '';
 
     extraPackages = with pkgs; [
-      neovim-remote
+      # neovim-remote
 
       # needed for tree-sitter
       gcc
@@ -35,6 +36,13 @@ in
       tree-sitter
       nodejs
 
+      # Go Formatter
+      golines
+
+      # Lua Formatter
+      stylua
+
+      gnumake
 
       # Language servers
       # TODO: This doesn't work on darwin, but probably could with some effort
@@ -49,7 +57,9 @@ in
       nodePackages.diagnostic-languageserver
       rnix-lsp
       rust-analyzer
-    ] ++ lib.optional (!stdenv.isDarwin) sumneko-lua-language-server;
+      rustfmt
+      (if pkgs.stdenv.isDarwin then pkgs.sumneko-lua-language-server-mac else pkgs.sumneko-lua-language-server)
+    ];
   };
 
   xdg.configFile."nvim/lua".source = ../config/nvim/lua;

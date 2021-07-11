@@ -1,5 +1,6 @@
 -- Generic Vim Code that isn't easily represented in lua
-vim.api.nvim_exec([[
+vim.api.nvim_exec(
+	[[
 function! NixFmt()
   silent execute '!nixpkgs-fmt %'
   silent edit!
@@ -43,4 +44,6 @@ command! WQa wqall
 command! Wqa wqall
 command! VS vsplit
 command! Vs vsplit
-]], true)
+]],
+	true
+)
