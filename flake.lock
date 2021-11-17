@@ -55,11 +55,11 @@
     },
     "flake-utils": {
       "locked": {
-        "lastModified": 1634851050,
-        "narHash": "sha256-N83GlSGPJJdcqhUxSCS/WwW5pksYf3VP1M13cDRTSVA=",
+        "lastModified": 1637014545,
+        "narHash": "sha256-26IZAc5yzlD9FlDT54io1oqG/bBoyka+FJk5guaX4x4=",
         "owner": "numtide",
         "repo": "flake-utils",
-        "rev": "c91f3de5adaf1de973b797ef7485e441a65b8935",
+        "rev": "bba5dcc8e0b20ab664967ad83d24d64cb64ec4f4",
         "type": "github"
       },
       "original": {
@@ -135,11 +135,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1636044164,
-        "narHash": "sha256-RI9QjS8NBrfVTp6dzmcEVKNNjxYGBf26+/7ihDA/USc=",
+        "lastModified": 1637088670,
+        "narHash": "sha256-d49wUICXl1iItqvk0lbMwjpUbro86mBrV6876C+SLcA=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "70c5b268e10025c70823767f4fb49e240b40151d",
+        "rev": "5559ef002306dde0093f3d329725259cada9ed41",
         "type": "github"
       },
       "original": {
@@ -156,11 +156,11 @@
         "phoenix": "phoenix"
       },
       "locked": {
-        "lastModified": 1636065046,
-        "narHash": "sha256-D2wBVT69r4A227vX7O4ph5rqc6LpG04l7Vg46dMDEcA=",
+        "lastModified": 1637112685,
+        "narHash": "sha256-hn2LSk/aev0QHT4EckZUdNcRuGTv17+b9o/jE22hYD8=",
         "ref": "main",
-        "rev": "ad401396acc77191b8bf7e9e355857d42a696ccb",
-        "revCount": 7613,
+        "rev": "2d708f4887a75869763fd6814702de5c0f023e3f",
+        "revCount": 7674,
         "type": "git",
         "url": "ssh://git@github.com/greenpark/mango.git"
       },
@@ -180,11 +180,11 @@
       },
       "locked": {
         "dir": "contrib",
-        "lastModified": 1635978264,
-        "narHash": "sha256-+MVrDbCihQ6jQbp+4xBLiB1kAOq8M/FKT/Hfx20W5AU=",
+        "lastModified": 1637090879,
+        "narHash": "sha256-mHwStRf24MPl1Rjhb2PfZGfK4hSP2A6lWxj7J2tLzlI=",
         "owner": "neovim",
         "repo": "neovim",
-        "rev": "f26b391317281d0520056eaa8312cf25e654149f",
+        "rev": "eba317d7a907a76e6e265c0fe0b97a87f17cf943",
         "type": "github"
       },
       "original": {
@@ -203,11 +203,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1636013597,
-        "narHash": "sha256-ZbTsr6MgEPfobUYRDcpMKGDJqrP2yYBeqfVxE7x/pXo=",
+        "lastModified": 1637136812,
+        "narHash": "sha256-DGBkLwdCcYZacovMsr3eFDypVBkVsSp4l7Mtj626hDs=",
         "owner": "nix-community",
         "repo": "neovim-nightly-overlay",
-        "rev": "4a24f8c327b4c595a09eca7d831fd29b40bfddf4",
+        "rev": "d847d1db450cb343dec9faf39a1bdea113161e34",
         "type": "github"
       },
       "original": {
@@ -218,11 +218,11 @@
     },
     "nixos": {
       "locked": {
-        "lastModified": 1635844945,
-        "narHash": "sha256-tZcL307dj28jgEU1Wdn+zwG9neyW0H2+ZjdVhvJxh9g=",
+        "lastModified": 1636976544,
+        "narHash": "sha256-9ZmdyoRz4Qu8bP5BKR1T10YbzcB9nvCeQjOEw2cRKR0=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "b67e752c29f18a0ca5534a07661366d6a2c2e649",
+        "rev": "931ab058daa7e4cd539533963f95e2bb0dbd41e6",
         "type": "github"
       },
       "original": {
@@ -234,11 +234,11 @@
     },
     "nixos-stable": {
       "locked": {
-        "lastModified": 1635933255,
-        "narHash": "sha256-cR4jRaog5/o5U0No0wNVgokfJma9vuiZhtcu3CUcb1M=",
+        "lastModified": 1636944046,
+        "narHash": "sha256-74KLDsiWSBsYXKj/ql9EGbw1TbIJRE7clFkhl30HV/c=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "2fd5c69fa6057870687a6589a8c95da955188f91",
+        "rev": "46251a79f752ae1d46ef733e8e9760b6d3429da4",
         "type": "github"
       },
       "original": {
@@ -266,11 +266,11 @@
     },
     "nixpkgs-master": {
       "locked": {
-        "lastModified": 1636045910,
-        "narHash": "sha256-37Dv3MvV/MXhPpgID309MawN5+BJjBvCli/at/soT+I=",
+        "lastModified": 1637165835,
+        "narHash": "sha256-GvUZAHc3hsYXSikX9TPLzFOwlSbELzxVpTttegunTuQ=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "164173d0fc914ec5f70b67cf1c8b2f03142cb7fc",
+        "rev": "d7f74f982f5ddf12273cf14cfcdb48a1c6412831",
         "type": "github"
       },
       "original": {
@@ -282,11 +282,11 @@
     },
     "nixpkgs-stable-darwin": {
       "locked": {
-        "lastModified": 1635719588,
-        "narHash": "sha256-pWjdy0NheM97NsPE6+jUnr5LYyeA0sBGTdw4mfXMGZQ=",
+        "lastModified": 1637036156,
+        "narHash": "sha256-62di9fxX6l61vCpEZwqxj47u2UFTchfhZKMX6HgcJQE=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "f0869b1a2c0b150aac26e10bb5c2364ffb2e804f",
+        "rev": "01eaa66bb663412c31b5399334f118030a91f1aa",
         "type": "github"
       },
       "original": {
@@ -314,11 +314,11 @@
     },
     "nixpkgs_3": {
       "locked": {
-        "lastModified": 1635710075,
-        "narHash": "sha256-VmixArh0lErs3oovx/y1YIClarLkpPR+9IQ5xkpjK7g=",
-        "owner": "NixOS",
+        "lastModified": 1636886446,
+        "narHash": "sha256-4xsVM2H8CG3d/3V+GqDDLDOmb3kdrugbqKVyrg8Q/zc=",
+        "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "639d86d5be81fa888dc3fff581f11fa50c4b44e4",
+        "rev": "5cb226a06c49f7a2d02863d0b5786a310599df6b",
         "type": "github"
       },
       "original": {
@@ -330,11 +330,11 @@
     },
     "nixpkgs_4": {
       "locked": {
-        "lastModified": 1635247071,
-        "narHash": "sha256-NjWixz/Yb55hE3c9FxQjah3Ijlwvz6zRTXLaQClE0x0=",
+        "lastModified": 1636886446,
+        "narHash": "sha256-4xsVM2H8CG3d/3V+GqDDLDOmb3kdrugbqKVyrg8Q/zc=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "f112b512e1710da6c8beb8e541a8ad9fcd81e6e6",
+        "rev": "5cb226a06c49f7a2d02863d0b5786a310599df6b",
         "type": "github"
       },
       "original": {
@@ -370,11 +370,11 @@
         "nixpkgs": "nixpkgs_4"
       },
       "locked": {
-        "lastModified": 1635302891,
-        "narHash": "sha256-j5JhyHeM1Nht0iWQ7alyXFzNDXPA1bHwJws9pIXqND8=",
+        "lastModified": 1636938636,
+        "narHash": "sha256-uzGeW88Cml5/WkRu6IqLxGqQSRIe4m7vEVih0UQv11w=",
         "ref": "main",
-        "rev": "ee949bdfb7e4116d989a3accca547a5e1b137a40",
-        "revCount": 44,
+        "rev": "58f2d61f2cdc889b995e1f42920ece4a87d72210",
+        "revCount": 53,
         "type": "git",
         "url": "ssh://git@github.com/greenpark/phoenix.git"
       },

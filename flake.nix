@@ -238,7 +238,7 @@
       {
         devShell = pkgs.mkShell {
           nativeBuildInputs = with pkgs; [
-            tree
+            # tree
             ncurses
           ];
         };
