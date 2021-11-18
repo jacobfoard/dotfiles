@@ -17,6 +17,11 @@
       nix-direnv = {
         enable = true;
       };
+      # Check in on to see if this can be removed 
+      # https://github.com/nix-community/nix-direnv/issues/120
+      stdlib = ''
+        sed() { ${pkgs.gnused}/bin/sed "$@"; }
+      '';
     };
 
     htop = {

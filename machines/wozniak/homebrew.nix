@@ -20,7 +20,6 @@
     masApps = {
       Amphetamine = 937984704;
       Clocker = 1056643111;
-      Slack = 803453959;
       Tailscale = 1475387142;
       Xcode = 497799835;
     };
@@ -35,6 +34,7 @@
       "itsycal"
       "iterm2"
       "rectangle"
+      "slack"
       "spotify"
       "spotmenu"
       "unity-hub"

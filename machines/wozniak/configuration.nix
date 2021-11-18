@@ -10,6 +10,7 @@
     # Other nix-darwin configuration
     ./homebrew.nix
     ./defaults.nix
+    ../../modules/darwin/apps/slack.nix
     # ../../modules/wezterm.nix
   ];
 
