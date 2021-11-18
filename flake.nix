@@ -46,12 +46,6 @@
     let
       overlays = with inputs; [
         neovim-nightly-overlay.overlay
-        # (self: super:
-        #   {
-        #     nixUnstable = super.nixUnstable.override {
-        #       patches = [ ./unset-is-macho.patch ];
-        #     };
-        #   })
         (
           final: prev:
             let
@@ -81,6 +75,14 @@
                   src = inputs.codedark;
                 };
               };
+
+              # Check in on https://github.com/NixOS/nixpkgs/pull/146456 to see if it can be removed
+              google-cloud-sdk = prev.google-cloud-sdk.overrideAttrs (old: {
+                postInstall = ''
+                  sed -i '1 i #compdef gcloud' $out/share/zsh/site-functions/_gcloud
+                  sed -i '1 i #compdef gsutil' $out/share/zsh/site-functions/_gsutil
+                '';
+              });
             }
         )
         (import ./packages/sumneko_mac.nix)
@@ -100,21 +102,11 @@
       # Modules shared by most `nix-darwin` personal configurations.
       nixDarwinCommonModules = { user }: [
         home-manager.darwinModules.home-manager
-        # phoenix.darwinModules.sops
-        # sops-nix.nixosModules.sops
         {
           nixpkgs = nixpkgsConfig;
           users.users.${user}.home = "/Users/${user}";
           home-manager.useGlobalPkgs = true;
           home-manager.users.${user} = homeManagerCommonConfig;
-          # sops.defaultSopsFile = ./secrets.yaml;
-          # sops.gnupgHome = "/Users/jacobfoard/.gnupg";
-          # # disable import host ssh keys
-          # sops.sshKeyPaths = [ ];
-          # sops.secrets.github = {
-          #   owner = "jacobfoard";
-          #   path = "/etc/github";
-          # };
         }
       ];
     in
@@ -238,7 +230,7 @@
       {
         devShell = pkgs.mkShell {
           nativeBuildInputs = with pkgs; [
-            # tree
+            tree
             ncurses
           ];
         };

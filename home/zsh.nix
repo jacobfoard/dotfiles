@@ -41,10 +41,7 @@
       };
 
       initExtraFirst = builtins.readFile ../config/zsh/initExtraFirst.zsh;
-      initExtra = builtins.readFile ../config/zsh/initExtra.zsh +
-        ''
-          source ${pkgs.google-cloud-sdk}/google-cloud-sdk/completion.zsh.inc
-        '';
+      initExtra = builtins.readFile ../config/zsh/initExtra.zsh;
 
       plugins = [
         {
