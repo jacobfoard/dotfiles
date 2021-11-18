@@ -51,6 +51,7 @@
     du-dust # fancy version of `du`
     lsd # fancy version of `ls`
     htop
+    glab
     parallel
     procs # fancy version of `ps`
     ripgrep
