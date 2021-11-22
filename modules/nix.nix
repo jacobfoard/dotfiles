@@ -2,13 +2,15 @@
 
 {
   nix = {
-    package = pkgs.nixUnstable;
+    # package = pkgs.nixUnstable;
     binaryCaches = [
+      "https://jacobfoard-dotfiles.cachix.org"
       "https://cache.nixos.org/"
       "https://nix-community.cachix.org"
     ];
 
     binaryCachePublicKeys = [
+      "jacobfoard-dotfiles.cachix.org-1:z/Be4vrLZ+whXwYP+/zwPKSrYo2z84BqMKBuapPjVao="
       "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
       "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
     ];
@@ -31,6 +33,5 @@
       keep-derivations = true
       experimental-features = nix-command flakes
     '';
-    # access-tokens = github.com=${config.sops.secrets.github}
   };
 }

@@ -26,6 +26,8 @@
         delta.enable = true;
 
         extraConfig = {
+          help.autoCorrect = "prompt";
+
           delta.features = "side-by-side line-numbers decorations";
           url = {
             "ssh://git@github.com/" = { insteadOf = "https://github.com/"; };

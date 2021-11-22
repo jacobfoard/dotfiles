@@ -83,6 +83,19 @@
                   sed -i '1 i #compdef gsutil' $out/share/zsh/site-functions/_gsutil
                 '';
               });
+
+              # https://nixpk.gs/pr-tracker.html?pr=146188
+              git = prev.git.overrideAttrs (old: {
+                version = "2.34.0";
+                src = builtins.fetchurl {
+                  url = "https://www.kernel.org/pub/software/scm/git/git-2.34.0.tar.xz";
+                  sha256 = "07s1c9lzlm4kpbb5lmxy0869phg7037pv4faz5hlqyb5csrbjv7x";
+                };
+              });
+
+              nix = prev.nix.overrideAttrs (old: {
+                doCheck = false;
+              });
             }
         )
         (import ./packages/sumneko_mac.nix)
@@ -230,6 +243,7 @@
       {
         devShell = pkgs.mkShell {
           nativeBuildInputs = with pkgs; [
+            cachix
             tree
             ncurses
           ];
