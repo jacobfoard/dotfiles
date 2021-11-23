@@ -64,6 +64,7 @@
           "docker"
           "gitignore"
           "golang"
+          "git-auto-fetch"
         ];
       };
     };

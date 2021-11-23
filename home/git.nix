@@ -6,61 +6,62 @@
       git-lfs
       gitAndTools.delta
       gitAndTools.gh
+      gitAndTools.glab
       gitAndTools.git-filter-repo
+      (writeShellScriptBin "git-browse" (builtins.readFile ../bin/git-browse))
     ];
 
-    programs.git =
-      {
-        enable = true;
+    programs.git = {
+      enable = true;
 
-        userName = "Jacob Foard";
-        userEmail = "jacobfoard@gmail.com";
+      userName = "Jacob Foard";
+      userEmail = "jacobfoard@gmail.com";
 
-        ignores = [
-          ".direnv"
-          "result"
-          ".DS_Store"
-          ".idea"
-        ];
+      ignores = [
+        ".direnv"
+        "result"
+        ".DS_Store"
+        ".idea"
+      ];
 
-        delta.enable = true;
+      delta.enable = true;
 
-        extraConfig = {
-          help.autoCorrect = "prompt";
+      extraConfig = {
+        help.autoCorrect = "prompt";
 
-          delta.features = "side-by-side line-numbers decorations";
-          url = {
-            "ssh://git@github.com/" = { insteadOf = "https://github.com/"; };
-          };
+        delta.features = "side-by-side line-numbers decorations";
+        url = {
+          "ssh://git@github.com/" = { insteadOf = "https://github.com/"; };
+        };
 
-          init.defaultBranch = "main";
-          advice.detachedHead = false;
+        init.defaultBranch = "main";
+        advice.detachedHead = false;
 
-          fetch.prune = true;
-          pull.rebase = true;
-          rebase.autoStash = true;
+        fetch.prune = true;
+        pull.rebase = true;
+        rebase.autoStash = true;
 
-          commit.gpgsign = true;
+        commit.gpgsign = true;
 
-          signing = {
-            signByDefault = true;
-            key = "0xC02488F487CF438C";
-            gpgPath = "gpg";
-          };
+        signing = {
+          signByDefault = true;
+          key = "0xC02488F487CF438C";
+          gpgPath = "gpg";
+        };
 
-          alias = {
-            browse = "!gh browse --branch $(git rev-parse --abbrev-ref HEAD)";
-          };
+        # alias = {
+        #   browse = "!gh browse --branch $(git rev-parse --abbrev-ref HEAD)";
+        # };
 
 
-          "filter \"lfs\"" = {
-            process = "git-lfs filter-process";
-            required = true;
-            clean = "git-lfs clean -- %f";
-            smudge = "git-lfs smudge -- %f";
-          };
+        "filter \"lfs\"" = {
+          process = "git-lfs filter-process";
+          required = true;
+          clean = "git-lfs clean -- %f";
+          smudge = "git-lfs smudge -- %f";
         };
       };
+    };
   };
 }
 
