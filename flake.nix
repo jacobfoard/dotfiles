@@ -13,7 +13,8 @@
     flake-utils.url = "github:numtide/flake-utils";
 
     darwin = {
-      url = "github:LnL7/nix-darwin";
+      # url = "github:LnL7/nix-darwin";
+      url = "github:jacobfoard/nix-darwin/waiting-on-upstream";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -37,6 +38,11 @@
       flake = false;
     };
 
+    oh-my-tmux = {
+      url = "github:gpakosz/.tmux";
+      flake = false;
+    };
+
     mango.url = "git+ssh://git@github.com/greenpark/mango.git?ref=main";
     phoenix.url = "git+ssh://git@github.com/greenpark/phoenix.git?ref=main";
   };
@@ -56,6 +62,7 @@
               mango_gpsd = mango.defaultPackage.${system};
               golines = phoenix.packages.${system}.golines;
               graphite = phoenix.packages.${system}.graphite-cli;
+              tmux-base = oh-my-tmux;
 
               master = nixpkgs-master.legacyPackages.${system};
               stable = nixpkgs-stable.legacyPackages.${system};
@@ -96,6 +103,19 @@
               nix = prev.nix.overrideAttrs (old: {
                 doCheck = false;
               });
+
+              tmux-darwin = prev.runCommand prev.tmux.name
+                { buildInputs = [ prev.makeWrapper ]; }
+                ''
+                  source $stdenv/setup
+                  mkdir -p $out/bin
+                  makeWrapper ${prev.tmux}/bin/tmux $out/bin/tmux \
+                    --set __ETC_BASHRC_SOURCED "" \
+                    --set __ETC_ZPROFILE_SOURCED  "" \
+                    --set __ETC_ZSHENV_SOURCED "" \
+                    --set __ETC_ZSHRC_SOURCED "" \
+                    --set __NIX_DARWIN_SET_ENVIRONMENT_DONE ""
+                '';
             }
         )
         (import ./packages/sumneko_mac.nix)
@@ -236,7 +256,10 @@
     } // # Join the standard configs with a nix shell for every system
     flake-utils.lib.eachDefaultSystem (system:
       let
-        pkgs = nixpkgs.legacyPackages.${system};
+        pkgs = import nixpkgs {
+          inherit system;
+          # inherit overlays;
+        };
         stable-pkgs = if system == "x86_64-darwin" then inputs.nixpkgs-stable-darwin else inputs.nixos-stable;
         stable = stable-pkgs.legacyPackages.${system};
       in

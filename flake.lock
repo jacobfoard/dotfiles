@@ -24,15 +24,16 @@
         ]
       },
       "locked": {
-        "lastModified": 1634994402,
-        "narHash": "sha256-xmlCVVOYGpZoxgOqsDOVF0B0ASrnbNGVAEzID9qh2xo=",
-        "owner": "LnL7",
+        "lastModified": 1637712451,
+        "narHash": "sha256-QrV5EExkIFqhR9RYpjH4y5xvxnvU7kyo4x89CFJ8LGM=",
+        "owner": "jacobfoard",
         "repo": "nix-darwin",
-        "rev": "44da835ac40dab5fd231298b59d83487382d2fab",
+        "rev": "f0abc4afbee69496e5307c365ee970b2ceaf4cd3",
         "type": "github"
       },
       "original": {
-        "owner": "LnL7",
+        "owner": "jacobfoard",
+        "ref": "waiting-on-upstream",
         "repo": "nix-darwin",
         "type": "github"
       }
@@ -344,6 +345,22 @@
         "type": "github"
       }
     },
+    "oh-my-tmux": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1637327246,
+        "narHash": "sha256-4ckIswlzYHRjDozK94hQnDL1qNVZRySxPkcK4aoNCv4=",
+        "owner": "gpakosz",
+        "repo": ".tmux",
+        "rev": "0fe760fa6decf6e743e2f9b38a97ae2e2df998a3",
+        "type": "github"
+      },
+      "original": {
+        "owner": "gpakosz",
+        "repo": ".tmux",
+        "type": "github"
+      }
+    },
     "phoenix": {
       "inputs": {
         "flake-utils": "flake-utils_3",
@@ -397,6 +414,7 @@
         "nixpkgs": "nixpkgs_3",
         "nixpkgs-master": "nixpkgs-master",
         "nixpkgs-stable-darwin": "nixpkgs-stable-darwin",
+        "oh-my-tmux": "oh-my-tmux",
         "phoenix": "phoenix_2",
         "thefuck": "thefuck"
       }

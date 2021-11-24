@@ -14,6 +14,7 @@
 # then uncomment the following line to make Meta + arrow keys mapping work
 #set -ga terminal-overrides "*:kUP3=\e[1;9A,*:kDN3=\e[1;9B,*:kRIT3=\e[1;9C,*:kLFT3=\e[1;9D"
 
+# set-environment -g PATH "/usr/local/bin:/bin:/usr/bin"
 
 # -- windows & pane creation ---------------------------------------------------
 
@@ -43,11 +44,12 @@ tmux_conf_new_session_prompt=false
 # RGB 24-bit colour support (tmux >= 2.2), possible values are:
 #  - true
 #  - false (default)
-tmux_conf_24b_colour=false
+tmux_conf_24b_colour=true
+# tmux_conf_24b_colour=false
 
 # default theme
-tmux_conf_theme_colour_1="#080808"    # dark gray
-tmux_conf_theme_colour_2="#303030"    # gray
+tmux_conf_theme_colour_1="#000000"    # black
+tmux_conf_theme_colour_2="#444444"    # gray
 tmux_conf_theme_colour_3="#8a8a8a"    # light gray
 tmux_conf_theme_colour_4="#00afff"    # light blue
 tmux_conf_theme_colour_5="#ffff00"    # yellow
@@ -63,6 +65,8 @@ tmux_conf_theme_colour_14="#080808"   # dark gray
 tmux_conf_theme_colour_15="#080808"   # dark gray
 tmux_conf_theme_colour_16="#d70000"   # red
 tmux_conf_theme_colour_17="#e4e4e4"   # white
+tmux_conf_theme_colour_18="#080808"    # dark gray
+tmux_conf_theme_colour_19="#ffffff"    # white
 
 # default theme (ansi)
 #tmux_conf_theme_colour_1="colour0"
@@ -93,7 +97,9 @@ tmux_conf_theme_window_bg="default"
 tmux_conf_theme_highlight_focused_pane=false
 
 # focused pane colours:
-tmux_conf_theme_focused_pane_bg="$tmux_conf_theme_colour_2"
+# tmux_conf_theme_focused_pane_bg="$tmux_conf_theme_colour_2"
+tmux_conf_theme_focused_pane_fg="default"
+tmux_conf_theme_focused_pane_bg="$tmux_conf_theme_colour_4"               # light blue
 
 # pane border style, possible values are:
 #   - thin (default)
@@ -134,8 +140,6 @@ tmux_conf_theme_status_attr="none"
 #     - #{circled_session_name}
 #     - #{hostname}
 #     - #{hostname_ssh}
-#     - #{hostname_full}
-#     - #{hostname_full_ssh}
 #     - #{username}
 #     - #{username_ssh}
 tmux_conf_theme_terminal_title="#h ❐ #S ● #I #W"
@@ -146,12 +150,10 @@ tmux_conf_theme_terminal_title="#h ❐ #S ● #I #W"
 #     - #{circled_session_name}
 #     - #{hostname}
 #     - #{hostname_ssh}
-#     - #{hostname_full}
-#     - #{hostname_full_ssh}
 #     - #{username}
 #     - #{username_ssh}
 tmux_conf_theme_window_status_fg="$tmux_conf_theme_colour_3"
-tmux_conf_theme_window_status_bg="$tmux_conf_theme_colour_1"
+tmux_conf_theme_window_status_bg="$tmux_conf_theme_colour_18"
 tmux_conf_theme_window_status_attr="none"
 tmux_conf_theme_window_status_format="#I #W"
 #tmux_conf_theme_window_status_format="#{circled_window_index} #W"
@@ -163,8 +165,6 @@ tmux_conf_theme_window_status_format="#I #W"
 #     - #{circled_session_name}
 #     - #{hostname}
 #     - #{hostname_ssh}
-#     - #{hostname_full}
-#     - #{hostname_full_ssh}
 #     - #{username}
 #     - #{username_ssh}
 tmux_conf_theme_window_status_current_fg="$tmux_conf_theme_colour_1"
@@ -186,18 +186,19 @@ tmux_conf_theme_window_status_bell_attr="blink,bold"
 
 # window last status style
 tmux_conf_theme_window_status_last_fg="$tmux_conf_theme_colour_4"
-tmux_conf_theme_window_status_last_bg="$tmux_conf_theme_colour_2"
+#tmux_conf_theme_window_status_last_bg="$tmux_conf_theme_colour_2"
+tmux_conf_theme_window_status_last_bg='default'
 tmux_conf_theme_window_status_last_attr="none"
 
 # status left/right sections separators
-tmux_conf_theme_left_separator_main=""
-tmux_conf_theme_left_separator_sub="|"
-tmux_conf_theme_right_separator_main=""
-tmux_conf_theme_right_separator_sub="|"
-#tmux_conf_theme_left_separator_main='\uE0B0'  # /!\ you don't need to install Powerline
-#tmux_conf_theme_left_separator_sub='\uE0B1'   #   you only need fonts patched with
-#tmux_conf_theme_right_separator_main='\uE0B2' #   Powerline symbols or the standalone
-#tmux_conf_theme_right_separator_sub='\uE0B3'  #   PowerlineSymbols.otf font, see README.md
+#tmux_conf_theme_left_separator_main=""
+#tmux_conf_theme_left_separator_sub="|"
+#tmux_conf_theme_right_separator_main=""
+#tmux_conf_theme_right_separator_sub="|"
+tmux_conf_theme_left_separator_main="\uE0B0"  # /!\ you don't need to install Powerline
+tmux_conf_theme_left_separator_sub="\uE0B1"   #   you only need fonts patched with
+tmux_conf_theme_right_separator_main="\uE0B2" #   Powerline symbols or the standalone
+tmux_conf_theme_right_separator_sub="\uE0B3"  #   PowerlineSymbols.otf font, see README.md
 
 # status left/right content:
 #   - separate main sections with "|"
@@ -211,10 +212,7 @@ tmux_conf_theme_right_separator_sub="|"
 #     - #{circled_session_name}
 #     - #{hostname_ssh}
 #     - #{hostname}
-#     - #{hostname_full}
-#     - #{hostname_full_ssh}
 #     - #{loadavg}
-#     - #{mouse}
 #     - #{pairing}
 #     - #{prefix}
 #     - #{root}
@@ -226,21 +224,31 @@ tmux_conf_theme_right_separator_sub="|"
 #     - #{uptime_s}
 #     - #{username}
 #     - #{username_ssh}
-tmux_conf_theme_status_left=" ❐ #S | ↑#{?uptime_y, #{uptime_y}y,}#{?uptime_d, #{uptime_d}d,}#{?uptime_h, #{uptime_h}h,}#{?uptime_m, #{uptime_m}m,} "
-tmux_conf_theme_status_right=" #{prefix}#{mouse}#{pairing}#{synchronized}#{?battery_status,#{battery_status},}#{?battery_bar, #{battery_bar},}#{?battery_percentage, #{battery_percentage},} , %R , %d %b | #{username}#{root} | #{hostname} "
+# tmux_conf_theme_status_left=" ❐ #S | ↑#{?uptime_y, #{uptime_y}y,}#{?uptime_d, #{uptime_d}d,}#{?uptime_h, #{uptime_h}h,}#{?uptime_m, #{uptime_m}m,} "
+# tmux_conf_theme_status_right=" #{prefix}#{pairing}#{synchronized}#{?battery_status,#{battery_status},}#{?battery_bar, #{battery_bar},}#{?battery_percentage, #{battery_percentage},} , %R , %d %b | #{username_ssh}#{root} | #{hostname_ssh} "
+tmux_conf_theme_status_left=' ❐ #S'
+#tmux_conf_theme_status_right='#{prefix}#{pairing}#{synchronized} #(spot)|, #(weather()), #(online) |, #{?battery_status, #{battery_status},}#{?battery_bar, #{battery_bar},}#{?battery_percentage, #{battery_percentage},} , %r , %A %b %d | #{username}#{root} | #{hostname} '
+tmux_conf_theme_status_right='#{prefix}#{pairing}#{synchronized} #(spot)|, #(curl -s -m 1 "http://wttr.in/{Charlotte,San%%20Francisco}?format=3" 2>/dev/null | sed -z "s/\n/  /" ; sleep 900) |, #{?battery_status, #{battery_status},}#{?battery_bar, #{battery_bar},}#{?battery_percentage, #{battery_percentage},} , %r , %A %b %d | #{username}#{root} | #{hostname} '
+
 
 # status left style
-tmux_conf_theme_status_left_fg="$tmux_conf_theme_colour_6,$tmux_conf_theme_colour_7,$tmux_conf_theme_colour_8"
-tmux_conf_theme_status_left_bg="$tmux_conf_theme_colour_9,$tmux_conf_theme_colour_10,$tmux_conf_theme_colour_11"
+#tmux_conf_theme_status_left_fg="$tmux_conf_theme_colour_6,$tmux_conf_theme_colour_7,$tmux_conf_theme_colour_8"
+#tmux_conf_theme_status_left_bg="$tmux_conf_theme_colour_9,$tmux_conf_theme_colour_10,$tmux_conf_theme_colour_11"
+tmux_conf_theme_status_left_fg="$tmux_conf_theme_colour_1,$tmux_conf_theme_colour_19,$tmux_conf_theme_colour_19"
+tmux_conf_theme_status_left_bg="$tmux_conf_theme_colour_5,$tmux_conf_theme_colour_10,$tmux_conf_theme_colour_4"
 tmux_conf_theme_status_left_attr="bold,none,none"
 
 # status right style
-tmux_conf_theme_status_right_fg="$tmux_conf_theme_colour_12,$tmux_conf_theme_colour_13,$tmux_conf_theme_colour_14"
-tmux_conf_theme_status_right_bg="$tmux_conf_theme_colour_15,$tmux_conf_theme_colour_16,$tmux_conf_theme_colour_17"
-tmux_conf_theme_status_right_attr="none,none,bold"
+# tmux_conf_theme_status_right_fg="$tmux_conf_theme_colour_12,$tmux_conf_theme_colour_13,$tmux_conf_theme_colour_14"
+# tmux_conf_theme_status_right_bg="$tmux_conf_theme_colour_15,$tmux_conf_theme_colour_16,$tmux_conf_theme_colour_17"
+# tmux_conf_theme_status_right_attr="none,none,bold"
+tmux_conf_theme_status_right_fg="$tmux_conf_theme_colour_19,$tmux_conf_theme_colour_19,$tmux_conf_theme_colour_19,$tmux_conf_theme_colour_1,$tmux_conf_theme_colour_1"
+tmux_conf_theme_status_right_bg="$tmux_conf_theme_colour_6,$tmux_conf_theme_colour_6,$tmux_conf_theme_colour_6,tmux_conf_theme_colour_16,tmux_conf_theme_colour_19"
+
+tmux_conf_theme_status_right_attr='none,none,bold,none,bold'
 
 # pairing indicator
-tmux_conf_theme_pairing="⚇"                 # U+2687
+tmux_conf_theme_pairing='👓 '          # U+1F453
 tmux_conf_theme_pairing_fg="none"
 tmux_conf_theme_pairing_bg="none"
 tmux_conf_theme_pairing_attr="none"
@@ -251,12 +259,6 @@ tmux_conf_theme_prefix_fg="none"
 tmux_conf_theme_prefix_bg="none"
 tmux_conf_theme_prefix_attr="none"
 
-# mouse indicator
-tmux_conf_theme_mouse="↗"                   # U+2197
-tmux_conf_theme_mouse_fg="none"
-tmux_conf_theme_mouse_bg="none"
-tmux_conf_theme_mouse_attr="none"
-
 # root indicator
 tmux_conf_theme_root="!"
 tmux_conf_theme_root_fg="none"
@@ -264,7 +266,7 @@ tmux_conf_theme_root_bg="none"
 tmux_conf_theme_root_attr="bold,blink"
 
 # synchronized indicator
-tmux_conf_theme_synchronized="⚏"            # U+268F
+tmux_conf_theme_synchronized='🔒'     # U+1F512
 tmux_conf_theme_synchronized_fg="none"
 tmux_conf_theme_synchronized_bg="none"
 tmux_conf_theme_synchronized_attr="none"
@@ -330,7 +332,7 @@ tmux_conf_copy_to_os_clipboard=false
 #set -g history-limit 10000
 
 # start with mouse mode enabled
-#set -g mouse on
+set -g mouse on
 
 # force Vi mode
 #   really you should export VISUAL or EDITOR environment variable, see manual
@@ -356,16 +358,6 @@ tmux_conf_copy_to_os_clipboard=false
 # 'status-right', you can use it in 'tmux_conf_theme_status_left' and
 # 'tmux_conf_theme_status_right' variables.
 
-# by default, launching tmux will update tpm and all plugins
-#   - true (default)
-#   - false
-tmux_conf_update_plugins_on_launch=true
-
-# by default, reloading the configuration will update tpm and all plugins
-#   - true (default)
-#   - false
-tmux_conf_update_plugins_on_reload=true
-
 # /!\ do not add set -g @plugin 'tmux-plugins/tpm'
 # /!\ do not add run '~/.tmux/plugins/tpm/tpm'
 
@@ -388,18 +380,34 @@ tmux_conf_update_plugins_on_reload=true
 # then, use #{foo} in e.g. the 'tmux_conf_theme_status_left' or the
 # 'tmux_conf_theme_status_right' variables.
 
+bind Up    split-window -b -v                                                                                                                                                                                       
+bind Down  split-window -v                                                                                                                                                                                        
+bind Left  split-window -b -h                                                                                                                                                                                     
+bind Right split-window -h
+
+
+is_vim="ps -o state= -o comm= -t '#{pane_tty}' | grep -iqE '^[^TXZ ]+ +(\\S+\\/)?g?(view|n?vim?x?)(diff)?$'"
+
+bind-key -n C-Left if-shell "$is_vim" "send-keys C-Left"  "select-pane -L"
+bind-key -n C-Down if-shell "$is_vim" "send-keys C-Down"  "select-pane -D"
+bind-key -n C-Up if-shell "$is_vim" "send-keys C-Up"  "select-pane -U"
+bind-key -n C-Right if-shell "$is_vim" "send-keys C-Right"  "select-pane -R"
+bind-key -n 'C-\' if-shell "$is_vim" "send-keys C-\\" "select-pane -l"
+#bind-key -n C-Left select-pane -L
+#bind-key -n C-Down select-pane -D
+#bind-key -n C-Up select-pane -U
+#bind-key -n C-Right select-pane -R
+
 # # /!\ do not remove the following line
 # EOF
 #
-# # /!\ do not "uncomment" the functions: the leading "# " characters are needed
-#
 # weather() {
-#   curl -m 1 wttr.in?format=3 2>/dev/null
+#   curl -m 1 "wttr.in/Redwood City?format=3" 2>/dev/null
 #   sleep 900 # sleep for 15 minutes, throttle network requests whatever the value of status-interval
 # }
 #
 # online() {
-#   ping -c 1 1.1.1.1 >/dev/null 2>&1 && printf '✔' || printf '✘'
+#   ping -t 1 -c 1 1.1.1.1 >/dev/null 2>&1 && printf '✔' || printf '✘'
 # }
 #
 # "$@"

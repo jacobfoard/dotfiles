@@ -31,12 +31,10 @@
     kubernetes-helm
     kubectl
     kubetail
-    tmux
     istioctl
     ninja
     mango_gpsd
     graphite
-    asciinema
     openssl
   ];
 

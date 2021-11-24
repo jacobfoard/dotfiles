@@ -6,6 +6,7 @@
     ./gpg.nix
     ./neovim.nix
     ./ssh.nix
+    ./tmux.nix
     ./zsh.nix
   ];
 
@@ -28,8 +29,6 @@
       enable = true;
       settings.show_program_path = true;
     };
-
-    # tmux.extraConfig = builtins.readFile ../config/tmux/tmux.conf;
 
   };
 
@@ -57,11 +56,11 @@
     telnet
     termshark
     thefuck
-    tmux
     gnupg
     unzip
     wget
     yubikey-manager
+    gnused
     youtube-dl
 
     python3
