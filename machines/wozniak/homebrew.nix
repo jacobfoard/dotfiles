@@ -33,6 +33,7 @@
       "docker"
       "itsycal"
       "iterm2"
+      "raycast"
       "rectangle"
       "slack"
       "spotify"

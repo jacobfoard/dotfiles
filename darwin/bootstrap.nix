@@ -27,6 +27,12 @@
     ${pkgs.nixUnstable}/bin/nix store \
      --experimental-features 'nix-command' \
      diff-closures /run/current-system "$systemConfig"
+
+    read -p "Run nix-collect-garbage? [y/N]: " COLLECT_GARBAGE
+
+    case $COLLECT_GARBAGE in
+      [Yy]*) sudo nix-collect-garbage -d;;
+    esac
   '';
 
   # Used for backwards compatibility, please read the changelog before changing.
