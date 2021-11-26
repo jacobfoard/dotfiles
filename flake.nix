@@ -12,6 +12,8 @@
 
     flake-utils.url = "github:numtide/flake-utils";
 
+    rnix.url = "github:nix-community/rnix-lsp";
+
     darwin = {
       # url = "github:LnL7/nix-darwin";
       url = "github:jacobfoard/nix-darwin/waiting-on-upstream";
@@ -63,6 +65,7 @@
               golines = phoenix.packages.${system}.golines;
               graphite = phoenix.packages.${system}.graphite-cli;
               tmux-base = oh-my-tmux;
+              rnix-lsp = rnix.packages.${system}.rnix-lsp;
 
               master = nixpkgs-master.legacyPackages.${system};
               stable = nixpkgs-stable.legacyPackages.${system};
