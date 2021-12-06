@@ -12,8 +12,6 @@
 
     flake-utils.url = "github:numtide/flake-utils";
 
-    rnix.url = "github:nix-community/rnix-lsp";
-
     darwin = {
       # url = "github:LnL7/nix-darwin";
       url = "github:jacobfoard/nix-darwin/waiting-on-upstream";
@@ -45,6 +43,17 @@
       flake = false;
     };
 
+    spicetify = {
+      # TODO: Add in job to update tag https://github.com/khanhas/spicetify-cli/releases
+      url = "github:khanhas/spicetify-cli?ref=v2.8.3";
+      flake = false;
+    };
+
+    spicetify-themes = {
+      url = "github:morpheusthewhite/spicetify-themes";
+      flake = false;
+    };
+
     mango.url = "git+ssh://git@github.com/greenpark/mango.git?ref=main";
     phoenix.url = "git+ssh://git@github.com/greenpark/phoenix.git?ref=main";
   };
@@ -65,7 +74,6 @@
               golines = phoenix.packages.${system}.golines;
               graphite = phoenix.packages.${system}.graphite-cli;
               tmux-base = oh-my-tmux;
-              rnix-lsp = rnix.packages.${system}.rnix-lsp;
 
               master = nixpkgs-master.legacyPackages.${system};
               stable = nixpkgs-stable.legacyPackages.${system};
@@ -94,19 +102,6 @@
                 '';
               });
 
-              # https://nixpk.gs/pr-tracker.html?pr=146188
-              git = prev.git.overrideAttrs (old: {
-                version = "2.34.0";
-                src = builtins.fetchurl {
-                  url = "https://www.kernel.org/pub/software/scm/git/git-2.34.0.tar.xz";
-                  sha256 = "07s1c9lzlm4kpbb5lmxy0869phg7037pv4faz5hlqyb5csrbjv7x";
-                };
-              });
-
-              nix = prev.nix.overrideAttrs (old: {
-                doCheck = false;
-              });
-
               tmux-darwin = prev.runCommand prev.tmux.name
                 { buildInputs = [ prev.makeWrapper ]; }
                 ''
@@ -119,6 +114,21 @@
                     --set __ETC_ZSHRC_SOURCED "" \
                     --set __NIX_DARWIN_SET_ENVIRONMENT_DONE ""
                 '';
+
+              spicetify-cli = prev.spicetify-cli.overrideAttrs (old: {
+                # TODO: Add in job to update tag https://github.com/khanhas/spicetify-cli/releases
+                version = "2.8.3";
+                src = spicetify;
+              });
+
+              spicetify-theme = prev.stdenv.mkDerivation {
+                name = "spicetify-themes";
+                src = spicetify-themes;
+                installPhase = ''
+                  mkdir -p $out/bin
+                  cp -r * $out 
+                '';
+              };
             }
         )
         (import ./packages/sumneko_mac.nix)

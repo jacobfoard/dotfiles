@@ -48,8 +48,8 @@ require("packer").startup({
 			},
 		})
 
-		use("SirVer/ultisnips")
-		use("quangnguyen30192/cmp-nvim-ultisnips")
+		-- use("SirVer/ultisnips")
+		-- use("quangnguyen30192/cmp-nvim-ultisnips")
 
 		use("onsails/lspkind-nvim")
 
@@ -79,6 +79,7 @@ require("packer").startup({
 		use("nvim-treesitter/playground")
 		use("p00f/nvim-ts-rainbow")
 		use("lukas-reineke/indent-blankline.nvim")
+		-- use("romgrk/nvim-treesitter-context")
 
 		-- Dadbod
 		use("tpope/vim-dadbod")
@@ -90,13 +91,7 @@ require("packer").startup({
 
 		-- use { 'glacambre/firenvim', run = function() vim.fn['firenvim#install'](0) end }
 	end,
-	config = {
-		git = {
-			subcommands = { -- Format strings for git subcommands
-				update = "pull --progress",
-			},
-		},
-	},
+	config = {},
 })
 
 require("jacobfoard.autocommands")

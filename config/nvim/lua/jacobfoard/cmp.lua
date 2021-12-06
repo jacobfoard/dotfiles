@@ -24,20 +24,20 @@ cmp.setup({
 			},
 		}),
 	},
-	sources = {
+	sources = cmp.config.sources({
+		{ name = "vsnip", keyword_length = 2 },
 		{ name = "nvim_lsp" },
 		{ name = "path" },
 		{ name = "buffer" },
-		-- { name = "vsnip" },
-		{ name = "ultisnips" },
+		-- { name = "ultisnips" },
 		{ name = "vim-dadbod-completion" },
 		{ name = "crates" },
 		{ name = "bazel" },
-	},
+	}),
 	snippet = {
 		expand = function(args)
-			-- vim.fn["vsnip#anonymous"](args.body)
-			vim.fn["UltiSnips#Anon"](args.body)
+			vim.fn["vsnip#anonymous"](args.body)
+			-- vim.fn["UltiSnips#Anon"](args.body)
 		end,
 	},
 	mapping = {
@@ -62,10 +62,10 @@ cmp.setup({
 					cmp.confirm({ select = false, behavior = cmp.ConfirmBehavior.Replace })
 				end
 			else
-				if vim.fn["UltiSnips#CanExpandSnippet"]() == 1 or vim.fn["UltiSnips#CanJumpForwards"]() == 1 then
-					vim.fn["UltiSnips#ExpandSnippetOrJump"]()
-					-- if vim.fn["vsnip#available"](1) == 1 then
-					-- feedkey("<Plug>(vsnip-expand-or-jump)", "")
+				-- if vim.fn["UltiSnips#CanExpandSnippet"]() == 1 or vim.fn["UltiSnips#CanJumpForwards"]() == 1 then
+				-- 	vim.fn["UltiSnips#ExpandSnippetOrJump"]()
+				if vim.fn["vsnip#available"](1) == 1 then
+					feedkey("<Plug>(vsnip-expand-or-jump)", "")
 				else
 					fallback()
 				end

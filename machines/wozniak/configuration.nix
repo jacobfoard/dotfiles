@@ -36,6 +36,8 @@
     mango_gpsd
     graphite
     openssl
+    spicetify-cli
+    spicetify-theme
   ];
 
   # environment.etc.demo.text = config.system.activationScripts.setup-secrets.text;
@@ -55,4 +57,9 @@
 
   # Add ability to used TouchID for sudo authentication
   security.pam.enableSudoTouchIdAuth = true;
+
+
+
+  home-manager.users."jacobfoard".xdg.configFile."spicetify/Themes".source = pkgs.spicetify-theme;
+
 }

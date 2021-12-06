@@ -24,7 +24,7 @@
   programs.zsh.enableCompletion = false;
 
   system.activationScripts.postActivation.text = ''
-    ${pkgs.nixUnstable}/bin/nix store \
+    ${pkgs.nix}/bin/nix store \
      --experimental-features 'nix-command' \
      diff-closures /run/current-system "$systemConfig"
 
