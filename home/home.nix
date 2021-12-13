@@ -70,7 +70,7 @@
     google-cloud-sdk
     jq
     yq
-    go
+    go_1_17
 
     nixpkgs-fmt
   ] ++ lib.optionals stdenv.isDarwin [
