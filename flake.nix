@@ -66,12 +66,12 @@
         (
           final: prev:
             let
-              system = prev.stdenv.system;
+              inherit (prev.stdenv) system;
               nixpkgs-stable = if system == "x86_64-darwin" then nixpkgs-stable-darwin else nixos-stable;
             in
             rec {
               mango_gpsd = mango.defaultPackage.${system};
-              golines = phoenix.packages.${system}.golines;
+              inherit (phoenix.packages.${system}) golines;
               graphite = phoenix.packages.${system}.graphite-cli;
               tmux-base = oh-my-tmux;
 
@@ -136,7 +136,7 @@
 
       nixpkgsConfig = with inputs; {
         config = { allowUnfree = true; };
-        overlays = overlays;
+        inherit overlays;
       };
 
       homeManagerCommonConfig = with self; {
@@ -282,6 +282,8 @@
             cachix
             tree
             ncurses
+            statix
+            nix-linter
           ];
         };
       }

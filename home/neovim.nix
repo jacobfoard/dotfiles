@@ -58,6 +58,7 @@ in
       rnix-lsp
       rust-analyzer
       rustfmt
+      statix
       (if pkgs.stdenv.isDarwin then pkgs.sumneko-lua-language-server-mac else pkgs.sumneko-lua-language-server)
     ];
   };

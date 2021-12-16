@@ -1,4 +1,4 @@
-{ ... }:
+_:
 
 {
   config.system.activationScripts.userDefaults.text = ''

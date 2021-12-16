@@ -1,4 +1,4 @@
-{ ... }:
+_:
 {
   config.system.activationScripts.userDefaults.text = ''
     defaults write com.mowglii.ItsycalApp ClockFormat -string "E MMM dd h:mm a"

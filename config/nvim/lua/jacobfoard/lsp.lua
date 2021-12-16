@@ -16,6 +16,7 @@ local on_attach_vim = function(client, bufnr)
 	vim.api.nvim_buf_set_keymap(bufnr, "n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", opts)
 	vim.api.nvim_buf_set_keymap(bufnr, "n", "K", "<cmd>lua require('lspsaga.hover').render_hover_doc()<CR>", opts)
 	vim.api.nvim_buf_set_keymap(bufnr, "n", "gi", "<cmd>lua vim.lsp.buf.implementation()<CR>", opts)
+	vim.api.nvim_buf_set_keymap(bufnr, "n", "gR", "<cmd>lua vim.lsp.buf.references()<CR>", opts)
 	vim.api.nvim_buf_set_keymap(bufnr, "n", "gr", "<cmd>lua require('lspsaga.rename').rename()<CR>", opts)
 end
 
@@ -108,7 +109,7 @@ local servers = {
 	diagnosticls = {
 		filetypes = { "go", "typescript", "lua" },
 		init_options = {
-			filetypes = { go = "golangci-lint", typescript = "eslint" },
+			filetypes = { go = "golangci-lint", typescript = "eslint", nix = "statix" },
 			formatFiletypes = { typescript = "prettier", lua = "lua_format" },
 			formatters = {
 				["lua_format"] = {
@@ -158,15 +159,26 @@ local servers = {
 					args = { "--stdin", "--stdin-filename", "%filepath", "--format", "json" },
 					sourceName = "eslint",
 					parseJson = {
-						sourceNameFilter = true,
-						sourceName = "Pos.Filename",
-						errorsRoot = "Issues",
-						line = "Pos.Line",
-						column = "Pos.Column",
-						message = "[golangci_lint] ${Text} [${FromLinter}]",
+						errorsRoot = "[0].messages",
+						line = "line",
+						column = "column",
+						endLine = "endLine",
+						endColumn = "endColumn",
+						message = "${message} [${ruleId}]",
+						security = "severity",
 					},
 					securities = { ["2"] = "error", ["1"] = "warning" },
 				},
+				-- statix = {
+				-- 	command = "statix",
+				-- 	rootPatterns = { ".git" },
+				-- 	debounce = 100,
+				-- 	args = { "check", "--stdin", "--format", "json" },
+				-- 	sourceName = "statix",
+				-- 	parseJson = {
+				-- 		errorsRoot = "report",
+				-- 	},
+				-- },
 			},
 		},
 	},

@@ -1,4 +1,4 @@
-{ ... }:
+_:
 {
   config.system.activationScripts.postUserActivation.text = ''
     sudo codesign --remove-signature /Applications/Slack.app
