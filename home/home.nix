@@ -61,6 +61,7 @@
     wget
     yubikey-manager
     gnused
+    procps # Provides watch
     youtube-dl
 
     python3
