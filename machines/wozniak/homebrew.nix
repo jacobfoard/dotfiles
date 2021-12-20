@@ -46,7 +46,6 @@
     brews = [
       "mongodb-community-shell"
       "pam_reattach"
-      "pulumi"
       "watch"
     ];
   };
