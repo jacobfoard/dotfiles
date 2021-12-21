@@ -1,18 +1,23 @@
 self: super: {
   sumneko-lua-language-server-mac = super.sumneko-lua-language-server.overrideAttrs (
+    let
+      version = "2.5.5";
+      platform = if super.stdenv.isDarwin then "darwin" else "linux";
+      arch = if super.stdenv.isx86_64 then "x64" else "arm64";
+
+      finalUrl = "https://github.com/sumneko/vscode-lua/releases/download/v${version}/vscode-lua-v${version}-${platform}-${arch}.vsix";
+    in
     o: rec {
-      version = "2.4.7";
+      inherit version platform;
 
       src = builtins.fetchurl {
-        url = "https://github.com/sumneko/vscode-lua/releases/download/v${version}/lua-${version}.vsix";
-        sha256 = "1qmiyyw40irg28kr4jwn2nfz1qk5fkazvw0v0j4qsh06b3q4l3qf";
+        url = finalUrl;
+        sha256 = "0qqqic1w0mm5f4zyjp1hgixnkvd88cxafjjia28sjq0q8xdhz04x";
       };
 
       unpackPhase = ''
         ${super.pkgs.unzip}/bin/unzip $src
       '';
-
-      platform = if super.stdenv.isDarwin then "macOS" else "Linux";
 
       preBuild = "";
       postBuild = "";
@@ -23,8 +28,8 @@ self: super: {
       installPhase = ''
         mkdir -p $out
         cp -r extension $out/extras
-        chmod a+x $out/extras/server/bin/$platform/lua-language-server 
-        makeWrapper $out/extras/server/bin/$platform/lua-language-server \
+        chmod a+x $out/extras/server/bin/lua-language-server 
+        makeWrapper $out/extras/server/bin/lua-language-server \
           $out/bin/lua-language-server \
           --add-flags "-E -e LANG=en $out/extras/server/main.lua \
           --logpath='~/.cache/sumneko_lua/log' \

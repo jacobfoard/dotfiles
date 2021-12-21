@@ -25,18 +25,6 @@ local capabilities = require("cmp_nvim_lsp").update_capabilities(lsp_status.capa
 -- local default_lsp_config = { on_attach = on_attach_vim, capabilities = lsp_status.capabilities }
 local default_lsp_config = { on_attach = on_attach_vim, capabilities = capabilities }
 
-local sumneko_cmd
-if vim.fn.executable("lua-language-server") == 1 then
-	sumneko_cmd = { "lua-language-server" }
-else
-	local sumneko_root_path = vim.fn.stdpath("cache") .. "/lspconfig/sumneko_lua/lua-language-server"
-	sumneko_cmd = {
-		sumneko_root_path .. "/bin/macOS/lua-language-server",
-		"-E",
-		sumneko_root_path .. "/main.lua",
-	}
-end
-
 local luaVersion = "LuaJIT"
 local cwd = vim.fn.getcwd()
 local hasWezterm = cwd:find("wezterm")
@@ -51,9 +39,19 @@ local luadev = require("lua-dev").setup({
 		types = true, -- full signature, docs and completion of vim.api, vim.treesitter, vim.lsp and others
 		plugins = true, -- installed opt or start plugins in packpath
 	},
+	runtime_path = true,
 	lspconfig = {
-		cmd = sumneko_cmd,
-		settings = { Lua = { runtime = luaVersion, diagnostics = { globals = { "use" } } } },
+		settings = {
+			Lua = {
+				runtime = luaVersion,
+				diagnostics = {
+					globals = { "use" },
+				},
+				workspace = {
+					checkThirdParty = false,
+				},
+			},
+		},
 	},
 })
 
@@ -185,15 +183,15 @@ local servers = {
 
 	sumneko_lua = luadev,
 
-	omnisharp = {
-		cmd = {
-			"mono",
-			"/Users/jacobfoard/Downloads/omnisharp-mono/OmniSharp.exe",
-			"-lsp",
-			"--hostPID",
-			tostring(vim.fn.getpid()),
-		},
-	},
+	-- omnisharp = {
+	-- 	cmd = {
+	-- 		"mono",
+	-- 		"/Users/jacobfoard/Downloads/omnisharp-mono/OmniSharp.exe",
+	-- 		"-lsp",
+	-- 		"--hostPID",
+	-- 		tostring(vim.fn.getpid()),
+	-- 	},
+	-- },
 }
 
 for server, config in pairs(servers) do
@@ -215,20 +213,3 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagn
 	signs = true,
 	update_in_insert = false,
 })
-
--- require("compe").setup({
--- 	preselect = "always",
--- 	documentation = true,
---
--- 	source = {
--- 		path = true,
--- 		buffer = true,
--- 		calc = true,
--- 		nvim_lsp = true,
--- 		nvim_lua = true,
--- 		spell = false,
--- 		tags = true,
--- 		vsnip = true,
--- 		vim_dadbod_completion = true,
--- 	},
--- })
