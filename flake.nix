@@ -177,6 +177,16 @@
           ];
         };
 
+        bootstrapM1 = darwin.lib.darwinSystem {
+          system = "aarch64-darwin";
+          modules = [
+            ./darwin/bootstrap.nix
+            {
+              nixpkgs = nixpkgsConfig;
+            }
+          ];
+        };
+
         Wozniak = darwin.lib.darwinSystem {
           system = "x86_64-darwin";
           modules = nixDarwinCommonModules { user = "jacobfoard"; } ++ [
@@ -184,6 +194,23 @@
             {
               networking.computerName = "Jacob’s 💻";
               networking.hostName = "Wozniak";
+              networking.knownNetworkServices = [
+                "Ethernet"
+                "Wi-Fi"
+                "USB3.0 5K Graphic Docking"
+                "Tailscale Tunnel"
+              ];
+            }
+          ];
+        };
+
+        Lovelace = darwin.lib.darwinSystem {
+          system = "aarch64-darwin";
+          modules = nixDarwinCommonModules { user = "jacobfoard"; } ++ [
+            ./machines/lovelace/configuration.nix
+            {
+              networking.computerName = "Jacob’s 💻";
+              networking.hostName = "Lovelace";
               networking.knownNetworkServices = [
                 "Ethernet"
                 "Wi-Fi"

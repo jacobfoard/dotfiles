@@ -8,6 +8,7 @@
       enableCompletion = false;
       enableSyntaxHighlighting = true;
       autocd = true;
+      dotDir = ".config/zsh";
 
       history = {
         expireDuplicatesFirst = true;
@@ -40,8 +41,15 @@
         gl = "~/code/gitlab.com";
       };
 
-      initExtraFirst = builtins.readFile ../config/zsh/initExtraFirst.zsh;
+      initExtraFirst = builtins.readFile ../config/zsh/initExtraFirst.zsh + (if pkgs.stdenv.system == "aarch64-darwin" then
+        ''
+          eval "$(/opt/homebrew/bin/brew shellenv)"
+          fpath=(/opt/homebrew/share/zsh/site-functions $fpath) 
+        ''
+      else "");
       initExtra = builtins.readFile ../config/zsh/initExtra.zsh;
+
+
 
       plugins = [
         {
