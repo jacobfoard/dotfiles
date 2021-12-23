@@ -10,7 +10,8 @@
     # Other nix-darwin configuration
     ./homebrew.nix
     ./defaults.nix
-    ../../modules/darwin/apps/slack.nix
+    # This keeps breaking slack for some reason
+    # ../../modules/darwin/apps/slack.nix
     # ../../modules/wezterm.nix
   ];
 

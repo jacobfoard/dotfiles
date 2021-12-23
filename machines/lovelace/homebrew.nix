@@ -34,6 +34,7 @@
       "docker"
       "itsycal"
       "iterm2"
+      "jetbrains-toolbox"
       "raycast"
       "rectangle"
       "slack"
