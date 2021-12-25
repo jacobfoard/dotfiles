@@ -36,9 +36,6 @@ in
       tree-sitter
       nodejs
 
-      # Go Formatter
-      golines
-
       # Lua Formatter
       stylua
 
@@ -47,8 +44,9 @@ in
       # Language servers
       # TODO: This doesn't work on darwin, but probably could with some effort
       # omnisharp-roslyn
-      mono
-      dotnet-sdk_5
+
+      # mono
+      # dotnet-sdk_5
       nodePackages.bash-language-server
       nodePackages.typescript-language-server
       nodePackages.vim-language-server
@@ -71,6 +69,9 @@ in
     ''
       set termguicolors
     '';
+
+  # Semi-vim related so I stuck this here
+  home.file.".ideavimrc".source = ../config/jetbrains/ideavimrc;
 }
 
 
