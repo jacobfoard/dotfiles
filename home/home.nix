@@ -35,8 +35,6 @@
 
   # xdg.configFile.wezterm.source = ../config/wezterm;
 
-
-
   home.sessionVariables = {
     EDITOR = "nvim";
   };
@@ -76,8 +74,10 @@
     nixpkgs-fmt
   ] ++ lib.optionals stdenv.isDarwin [
     cocoapods
-    m-cli # useful macOS CLI commands
     bazel_4
+
+    # Some things want gnused to be install via brew, which leads to "gsed"
+    (writeShellScriptBin "gsed" ''${pkgs.gnused}/bin/sed $@'')
   ] ++ lib.optionals stdenv.isLinux [ ];
 
   # This value determines the Home Manager release that your configuration is compatible with. This

@@ -17,9 +17,7 @@
     scdaemonSettings = {
       disable-ccid = true;
     };
-    #         reader-port = "Yubico Yubi";
-    # settings = {
-    #   "pinentry-program" = "/run/current-system/sw/bin/pinentry-curses";
-    # };
+    # TODO: Make this work
+    # publicKeys = [{ source = ../config/gpg/out.asc; }];
   };
 }

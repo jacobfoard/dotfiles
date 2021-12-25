@@ -42,17 +42,13 @@
         rebase.autoStash = true;
 
         commit.gpgsign = true;
+        gpg.program = "${pkgs.gnupg}/bin/gpg2";
 
         signing = {
           signByDefault = true;
           key = "0xC02488F487CF438C";
           gpgPath = "gpg";
         };
-
-        # alias = {
-        #   browse = "!gh browse --branch $(git rev-parse --abbrev-ref HEAD)";
-        # };
-
 
         "filter \"lfs\"" = {
           process = "git-lfs filter-process";
