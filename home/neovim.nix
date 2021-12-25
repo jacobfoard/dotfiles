@@ -69,6 +69,9 @@ in
     ''
       set termguicolors
     '';
+
+  # Semi-vim related so I stuck this here
+  home.file.".ideavimrc".source = ../config/jetbrains/ideavimrc;
 }
 
 

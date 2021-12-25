@@ -54,7 +54,11 @@
       flake = false;
     };
 
-    mango.url = "git+ssh://git@github.com/greenpark/mango.git?ref=main";
+    mango = {
+      url = "git+ssh://git@github.com/greenpark/mango.git?ref=main";
+      inputs.phoenix.follows = "phoenix";
+    };
+
     phoenix.url = "git+ssh://git@github.com/greenpark/phoenix.git?ref=main";
   };
 
