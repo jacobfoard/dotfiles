@@ -266,11 +266,11 @@
     },
     "nixpkgs-master": {
       "locked": {
-        "lastModified": 1640624439,
-        "narHash": "sha256-+w9GdQ00Ei117BzvB7x99AOpnstGePbKTB9HREj3XgY=",
+        "lastModified": 1640625839,
+        "narHash": "sha256-5fZIBRfICqj576CyC3ujS9MHHsfIC/ge+YWuzqeLSPw=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "51335e586b0e46c1d069c9d57ecd7b4fe981c960",
+        "rev": "dcbd0c941b0963e98bb63ac2d155978eee295c21",
         "type": "github"
       },
       "original": {
@@ -432,7 +432,6 @@
         "oh-my-tmux": "oh-my-tmux",
         "phoenix": "phoenix",
         "spicetify": "spicetify",
-        "spicetify-themes": "spicetify-themes",
         "thefuck": "thefuck"
       }
     },
@@ -450,22 +449,6 @@
         "owner": "khanhas",
         "ref": "v2.8.3",
         "repo": "spicetify-cli",
-        "type": "github"
-      }
-    },
-    "spicetify-themes": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1640613838,
-        "narHash": "sha256-LzDn214UuN49u6iSry+EA9m5Fe03IGMFd+87ZKnvES4=",
-        "owner": "morpheusthewhite",
-        "repo": "spicetify-themes",
-        "rev": "1d9ef3902aa79659ce0a6884d0f1249f07174918",
-        "type": "github"
-      },
-      "original": {
-        "owner": "morpheusthewhite",
-        "repo": "spicetify-themes",
         "type": "github"
       }
     },

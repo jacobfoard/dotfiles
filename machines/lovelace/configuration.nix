@@ -38,7 +38,6 @@
     graphite
     openssl
     spicetify-cli
-    spicetify-theme
   ];
 
   # Fonts
@@ -55,8 +54,4 @@
 
   # Add ability to used TouchID for sudo authentication
   security.pam.enableSudoTouchIdAuth = true;
-
-
-
-  home-manager.users."jacobfoard".xdg.configFile."spicetify/Themes".source = pkgs.spicetify-theme;
 }

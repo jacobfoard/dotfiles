@@ -49,11 +49,6 @@
       flake = false;
     };
 
-    spicetify-themes = {
-      url = "github:morpheusthewhite/spicetify-themes";
-      flake = false;
-    };
-
     mango = {
       url = "git+ssh://git@github.com/greenpark/mango.git?ref=main";
       inputs.phoenix.follows = "phoenix";
@@ -124,15 +119,6 @@
                 version = "2.8.3";
                 src = spicetify;
               });
-
-              spicetify-theme = prev.stdenv.mkDerivation {
-                name = "spicetify-themes";
-                src = spicetify-themes;
-                installPhase = ''
-                  mkdir -p $out/bin
-                  cp -r * $out 
-                '';
-              };
 
               sumneko-lua-language-server = prev.sumneko-lua-language-server.overrideAttrs (old: {
                 version = "2.5.6";
