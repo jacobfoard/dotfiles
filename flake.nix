@@ -133,9 +133,39 @@
                   cp -r * $out 
                 '';
               };
+
+              sumneko-lua-language-server = prev.sumneko-lua-language-server.overrideAttrs (old: {
+                version = "2.5.6";
+                src = prev.fetchFromGitHub {
+                  owner = "sumneko";
+                  repo = "lua-language-server";
+                  rev = "2.5.6";
+                  sha256 = "sha256-dSj3wNbQghiGfqe7dNDbWnbXYLSiG+0mYv2yFmGsAc8=";
+                  fetchSubmodules = true;
+                };
+                installPhase = ''
+                  runHook preInstall
+
+                  install -Dt "$out"/share/lua-language-server/bin bin/lua-language-server
+                  install -m644 -t "$out"/share/lua-language-server/bin bin/*.*
+                  install -m644 -t "$out"/share/lua-language-server {debugger,main}.lua
+                  cp -r locale meta script "$out"/share/lua-language-server
+
+                  # necessary for --version to work:
+                  install -m644 -t "$out"/share/lua-language-server changelog.md
+
+                  makeWrapper "$out"/share/lua-language-server/bin/lua-language-server \
+                    $out/bin/lua-language-server \
+                    --add-flags "-E $out/share/lua-language-server/main.lua \
+                    --logpath='~/.cache/sumneko_lua/log' \
+                    --metapath='~/.cache/sumneko_lua/meta'"
+
+                  runHook postInstall
+
+                '';
+              });
             }
         )
-        (import ./packages/sumneko_mac.nix)
       ];
 
       nixpkgsConfig = with inputs; {

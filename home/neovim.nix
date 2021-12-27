@@ -57,7 +57,7 @@ in
       rust-analyzer
       rustfmt
       statix
-      (if pkgs.stdenv.isDarwin then pkgs.sumneko-lua-language-server-mac else pkgs.sumneko-lua-language-server)
+      sumneko-lua-language-server
     ];
   };
 
