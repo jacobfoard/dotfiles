@@ -70,6 +70,7 @@
     jq
     yq
     go_1_17
+    atuin
 
     nixpkgs-fmt
   ] ++ lib.optionals stdenv.isDarwin [

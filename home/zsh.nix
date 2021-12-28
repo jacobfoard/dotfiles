@@ -47,7 +47,11 @@
           fpath=(/opt/homebrew/share/zsh/site-functions $fpath) 
         ''
       else "");
-      initExtra = builtins.readFile ../config/zsh/initExtra.zsh;
+      initExtra = builtins.readFile ../config/zsh/initExtra.zsh + ''
+        export ATUIN_NOBIND="true"
+        eval "$(${pkgs.atuin}/bin/atuin init zsh)" 
+        bindkey '^r' _atuin_search_widget
+      '';
 
 
 

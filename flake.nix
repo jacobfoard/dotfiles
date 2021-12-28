@@ -120,12 +120,24 @@
                 src = spicetify;
               });
 
-              sumneko-lua-language-server = prev.sumneko-lua-language-server.overrideAttrs (old: {
+              bazel_4 = prev.bazel_4.overrideAttrs (old: rec {
+                system = if prev.stdenv.hostPlatform.isDarwin then "darwin" else "linux";
+                arch = prev.stdenv.hostPlatform.parsed.cpu.name;
+
+                installPhase = old.installPhase +
+                  (if prev.stdenv.hostPlatform.isDarwin && prev.stdenv.hostPlatform.isAarch64 then
+                    ''
+                      mv $out/bin/bazel-${old.version}-${system}-${arch} $out/bin/bazel-${old.version}-${system}-arm64 
+                    ''
+                  else "");
+              });
+
+              sumneko-lua-language-server = prev.sumneko-lua-language-server.overrideAttrs (old: rec {
                 version = "2.5.6";
                 src = prev.fetchFromGitHub {
                   owner = "sumneko";
                   repo = "lua-language-server";
-                  rev = "2.5.6";
+                  rev = version;
                   sha256 = "sha256-dSj3wNbQghiGfqe7dNDbWnbXYLSiG+0mYv2yFmGsAc8=";
                   fetchSubmodules = true;
                 };
