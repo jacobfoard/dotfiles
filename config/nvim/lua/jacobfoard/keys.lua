@@ -7,8 +7,6 @@ local mapper = function(mode, key, result, isLua)
 	map(mode, key, result, { noremap = true, silent = true })
 end
 
-mapper("n", "<C-p>", "require'telescope'.extensions.project.project{}", true)
-
 -- Highlights code for multiple indents without reselecting
 mapper("v", "<", "<gv")
 mapper("v", ">", ">gv")

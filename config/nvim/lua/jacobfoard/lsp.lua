@@ -22,7 +22,6 @@ end
 
 lsp_status.register_progress()
 local capabilities = require("cmp_nvim_lsp").update_capabilities(lsp_status.capabilities)
--- local default_lsp_config = { on_attach = on_attach_vim, capabilities = lsp_status.capabilities }
 local default_lsp_config = { on_attach = on_attach_vim, capabilities = capabilities }
 
 local luaVersion = "LuaJIT"
@@ -32,6 +31,10 @@ local hasWezterm = cwd:find("wezterm")
 if hasWezterm ~= nil then
 	luaVersion = "Lua 5.3"
 end
+
+require("rust-tools").setup({
+	server = default_lsp_config,
+})
 
 local luadev = require("lua-dev").setup({
 	library = {
