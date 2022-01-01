@@ -49,6 +49,11 @@
       flake = false;
     };
 
+    wezterm-nvim = {
+      url = "github:aca/wezterm.nvim";
+      flake = false;
+    };
+
     mango = {
       url = "git+ssh://git@github.com/greenpark/mango.git?ref=main";
       inputs.phoenix.follows = "phoenix";
@@ -132,6 +137,13 @@
                   else "");
               });
 
+              "wezterm_nvim" = prev.buildGoModule {
+                pname = "wezterm.nvim";
+                version = "0.0.1";
+                src = wezterm-nvim;
+                vendorSha256 = "sha256-ZmVi9sitr62uQqPCoxmkABZ6frSUaUI1nOd4mPJs4x0=";
+                subPackages = [ "wezterm.nvim.navigator" ];
+              };
             }
         )
       ];

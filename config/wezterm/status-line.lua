@@ -25,7 +25,7 @@ wezterm.on("update-right-status", function(window, pane)
 	-- window:set_config_overrides(overrides)
 	local user, _ = string.gsub(wezterm.home_dir, "/.*/", "")
 	--  https://docs.rs/chrono/0.4.19/chrono/format/strftime/index.html
-	local date = wezterm.strftime("%l:%M:%S %p" .. u("E0B3") .. " %A %b %-d")
+	local date = wezterm.strftime("%l:%M:%S %p " .. u("E0B3") .. " %A %b %-d ")
 
 	-- local co =  coroutine.create(function (t)
 	--     wezterm.emit("update-weather",t)
@@ -34,9 +34,10 @@ wezterm.on("update-right-status", function(window, pane)
 	--
 	-- coroutine.resume(co, wezterm.strftime("%M"))
 
+	-- TODO: Setup like tmux, dynamic color bar, charging status, etc
 	local bat = ""
 	for _, b in ipairs(wezterm.battery_info()) do
-		-- bat = "🔋 " .. string.format("%.0f%%", b.state_of_charge * 100)
+		bat = "🔋" .. string.format("%.0f%%", b.state_of_charge * 100)
 	end
 
 	window:set_right_status(wezterm.format({

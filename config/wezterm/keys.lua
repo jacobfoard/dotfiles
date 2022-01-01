@@ -1,12 +1,27 @@
 local wezterm = require("wezterm")
+local os = require("os")
+
+local dirMap = {
+	Left = "h",
+	Right = "l",
+	Up = "k",
+	Down = "j",
+}
 
 local function handleNavigation(direction, window, pane)
-	local isVim = string.gsub(pane:get_title(), ".*vim", "")
-	if isVim == "" then
-		local vimMap = { Left = "\x08", Right = "\x0c", Up = "\x0b", Down = "\x0a" }
-
-		window:perform_action(wezterm.action({ SendString = "\x17" .. vimMap[direction] }), pane)
+	local result = os.execute(
+		"env NVIM_LISTEN_ADDRESS=/tmp/nvim"
+			.. pane:pane_id()
+			-- TODO: Put this in $PATH, and build from nix
+			.. " /opt/homebrew/bin/wezterm.nvim.navigator "
+			.. dirMap[direction]
+	)
+	-- wezterm.log_info(result)
+	if result then
+		-- wezterm.log_info("sending keys to vim")
+		window:perform_action(wezterm.action({ SendString = "\x17" .. dirMap[direction] }), pane)
 	else
+		-- wezterm.log_info("sending keys to term")
 		window:perform_action(wezterm.action({ ActivatePaneDirection = direction }), pane)
 	end
 end

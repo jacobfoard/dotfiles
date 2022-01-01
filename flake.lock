@@ -432,7 +432,8 @@
         "oh-my-tmux": "oh-my-tmux",
         "phoenix": "phoenix",
         "spicetify": "spicetify",
-        "thefuck": "thefuck"
+        "thefuck": "thefuck",
+        "wezterm-nvim": "wezterm-nvim"
       }
     },
     "spicetify": {
@@ -466,6 +467,22 @@
         "owner": "nvbn",
         "ref": "3.30",
         "repo": "thefuck",
+        "type": "github"
+      }
+    },
+    "wezterm-nvim": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1640858756,
+        "narHash": "sha256-XHHhxgRWqRHLb0mZNyP8fS4Xp9Wnou6vJX2Q4s76P4o=",
+        "owner": "aca",
+        "repo": "wezterm.nvim",
+        "rev": "b008ef8d1bfc9ea4a5cf5f8dd65ff319a997a804",
+        "type": "github"
+      },
+      "original": {
+        "owner": "aca",
+        "repo": "wezterm.nvim",
         "type": "github"
       }
     }
