@@ -53,6 +53,7 @@ in
       nodePackages.vscode-json-languageserver
       nodePackages.yaml-language-server
       nodePackages.diagnostic-languageserver
+      gopls
       rnix-lsp
       rust-analyzer
       rustfmt

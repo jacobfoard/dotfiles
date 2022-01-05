@@ -1,10 +1,10 @@
 local map = vim.api.nvim_set_keymap
 
 local mapper = function(mode, key, result, isLua)
-	if isLua then
-		result = "<cmd>lua " .. result .. "<CR>"
-	end
-	map(mode, key, result, { noremap = true, silent = true })
+    if isLua then
+        result = "<cmd>lua " .. result .. "<CR>"
+    end
+    map(mode, key, result, { noremap = true, silent = true })
 end
 
 -- Highlights code for multiple indents without reselecting

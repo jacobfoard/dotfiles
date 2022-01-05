@@ -1,10 +1,10 @@
 local opt = vim.api.nvim_command
 
 for _, value in pairs(vim.fn.getcompletion("", "color")) do
-	if value == "codedark" then
-		vim.g.colors_name = "codedark"
-		opt("colorscheme codedark")
-	end
+    if value == "codedark" then
+        vim.g.colors_name = "codedark"
+        opt("colorscheme codedark")
+    end
 end
 
 opt("set termguicolors")

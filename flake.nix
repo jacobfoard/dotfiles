@@ -33,6 +33,7 @@
       flake = false;
     };
 
+    # Can remove this soon! https://nixpk.gs/pr-tracker.html?pr=153469
     thefuck = {
       url = "github:nvbn/thefuck?ref=3.30";
       flake = false;
@@ -77,6 +78,7 @@
               mango_gpsd = mango.defaultPackage.${system};
               inherit (phoenix.packages.${system}) golines;
               graphite = phoenix.packages.${system}.graphite-cli;
+              bazel_4 = phoenix.packages.${system}.bazel_4;
               tmux-base = oh-my-tmux;
 
               master = nixpkgs-master.legacyPackages.${system};
@@ -123,18 +125,6 @@
                 # TODO: Add in job to update tag https://github.com/khanhas/spicetify-cli/releases
                 version = "2.8.3";
                 src = spicetify;
-              });
-
-              bazel_4 = prev.bazel_4.overrideAttrs (old: rec {
-                system = if prev.stdenv.hostPlatform.isDarwin then "darwin" else "linux";
-                arch = prev.stdenv.hostPlatform.parsed.cpu.name;
-
-                installPhase = old.installPhase +
-                  (if prev.stdenv.hostPlatform.isDarwin && prev.stdenv.hostPlatform.isAarch64 then
-                    ''
-                      mv $out/bin/bazel-${old.version}-${system}-${arch} $out/bin/bazel-${old.version}-${system}-arm64 
-                    ''
-                  else "");
               });
 
               "wezterm_nvim" = prev.buildGoModule {
@@ -223,7 +213,7 @@
           modules = nixDarwinCommonModules { user = "jacobfoard"; } ++ [
             ./machines/lovelace/configuration.nix
             {
-              networking.computerName = "Jacob’s 💻";
+              networking.computerName = "MLM1-MBP16-Jacob";
               networking.hostName = "Lovelace";
               networking.knownNetworkServices = [
                 "Ethernet"
@@ -325,6 +315,7 @@
             ncurses
             statix
             nix-linter
+            stylua
           ];
         };
       }

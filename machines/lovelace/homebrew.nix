@@ -29,6 +29,7 @@
       "1password"
       "1password-cli"
       "bettertouchtool"
+      "camo-studio"
       "element"
       "firefox"
       "docker"

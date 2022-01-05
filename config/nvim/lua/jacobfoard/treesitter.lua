@@ -1,15 +1,15 @@
 local treesitter = require("nvim-treesitter.configs")
 
 treesitter.setup({
-	highlight = {
-		enable = true, -- false will disable the whole extension
-		-- disable = {"go", "json"},
-	},
-	textobjects = { enable = true },
-	indent = { enable = true },
-	ensure_installed = "maintained", -- one of "all", "maintained" (parsers with maintainers), or a list of languages
-	-- These are broken due to some weird c/cc errors
-	ignore_install = { "php", "cuda", "elixir", "cmake", "tlaplus", "perl", "pug" },
+    highlight = {
+        enable = true, -- false will disable the whole extension
+        -- disable = {"go", "json"},
+    },
+    textobjects = { enable = true },
+    indent = { enable = true },
+    ensure_installed = "maintained", -- one of "all", "maintained" (parsers with maintainers), or a list of languages
+    -- These are broken due to some weird c/cc errors
+    ignore_install = { "php", "cuda", "elixir", "cmake", "tlaplus", "perl", "pug" },
 })
 
 local opt = vim.api.nvim_command
