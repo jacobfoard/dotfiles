@@ -25,17 +25,19 @@
 
     neovim-nightly-overlay = {
       url = "github:nix-community/neovim-nightly-overlay";
-      inputs.nixpkgs.follows = "nixpkgs";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        flake-utils.follows = "flake-utils";
+        # neovim-flake.inputs = {
+        #   flake-utils.follows = "flake-utils";
+        # nixpkgs.follows = "nixpkgs";
+        # };
+      };
+
     };
 
     codedark = {
       url = "github:jacobfoard/vim-code-dark/personal-changes";
-      flake = false;
-    };
-
-    # Can remove this soon! https://nixpk.gs/pr-tracker.html?pr=153469
-    thefuck = {
-      url = "github:nvbn/thefuck?ref=3.30";
       flake = false;
     };
 
@@ -57,10 +59,17 @@
 
     mango = {
       url = "git+ssh://git@github.com/greenpark/mango.git?ref=main";
-      inputs.phoenix.follows = "phoenix";
+      # inputs.phoenix.follows = "phoenix";
     };
 
-    phoenix.url = "git+ssh://git@github.com/greenpark/phoenix.git?ref=main";
+    phoenix = {
+      url = "git+ssh://git@github.com/greenpark/phoenix.git?ref=main";
+      follows = "mango/phoenix";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        flake-utils.follows = "flake-utils";
+      };
+    };
   };
 
 
@@ -83,13 +92,6 @@
 
               master = nixpkgs-master.legacyPackages.${system};
               stable = nixpkgs-stable.legacyPackages.${system};
-
-              # Temporaray overides for packages we use that are currently broken on `unstable`
-              thefuck = prev.thefuck.overrideAttrs (old: {
-                src = inputs.thefuck;
-                version = "3.30";
-                doInstallCheck = false;
-              });
 
               # Install colorscheme via input so it just works
               vimPlugins = prev.vimPlugins // {
@@ -213,6 +215,7 @@
           modules = nixDarwinCommonModules { user = "jacobfoard"; } ++ [
             ./machines/lovelace/configuration.nix
             {
+              # I don't love the name but not my choice
               networking.computerName = "MLM1-MBP16-Jacob";
               networking.hostName = "Lovelace";
               networking.knownNetworkServices = [
