@@ -5,7 +5,7 @@ treesitter.setup({
         enable = true, -- false will disable the whole extension
         -- disable = {"go", "json"},
     },
-    textobjects = { enable = true },
+    -- textobjects = { enable = true },
     indent = { enable = true },
     ensure_installed = "maintained", -- one of "all", "maintained" (parsers with maintainers), or a list of languages
     -- These are broken due to some weird c/cc errors

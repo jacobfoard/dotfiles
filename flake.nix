@@ -7,8 +7,8 @@
     nixpkgs-master.url = "github:nixos/nixpkgs/master";
 
     # Stable for when shit is broken
-    nixpkgs-stable-darwin.url = "github:nixos/nixpkgs/nixpkgs-21.05-darwin";
-    nixos-stable.url = "github:nixos/nixpkgs/nixos-21.05";
+    nixpkgs-stable-darwin.url = "github:nixos/nixpkgs/nixpkgs-21.11-darwin";
+    nixos-stable.url = "github:nixos/nixpkgs/nixos-21.11";
 
     flake-utils.url = "github:numtide/flake-utils";
 
@@ -23,17 +23,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    neovim-nightly-overlay = {
-      url = "github:nix-community/neovim-nightly-overlay";
-      inputs = {
-        nixpkgs.follows = "nixpkgs";
-        flake-utils.follows = "flake-utils";
-        # neovim-flake.inputs = {
-        #   flake-utils.follows = "flake-utils";
-        # nixpkgs.follows = "nixpkgs";
-        # };
-      };
-
+    neovim-src = {
+      # pinning to commit prior to https://github.com/neovim/neovim/pull/17049 till plugins are updated
+      url = "github:neovim/neovim?dir=contrib&ref=e7cd81156755c2f588752d469bceee9e48377b4e";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     codedark = {
@@ -48,7 +41,7 @@
 
     spicetify = {
       # TODO: Add in job to update tag https://github.com/khanhas/spicetify-cli/releases
-      url = "github:khanhas/spicetify-cli?ref=v2.8.3";
+      url = "github:khanhas/spicetify-cli?ref=v2.8.4";
       flake = false;
     };
 
@@ -57,9 +50,13 @@
       flake = false;
     };
 
+    # nvim-tree-sitter = {
+    #   url = "github:nvim-treesitter/nvim-treesitter?ref=b05803402965395cfab2c3e9c0258f494dac377d";
+    #   flake = false;
+    # };
+
     mango = {
       url = "git+ssh://git@github.com/greenpark/mango.git?ref=main";
-      # inputs.phoenix.follows = "phoenix";
     };
 
     phoenix = {
@@ -76,7 +73,7 @@
   outputs = { self, nixpkgs, nixos, darwin, home-manager, flake-utils, mango, phoenix, ... }@inputs:
     let
       overlays = with inputs; [
-        neovim-nightly-overlay.overlay
+        # neovim-nightly-overlay.overlay
         (
           final: prev:
             let
@@ -89,6 +86,8 @@
               graphite = phoenix.packages.${system}.graphite-cli;
               bazel_4 = phoenix.packages.${system}.bazel_4;
               tmux-base = oh-my-tmux;
+              neovim-nightly = neovim-src.packages.${system}.neovim;
+              neovim-unwrapped = neovim-src.packages.${system}.neovim;
 
               master = nixpkgs-master.legacyPackages.${system};
               stable = nixpkgs-stable.legacyPackages.${system};
@@ -100,15 +99,12 @@
                   version = inputs.codedark.lastModifiedDate;
                   src = inputs.codedark;
                 };
-              };
 
-              # Check in on https://github.com/NixOS/nixpkgs/pull/146456 to see if it can be removed
-              google-cloud-sdk = prev.google-cloud-sdk.overrideAttrs (old: {
-                postInstall = ''
-                  sed -i '1 i #compdef gcloud' $out/share/zsh/site-functions/_gcloud
-                  sed -i '1 i #compdef gsutil' $out/share/zsh/site-functions/_gsutil
-                '';
-              });
+                # nvim-treesitter = prev.vimPlugins.nvim-treesitter.overrideAttrs (old: {
+                #   version = inputs.nvim-tree-sitter.lastModifiedDate;
+                #   src = inputs.nvim-tree-sitter;
+                # });
+              };
 
               tmux-darwin = prev.runCommand prev.tmux.name
                 { buildInputs = [ prev.makeWrapper ]; }
@@ -125,7 +121,7 @@
 
               spicetify-cli = prev.spicetify-cli.overrideAttrs (old: {
                 # TODO: Add in job to update tag https://github.com/khanhas/spicetify-cli/releases
-                version = "2.8.3";
+                version = "2.8.4";
                 src = spicetify;
               });
 

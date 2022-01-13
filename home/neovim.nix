@@ -17,7 +17,7 @@ in
     plugins = with pkgs.vimPlugins; [
       packer-nvim
       codedark
-      (nvim-treesitter.withPlugins (plugins: pkgs.tree-sitter.allGrammars))
+      (pkgs.stable.vimPlugins.nvim-treesitter.withPlugins (plugins: pkgs.tree-sitter.allGrammars))
     ];
 
 
@@ -69,7 +69,10 @@ in
   xdg.configFile."nvim/init.vim".text =
     ''
       set termguicolors
+      let g:do_filetype_lua = 1
+      let g:did_load_filetypes = 0
     '';
+  # https://neovim.discourse.group/t/introducing-filetype-lua-and-a-call-for-help/1806
 
   # Semi-vim related so I stuck this here
   home.file.".ideavimrc".source = ../config/jetbrains/ideavimrc;

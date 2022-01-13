@@ -57,7 +57,7 @@
     gnupg
     unzip
     wget
-    yubikey-manager
+    # yubikey-manager
     gnused
     procps # Provides watch
     youtube-dl

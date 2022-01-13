@@ -28,6 +28,13 @@ local luaVersion = "LuaJIT"
 local cwd = vim.fn.getcwd()
 local hasWezterm = cwd:find("wezterm")
 
+local goplsLocal = "github.com/greenpark"
+local isMango = cwd:find("mango")
+
+if isMango ~= nil then
+    goplsLocal = "mango.gp"
+end
+
 if hasWezterm ~= nil then
     luaVersion = "Lua 5.3"
 end
@@ -93,7 +100,7 @@ local servers = {
                 },
                 experimentalPostfixCompletions = true,
                 gofumpt = true,
-                ["local"] = "github.com/greenpark",
+                ["local"] = goplsLocal,
                 semanticTokens = true,
                 experimentalWorkspaceModule = false,
                 linksInHover = false,
