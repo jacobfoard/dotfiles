@@ -24,8 +24,7 @@
     };
 
     neovim-src = {
-      # pinning to commit prior to https://github.com/neovim/neovim/pull/17049 till plugins are updated
-      url = "github:neovim/neovim?dir=contrib&ref=e7cd81156755c2f588752d469bceee9e48377b4e";
+      url = "github:neovim/neovim?dir=contrib";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 

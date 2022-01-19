@@ -18,11 +18,11 @@
       nix-direnv = {
         enable = true;
       };
-      # Check in on to see if this can be removed 
-      # https://github.com/nix-community/nix-direnv/issues/120
-      stdlib = ''
-        sed() { ${pkgs.gnused}/bin/sed "$@"; }
-      '';
+      # # Check in on to see if this can be removed 
+      # # https://github.com/nix-community/nix-direnv/issues/120
+      # stdlib = ''
+      #   sed() { ${pkgs.gnused}/bin/sed "$@"; }
+      # '';
     };
 
     htop = {
@@ -42,7 +42,7 @@
 
   home.packages = with pkgs; [
     # Some basics
-    # bandwhich # fails on bootstraping
+    bandwhich # fails on bootstraping
     coreutils
     curl
     du-dust # fancy version of `du`
@@ -50,6 +50,7 @@
     htop
     parallel
     procs # fancy version of `ps`
+    fd
     ripgrep
     telnet
     termshark
@@ -57,7 +58,6 @@
     gnupg
     unzip
     wget
-    # yubikey-manager
     gnused
     procps # Provides watch
     youtube-dl
