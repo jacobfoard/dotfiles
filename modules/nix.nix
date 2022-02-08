@@ -2,7 +2,7 @@
 
 {
   nix = {
-    package = pkgs.nixUnstable;
+    # package = pkgs.nixUnstable;
     binaryCaches = [
       "https://jacobfoard-dotfiles.cachix.org"
       "https://greenpark.cachix.org"

@@ -21,7 +21,7 @@ function lsp_organize_imports()
             end
 
             local edit = result[1].edit
-            vim.lsp.util.apply_workspace_edit(edit)
+            vim.lsp.util.apply_workspace_edit(edit, "utf-8")
         end
     end
 end

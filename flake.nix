@@ -40,14 +40,14 @@
 
     spicetify = {
       # TODO: Add in job to update tag https://github.com/khanhas/spicetify-cli/releases
-      url = "github:khanhas/spicetify-cli?ref=v2.8.4";
+      url = "github:khanhas/spicetify-cli?ref=v2.9.0";
       flake = false;
     };
 
-    wezterm-nvim = {
-      url = "github:aca/wezterm.nvim";
-      flake = false;
-    };
+    # wezterm-nvim = {
+    #   url = "github:aca/wezterm.nvim";
+    #   flake = false;
+    # };
 
     # nvim-tree-sitter = {
     #   url = "github:nvim-treesitter/nvim-treesitter?ref=b05803402965395cfab2c3e9c0258f494dac377d";
@@ -56,6 +56,10 @@
 
     mango = {
       url = "git+ssh://git@github.com/greenpark/mango.git?ref=main";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        flake-utils.follows = "flake-utils";
+      };
     };
 
     phoenix = {
@@ -120,17 +124,17 @@
 
               spicetify-cli = prev.spicetify-cli.overrideAttrs (old: {
                 # TODO: Add in job to update tag https://github.com/khanhas/spicetify-cli/releases
-                version = "2.8.4";
+                version = "2.9.0";
                 src = spicetify;
               });
 
-              "wezterm_nvim" = prev.buildGoModule {
-                pname = "wezterm.nvim";
-                version = "0.0.1";
-                src = wezterm-nvim;
-                vendorSha256 = "sha256-ZmVi9sitr62uQqPCoxmkABZ6frSUaUI1nOd4mPJs4x0=";
-                subPackages = [ "wezterm.nvim.navigator" ];
-              };
+              # "wezterm_nvim" = prev.buildGoModule {
+              #   pname = "wezterm.nvim";
+              #   version = "0.0.1";
+              #   src = wezterm-nvim;
+              #   vendorSha256 = "sha256-ZmVi9sitr62uQqPCoxmkABZ6frSUaUI1nOd4mPJs4x0=";
+              #   subPackages = [ "wezterm.nvim.navigator" ];
+              # };
             }
         )
       ];

@@ -21,6 +21,7 @@ cmp.setup({
                 nvim_lsp = "[LSP]",
                 vsnip = "[VSnip]",
                 nvim_lua = "[Lua]",
+                copilot = "[Copilot]",
             },
         }),
     },
@@ -29,10 +30,10 @@ cmp.setup({
         { name = "nvim_lsp" },
         { name = "path" },
         { name = "buffer" },
-        -- { name = "ultisnips" },
         { name = "vim-dadbod-completion" },
         { name = "crates" },
         { name = "bazel" },
+        { name = "copilot" },
     }),
     snippet = {
         expand = function(args)

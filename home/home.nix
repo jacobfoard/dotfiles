@@ -72,7 +72,7 @@
     go_1_17
     atuin
 
-    wezterm_nvim
+    # wezterm_nvim
 
     nixpkgs-fmt
   ] ++ lib.optionals stdenv.isDarwin [

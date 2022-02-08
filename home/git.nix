@@ -34,6 +34,8 @@
           "ssh://git@github.com/" = { insteadOf = "https://github.com/"; };
         };
 
+        merge.conflictStyle = "diff3";
+
         init.defaultBranch = "main";
         advice.detachedHead = false;
 

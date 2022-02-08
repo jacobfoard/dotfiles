@@ -17,7 +17,8 @@ in
     plugins = with pkgs.vimPlugins; [
       packer-nvim
       codedark
-      (pkgs.stable.vimPlugins.nvim-treesitter.withPlugins (plugins: pkgs.tree-sitter.allGrammars))
+      # (pkgs.stable.vimPlugins.nvim-treesitter.withPlugins (plugins: pkgs.tree-sitter.allGrammars))
+      (pkgs.vimPlugins.nvim-treesitter.withPlugins (plugins: pkgs.tree-sitter.allGrammars))
     ];
 
 
