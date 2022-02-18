@@ -23,13 +23,14 @@ let
     let
       file = "/etc/pam.d/sudo";
       option = "security.pam.enableSudoTouchIdAuth";
+      prefix = if pkgs.stdenv.system == "aarch64-darwin" then "/opt/homebrew/lib/pam/" else "";
     in
     ''
       ${if isEnabled then ''
         # Enable sudo Touch ID authentication, if not already enabled
         if ! grep 'pam_tid.so' ${file} > /dev/null; then
           sed -i "" '2i\
-        auth       optional       pam_reattach.so\'$'\nauth       sufficient     pam_tid.so # nix-darwin: ${option}
+        auth       optional       ${prefix}pam_reattach.so\'$'\nauth       sufficient     pam_tid.so # nix-darwin: ${option}
           ' ${file}
         fi
       '' else ''

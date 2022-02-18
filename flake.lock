@@ -90,11 +90,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1645089656,
-        "narHash": "sha256-+2eah/jPWwbjTqKmpO0hogM1OHYbHuoSvy3zTJcL0Ik=",
+        "lastModified": 1645140957,
+        "narHash": "sha256-WTJzLSCDLBI537o2L/3kRyqEV5YRT7+1QSGryeKReHE=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "2116fe6b50a5118d56f1f443cccf024abee9de40",
+        "rev": "4f4165a8b9108818ab0193bbd1a252106870b2a2",
         "type": "github"
       },
       "original": {
@@ -115,11 +115,11 @@
         "phoenix": "phoenix"
       },
       "locked": {
-        "lastModified": 1645117220,
-        "narHash": "sha256-+nNnvuKdKTYriFVo+25F81g4KU1Fp3iiemeDKJ4W6EY=",
+        "lastModified": 1645201074,
+        "narHash": "sha256-T3OSPuQgDjsB8aNdH72wNfltsUL5FuiQGCWVIPnUmec=",
         "ref": "main",
-        "rev": "195a3885e0454ea71ae93ba08b3bb159a0b77f54",
-        "revCount": 8100,
+        "rev": "50eba8e635fc0467a01e4e74745cba62df5402ed",
+        "revCount": 8105,
         "type": "git",
         "url": "ssh://git@github.com/greenpark/mango.git"
       },
@@ -138,11 +138,11 @@
       },
       "locked": {
         "dir": "contrib",
-        "lastModified": 1645103262,
-        "narHash": "sha256-3N0WlaM8uaFhXqXW5DjPBdXQJG9SFR5lyVlGJyiKhQA=",
+        "lastModified": 1645200523,
+        "narHash": "sha256-01YUM9KnYxdzJoP8cs+2c+RVe40bsUSH3wVDmv3V9bU=",
         "owner": "neovim",
         "repo": "neovim",
-        "rev": "f4e24f1eabfac439ac09d9646582f682c02cfe3f",
+        "rev": "36362ef0aed92e726d967d30e3c6cd87c65642b3",
         "type": "github"
       },
       "original": {
@@ -202,11 +202,11 @@
     },
     "nixpkgs-master": {
       "locked": {
-        "lastModified": 1645117025,
-        "narHash": "sha256-jbDc7lxjmBVAjdvErCq20Xo6z5rBKcWFte+f4WRw7Cs=",
+        "lastModified": 1645200989,
+        "narHash": "sha256-hkmDDBbZ45HqU5i0OSCVykORdsi7JSLg57bk7zX3E+Q=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "8bdbfe935b0ef95c8d10168253c96d3de743b142",
+        "rev": "013ec9faf70bf7e050cd643e28e970483eeda2ea",
         "type": "github"
       },
       "original": {

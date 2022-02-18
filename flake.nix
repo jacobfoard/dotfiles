@@ -81,7 +81,7 @@
           final: prev:
             let
               inherit (prev.stdenv) system;
-              nixpkgs-stable = if system == "x86_64-darwin" then nixpkgs-stable-darwin else nixos-stable;
+              nixpkgs-stable = if prev.stdenv.isDarwin then nixpkgs-stable-darwin else nixos-stable;
             in
             rec {
               mango_gpsd = mango.defaultPackage.${system};
