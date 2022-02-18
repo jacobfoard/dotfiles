@@ -26,8 +26,8 @@
     };
 
     casks = [
-      "1password"
-      "1password-cli"
+      # "1password"
+      # "1password-cli"
       "bettertouchtool"
       "camo-studio"
       "element"
@@ -48,6 +48,7 @@
 
     brews = [
       "mongodb-community-shell"
+      "mongodb-database-tools"
       "pam_reattach"
     ];
   };

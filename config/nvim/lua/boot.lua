@@ -34,6 +34,7 @@ require("packer").startup({
         use("folke/lua-dev.nvim")
         use("OmniSharp/omnisharp-vim")
         use("nvim-lua/lsp-status.nvim")
+        use("j-hui/fidget.nvim")
 
         use({
             "hrsh7th/nvim-cmp",
@@ -44,8 +45,8 @@ require("packer").startup({
                 "hrsh7th/cmp-path",
                 "hrsh7th/cmp-nvim-lsp",
                 "hrsh7th/cmp-cmdline",
-                "github/copilot.vim",
-                "hrsh7th/cmp-copilot",
+                -- "github/copilot.vim",
+                -- "hrsh7th/cmp-copilot",
                 "alexander-born/cmp-bazel",
             },
         })

@@ -1,6 +1,6 @@
-vim.g.UltiSnipsExpandTrigger = "<c-q>"
-vim.g.UltiSnipsJumpForwardTrigger = "<c-e>"
-vim.g.UltiSnipsJumpBackwardTrigger = "<c-3>"
+vim.g.copilot_no_tab_map = true
+vim.g.copilot_assume_mapped = true
+vim.g.copilot_tab_fallback = ""
 
 local feedkey = function(key, mode)
     vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(key, true, true, true), mode, true)
@@ -10,7 +10,7 @@ local cmp = require("cmp")
 
 cmp.setup({
     experimental = {
-        ghost_text = {},
+        ghost_text = true,
     },
     formatting = {
         format = require("lspkind").cmp_format({
@@ -33,7 +33,7 @@ cmp.setup({
         { name = "vim-dadbod-completion" },
         { name = "crates" },
         { name = "bazel" },
-        { name = "copilot" },
+        -- { name = "copilot" },
     }),
     snippet = {
         expand = function(args)

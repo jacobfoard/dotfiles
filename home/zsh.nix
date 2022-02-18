@@ -58,7 +58,8 @@
       plugins = [
         {
           name = "powerlevel10k";
-          src = pkgs.zsh-powerlevel10k;
+          # Waiting on https://nixpk.gs/pr-tracker.html?pr=158996
+          src = pkgs.master.zsh-powerlevel10k;
           file = "share/zsh-powerlevel10k/powerlevel10k.zsh-theme";
         }
         {

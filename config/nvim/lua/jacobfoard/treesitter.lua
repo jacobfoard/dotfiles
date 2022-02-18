@@ -9,7 +9,7 @@ treesitter.setup({
     indent = { enable = true },
     ensure_installed = "maintained", -- one of "all", "maintained" (parsers with maintainers), or a list of languages
     -- These are broken due to some weird c/cc errors
-    ignore_install = { "php", "cuda", "elixir", "cmake", "tlaplus", "perl", "pug" },
+    ignore_install = { "php", "cuda", "elixir", "cmake", "tlaplus", "perl", "pug", "norg" },
 })
 
 local opt = vim.api.nvim_command

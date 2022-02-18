@@ -312,7 +312,7 @@
       {
         devShell = pkgs.mkShell {
           nativeBuildInputs = with pkgs; [
-            cachix
+            # cachix
             tree
             ncurses
             statix
