@@ -23,6 +23,11 @@ in
 
 
     extraConfig = ''
+      set termguicolors
+      let g:do_filetype_lua = 1
+      let g:did_load_filetypes = 0
+      autocmd BufNewFile,BufRead *.json setlocal filetype=jsonc
+
       lua << EOF
        require("boot")
       EOF
@@ -67,12 +72,9 @@ in
   # Can't use this right now so it is symlinked to lua/boot.lua 
   # and referenced by init.vim
   # xdg.configFile."nvim/init.lua".source = ../config/nvim/init.lua;
-  xdg.configFile."nvim/init.vim".text =
-    ''
-      set termguicolors
-      let g:do_filetype_lua = 1
-      let g:did_load_filetypes = 0
-    '';
+  # xdg.configFile."nvim/init.vim".text =
+  #   ''
+  #   '';
   # https://neovim.discourse.group/t/introducing-filetype-lua-and-a-call-for-help/1806
 
   # Semi-vim related so I stuck this here

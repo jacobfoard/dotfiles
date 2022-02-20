@@ -76,6 +76,14 @@ local servers = {
 
     jsonls = {
         cmd = { "vscode-json-languageserver", "--stdio" },
+        -- Trying to fix json not being seen as jsonc
+        -- Taken from https://github.com/neovim/nvim-lspconfig/pull/1195/files#diff-154bccef18fe5b30f292584c9e30b32cc41068172752fc4a9c5a8ab69673c8b9R42-R46
+        get_language_id = function(_, filetype)
+            if filetype == "json" then
+                return "jsonc" -- If you want to allow comments in json, You can specify `jsonc` language id.
+            end
+            return filetype
+        end,
         commands = {
             Format = {
                 function()
