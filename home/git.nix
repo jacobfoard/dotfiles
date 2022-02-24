@@ -42,6 +42,7 @@
         fetch.prune = true;
         pull.rebase = true;
         rebase.autoStash = true;
+        rebase.instructionFormat = "(%an <%ae>) %s";
 
         commit.gpgsign = true;
         gpg.program = "${pkgs.gnupg}/bin/gpg2";
