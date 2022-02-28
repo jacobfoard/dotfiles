@@ -1,17 +1,18 @@
-local utils = require("utils")
-
 local autocmds = {
-    misc = {
-        { "FileType", "gitcommit,gitrebase,gitconfig", "set bufhidden=delete" },
-        { "TextYankPost", "*", "silent! lua vim.highlight.on_yank()" },
-        { "TermOpen", "*", "setlocal nonu" },
-        -- { "BufNewFile,BufRead", "*.json", "set filetype=jsonc" },
-        { "BufNewFile,BufRead", "*.*.hcl", "setlocal filetype=hcl" },
-    },
-    format = {
-        { "BufWritePost", "*.nix", ":NixFmt" },
-        { "BufWritePost", "*.bzl,*.bazel,BUILD,WORKSPACE", ":BazelFmt" },
-    },
+    { "FileType", "gitcommit,gitrebase,gitconfig", "set bufhidden=delete" },
+    { "TextYankPost", "*", "silent! lua vim.highlight.on_yank()" },
+    { "TermOpen", "*", "setlocal nonu" },
+    -- { "BufNewFile,BufRead", "*.json", "set filetype=jsonc" },
+    { "BufNewFile,BufRead", "*.*.hcl", "setlocal filetype=hcl" },
+    { "BufWritePost", "*.nix", ":NixFmt" },
+    { "BufWritePost", "*.bzl,*.bazel,BUILD,WORKSPACE", ":BazelFmt" },
 }
 
-utils.nvim_create_augroups(autocmds)
+-- TODO: Maybe make this cleaner
+for _, v in ipairs(autocmds) do
+    vim.api.nvim_create_autocmd({
+        event = v[1],
+        pattern = v[2],
+        command = v[3],
+    })
+end

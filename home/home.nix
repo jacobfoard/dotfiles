@@ -52,7 +52,7 @@
     procs # fancy version of `ps`
     fd
     ripgrep
-    telnet
+    inetutils # telnet
     termshark
     thefuck
     gnupg
