@@ -10,9 +10,12 @@ local autocmds = {
 
 -- TODO: Maybe make this cleaner
 for _, v in ipairs(autocmds) do
-    vim.api.nvim_create_autocmd({
-        event = v[1],
-        pattern = v[2],
-        command = v[3],
-    })
+    vim.api.nvim_create_autocmd(
+        v[1], -- event
+        -- opts
+        {
+            pattern = v[2],
+            command = v[3],
+        }
+    )
 end
