@@ -64,7 +64,7 @@
 
     phoenix = {
       url = "git+ssh://git@github.com/greenpark/phoenix.git?ref=main";
-      follows = "mango/phoenix";
+      # follows = "mango/phoenix";
       inputs = {
         nixpkgs.follows = "nixpkgs";
         flake-utils.follows = "flake-utils";

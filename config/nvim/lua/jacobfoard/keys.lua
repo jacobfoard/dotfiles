@@ -46,3 +46,7 @@ mapper("n", "nt", "<cmd>NvimTreeToggle<cr>")
 mapper("n", "<leader>w", "<cmd>lua require'hop'.hint_words()<cr>")
 mapper("n", "<leader>w", "<cmd>lua require'hop'.hint_words()<cr>")
 mapper("n", "<leader>t", "<cmd>TroubleToggle<cr>")
+
+-- Map <C-s> to <C-a> for incrementing
+-- since <C-a> is used by tmux
+mapper("n", "<C-s>", "<C-a>")
