@@ -92,8 +92,7 @@ require("nvim-tree").setup({
     },
 
     view = {
-        -- if true the tree will resize itself after opening a file
-        auto_resize = false,
+        preserve_window_proportions = true,
         mappings = {
             -- custom only false will merge the list with the default mappings
             -- if true, it will only use your list to set the mappings
