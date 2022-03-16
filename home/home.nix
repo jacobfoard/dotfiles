@@ -69,7 +69,7 @@
     google-cloud-sdk
     jq
     yq
-    go_1_17
+    go_1_18
     atuin
 
     # wezterm_nvim
