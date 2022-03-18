@@ -70,6 +70,8 @@
     jq
     yq
     go_1_18
+    gopls
+    golangci-lint
     atuin
 
     # wezterm_nvim

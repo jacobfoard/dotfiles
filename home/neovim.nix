@@ -36,6 +36,8 @@ in
     extraPackages = with pkgs; [
       # neovim-remote
 
+      golangci-lint
+
       # needed for tree-sitter
       gcc
       libcxx

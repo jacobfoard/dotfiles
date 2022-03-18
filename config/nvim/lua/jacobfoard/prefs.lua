@@ -35,6 +35,7 @@ opt("set inccommand=split")
 opt("set updatetime=500 ")
 opt("set viminfo='100,<1000,s10,h")
 opt("set exrc")
+opt("set laststatus=3")
 
 vim.env.GIT_EDITOR = "nvr -cc split --remote-wait"
 vim.env.EDITOR = "nvr -cc split --remote-wait"

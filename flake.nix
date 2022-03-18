@@ -133,6 +133,11 @@
                 buildGoModule = args: prev.buildGoModule.override { go = prev.go_1_18; } (args);
               };
 
+              golangci-lint = prev.golangci-lint.override {
+                # https://nixpk.gs/pr-tracker.html?pr=164292
+                buildGoModule = args: prev.buildGoModule.override { go = prev.go_1_18; } (args);
+              };
+
               # "wezterm_nvim" = prev.buildGoModule {
               #   pname = "wezterm.nvim";
               #   version = "0.0.1";
