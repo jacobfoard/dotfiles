@@ -17,6 +17,7 @@ require("packer").startup({
         use({ "kyazdani42/nvim-tree.lua", requires = { "kyazdani42/nvim-web-devicons" } })
 
         use("LnL7/vim-nix")
+        use("ziglang/zig.vim")
 
         -- Highlight colors inline like #ffffff
         use("norcalli/nvim-colorizer.lua")

@@ -41,6 +41,7 @@ mapper("n", "<PageDown>", "<PageDown>zz")
 mapper("i", "<PageDown>", "<ESC><PageDown>zzi")
 
 mapper("", "<C-f>", "require('telescope.builtin').find_files()", true)
+mapper("", "<leader>r", "require('telescope.builtin').resume()", true)
 mapper("n", "nt", "<cmd>NvimTreeToggle<cr>")
 
 mapper("n", "<leader>w", "<cmd>lua require'hop'.hint_words()<cr>")

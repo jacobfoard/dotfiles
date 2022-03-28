@@ -87,7 +87,7 @@
               mango_gpsd = mango.defaultPackage.${system};
               inherit (phoenix.packages.${system}) golines;
               graphite = phoenix.packages.${system}.graphite-cli;
-              bazel_4 = phoenix.packages.${system}.bazel_4;
+              bazel_4 = phoenix.packages.${system}.bazel_5;
               tmux-base = oh-my-tmux;
               neovim-nightly = neovim-src.packages.${system}.neovim;
               neovim-unwrapped = neovim-src.packages.${system}.neovim;
@@ -127,11 +127,6 @@
                 version = "2.9.0";
                 src = spicetify;
               });
-
-              gopls = prev.gopls.override {
-                # https://nixpk.gs/pr-tracker.html?pr=164292
-                buildGoModule = args: prev.buildGoModule.override { go = prev.go_1_18; } (args);
-              };
 
               golangci-lint = prev.golangci-lint.override {
                 # https://nixpk.gs/pr-tracker.html?pr=164292

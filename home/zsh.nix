@@ -48,9 +48,9 @@
         ''
       else "");
       initExtra = builtins.readFile ../config/zsh/initExtra.zsh + ''
-        export ATUIN_NOBIND="true"
-        eval "$(${pkgs.atuin}/bin/atuin init zsh)" 
-        bindkey '^r' _atuin_search_widget
+        # export ATUIN_NOBIND="true"
+        # eval "$(${pkgs.atuin}/bin/atuin init zsh)" 
+        # bindkey '^r' _atuin_search_widget
       '';
 
 

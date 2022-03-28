@@ -69,8 +69,9 @@ local servers = {
     bashls = {},
     yamlls = {},
     rnix = {},
-    sourcekit = {},
+    sourcekit = {}, -- Swift/ObjC
     vimls = {},
+    -- zls = {}, -- Zig
 
     tsserver = { init_options = { preferences = { importModuleSpecifierPreference = "non-relative" } } },
 

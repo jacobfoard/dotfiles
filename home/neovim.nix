@@ -17,8 +17,8 @@ in
     plugins = with pkgs.vimPlugins; [
       packer-nvim
       codedark
-      # (pkgs.stable.vimPlugins.nvim-treesitter.withPlugins (plugins: pkgs.tree-sitter.allGrammars))
-      (pkgs.vimPlugins.nvim-treesitter.withPlugins (plugins: pkgs.tree-sitter.allGrammars))
+      (pkgs.stable.vimPlugins.nvim-treesitter.withPlugins (plugins: pkgs.stable.tree-sitter.allGrammars))
+      # (pkgs.vimPlugins.nvim-treesitter.withPlugins (plugins: pkgs.tree-sitter.allGrammars))
     ];
 
 
@@ -35,8 +35,6 @@ in
 
     extraPackages = with pkgs; [
       # neovim-remote
-
-      golangci-lint
 
       # needed for tree-sitter
       gcc
@@ -67,6 +65,7 @@ in
       rustfmt
       statix
       sumneko-lua-language-server
+      # zls
     ];
   };
 

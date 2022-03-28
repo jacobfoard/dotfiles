@@ -71,8 +71,7 @@
     yq
     go_1_18
     gopls
-    golangci-lint
-    atuin
+    # atuin
 
     # wezterm_nvim
 
