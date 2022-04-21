@@ -14,7 +14,7 @@
 
     darwin = {
       # url = "github:LnL7/nix-darwin";
-      url = "github:jacobfoard/nix-darwin/waiting-on-upstream";
+      url = "github:jacobfoard/nix-darwin/trying-to-fix-segfaults";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 

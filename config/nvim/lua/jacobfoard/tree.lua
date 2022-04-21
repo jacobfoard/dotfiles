@@ -67,7 +67,7 @@ g.nvim_tree_git_hl = 1
 -- }
 
 require("nvim-tree").setup({
-    auto_close = true,
+    -- auto_close = true,
     open_on_tab = true,
     hijack_cursor = true,
     diagnostics = {

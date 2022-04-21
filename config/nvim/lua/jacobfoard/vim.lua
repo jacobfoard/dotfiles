@@ -44,6 +44,8 @@ command! WQa wqall
 command! Wqa wqall
 command! VS vsplit
 command! Vs vsplit
+
+autocmd BufEnter * ++nested if winnr('$') == 1 && bufname() == 'NvimTree_' . tabpagenr() | quit | endif
 ]],
     true
 )

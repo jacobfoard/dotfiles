@@ -49,7 +49,7 @@
 
         signing = {
           signByDefault = true;
-          key = "0xC02488F487CF438C";
+          key = "0xFCF95B830FE199A2";
           gpgPath = "gpg";
         };
 

@@ -78,7 +78,7 @@
     nixpkgs-fmt
   ] ++ lib.optionals stdenv.isDarwin [
     cocoapods
-    bazel_4
+    bazel_5
 
     # Some things want gnused to be install via brew, which leads to "gsed"
     (writeShellScriptBin "gsed" ''${pkgs.gnused}/bin/sed $@'')

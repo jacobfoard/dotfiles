@@ -49,10 +49,8 @@ in
 
       # Language servers
       # TODO: This doesn't work on darwin, but probably could with some effort
-      # omnisharp-roslyn
+      omnisharp-roslyn
 
-      # mono
-      # dotnet-sdk_5
       nodePackages.bash-language-server
       nodePackages.typescript-language-server
       nodePackages.vim-language-server
