@@ -6,7 +6,7 @@ local tree_cb = require("nvim-tree.config").nvim_tree_callback
 -- g.nvim_tree_auto_open = 0
 -- g.nvim_tree_auto_close = 1
 -- g.nvim_tree_follow = 1
-g.nvim_tree_indent_markers = 1
+-- g.nvim_tree_indent_markers = 1
 g.nvim_tree_git_hl = 1
 -- g.nvim_tree_tab_open = 1
 -- g.nvim_tree_width_allow_resize = 1
@@ -77,7 +77,7 @@ require("nvim-tree").setup({
     filters = {
         dotfiles = false,
         custom = {
-            ".git",
+            "^\\.git$",
             "bazel-bin",
             "bazel-out",
             "bazel-testlogs",
@@ -96,7 +96,7 @@ require("nvim-tree").setup({
         mappings = {
             -- custom only false will merge the list with the default mappings
             -- if true, it will only use your list to set the mappings
-            custom_only = false,
+            custom_only = true,
             -- list of mappings to set on the tree manually
             list = {
                 { key = "<CR>", cb = tree_cb("edit") },

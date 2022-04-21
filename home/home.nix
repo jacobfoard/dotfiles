@@ -72,6 +72,7 @@
     go_1_18
     gopls
     # atuin
+    operator-sdk
 
     # wezterm_nvim
 

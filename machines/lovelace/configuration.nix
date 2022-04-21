@@ -37,7 +37,6 @@
     mango_gpsd
     graphite
     openssl
-    spicetify-cli
   ];
 
   # Fonts

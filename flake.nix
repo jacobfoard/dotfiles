@@ -38,12 +38,6 @@
       flake = false;
     };
 
-    spicetify = {
-      # TODO: Add in job to update tag https://github.com/khanhas/spicetify-cli/releases
-      url = "github:khanhas/spicetify-cli?ref=v2.9.0";
-      flake = false;
-    };
-
     # wezterm-nvim = {
     #   url = "github:aca/wezterm.nvim";
     #   flake = false;
@@ -121,12 +115,6 @@
                     --set __ETC_ZSHRC_SOURCED "" \
                     --set __NIX_DARWIN_SET_ENVIRONMENT_DONE ""
                 '';
-
-              spicetify-cli = prev.spicetify-cli.overrideAttrs (old: {
-                # TODO: Add in job to update tag https://github.com/khanhas/spicetify-cli/releases
-                version = "2.9.0";
-                src = spicetify;
-              });
 
               golangci-lint = prev.golangci-lint.override {
                 # https://nixpk.gs/pr-tracker.html?pr=164292
@@ -323,6 +311,7 @@
             statix
             nix-linter
             stylua
+            operator-sdk
           ];
         };
       }
