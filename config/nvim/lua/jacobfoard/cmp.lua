@@ -7,6 +7,7 @@ local feedkey = function(key, mode)
 end
 
 local cmp = require("cmp")
+local types = require("cmp.types")
 
 cmp.setup({
     experimental = {
@@ -33,7 +34,7 @@ cmp.setup({
         { name = "vim-dadbod-completion" },
         { name = "crates" },
         { name = "bazel" },
-        -- { name = "copilot" },
+        { name = "copilot" },
     }),
     snippet = {
         expand = function(args)
@@ -42,6 +43,22 @@ cmp.setup({
         end,
     },
     mapping = {
+        ["<Down>"] = cmp.mapping({
+            i = cmp.mapping.select_next_item({ behavior = types.cmp.SelectBehavior.Select }),
+            c = function(fallback)
+                cmp.close()
+                vim.schedule(cmp.suspend())
+                fallback()
+            end,
+        }),
+        ["<Up>"] = cmp.mapping({
+            i = cmp.mapping.select_prev_item({ behavior = types.cmp.SelectBehavior.Select }),
+            c = function(fallback)
+                cmp.close()
+                vim.schedule(cmp.suspend())
+                fallback()
+            end,
+        }),
         ["<C-p>"] = cmp.mapping.complete(),
         ["<C-y>"] = cmp.mapping.confirm({ select = true }),
         ["<CR>"] = cmp.mapping.confirm({ select = true }),

@@ -54,6 +54,9 @@ local luadev = require("lua-dev").setup({
         settings = {
             Lua = {
                 runtime = luaVersion,
+                format = {
+                    enable = false,
+                },
                 diagnostics = {
                     globals = { "use" },
                 },

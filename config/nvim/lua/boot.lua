@@ -52,6 +52,17 @@ require("packer").startup({
             },
         })
 
+        use({
+            "zbirenbaum/copilot.lua",
+            event = { "VimEnter" },
+            config = function()
+                vim.defer_fn(function()
+                    require("copilot").setup()
+                end, 100)
+            end,
+        })
+
+        use({ "zbirenbaum/copilot-cmp", after = { "copilot.lua", "nvim-cmp" } })
         -- use("SirVer/ultisnips")
         -- use("quangnguyen30192/cmp-nvim-ultisnips")
 
