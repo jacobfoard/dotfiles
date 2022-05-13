@@ -46,23 +46,10 @@ require("packer").startup({
                 "hrsh7th/cmp-path",
                 "hrsh7th/cmp-nvim-lsp",
                 "hrsh7th/cmp-cmdline",
-                -- "github/copilot.vim",
-                -- "hrsh7th/cmp-copilot",
                 "alexander-born/cmp-bazel",
             },
         })
 
-        use({
-            "zbirenbaum/copilot.lua",
-            event = { "VimEnter" },
-            config = function()
-                vim.defer_fn(function()
-                    require("copilot").setup()
-                end, 100)
-            end,
-        })
-
-        use({ "zbirenbaum/copilot-cmp", after = { "copilot.lua", "nvim-cmp" } })
         -- use("SirVer/ultisnips")
         -- use("quangnguyen30192/cmp-nvim-ultisnips")
 

@@ -1,4 +1,14 @@
 local treesitter = require("nvim-treesitter.configs")
+local parser_config = require("nvim-treesitter.parsers").get_parser_configs()
+
+parser_config.cue = {
+    install_info = {
+        url = "https://github.com/eonpatapon/tree-sitter-cue", -- local path or git repo
+        files = { "src/parser.c", "src/scanner.c" },
+        branch = "main",
+    },
+    filetype = "cue", -- if filetype does not agrees with parser name
+}
 
 treesitter.setup({
     highlight = {
@@ -7,9 +17,13 @@ treesitter.setup({
     },
     -- textobjects = { enable = true },
     indent = { enable = true },
-    ensure_installed = "maintained", -- one of "all", "maintained" (parsers with maintainers), or a list of languages
-    -- These are broken due to some weird c/cc errors
-    ignore_install = { "php", "cuda", "elixir", "cmake", "tlaplus", "perl", "pug", "norg" },
+    ensure_installed = {
+        "go",
+        "nix",
+        "json",
+        "yaml",
+        "cue",
+    },
 })
 
 local opt = vim.api.nvim_command

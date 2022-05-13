@@ -1,7 +1,3 @@
-vim.g.copilot_no_tab_map = true
-vim.g.copilot_assume_mapped = true
-vim.g.copilot_tab_fallback = ""
-
 local feedkey = function(key, mode)
     vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(key, true, true, true), mode, true)
 end
@@ -22,7 +18,6 @@ cmp.setup({
                 nvim_lsp = "[LSP]",
                 vsnip = "[VSnip]",
                 nvim_lua = "[Lua]",
-                copilot = "[Copilot]",
             },
         }),
     },
@@ -34,7 +29,6 @@ cmp.setup({
         { name = "vim-dadbod-completion" },
         { name = "crates" },
         { name = "bazel" },
-        { name = "copilot" },
     }),
     snippet = {
         expand = function(args)
