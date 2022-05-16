@@ -35,7 +35,7 @@
         mkdir = "mkdir -p";
         proj = "gcloud config configurations activate";
         r = "cd `git rev-parse --show-toplevel`";
-        dots = "~/code/gitlab.com/jacobfoard/dotfiles";
+        dots = "~/code/github.com/jacobfoard/dotfiles";
         jf = "~/code/github.com/jacobfoard";
         gmi = "pwd | sed 's;.*code/;;' | xargs go mod init";
         gl = "~/code/gitlab.com";
