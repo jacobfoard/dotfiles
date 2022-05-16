@@ -71,9 +71,14 @@ require("nvim-tree").setup({
     open_on_tab = true,
     hijack_cursor = true,
     diagnostics = {
-        enabled = true,
+        enable = true,
+        show_on_dirs = true,
     },
-
+    renderer = {
+        indent_markers = {
+            enable = false,
+        },
+    },
     filters = {
         dotfiles = false,
         custom = {

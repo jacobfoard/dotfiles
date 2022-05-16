@@ -60,7 +60,7 @@
     wget
     gnused
     procps # Provides watch
-    youtube-dl
+    # youtube-dl
 
     python3
     python3.pkgs.pyyaml
@@ -68,7 +68,7 @@
 
     google-cloud-sdk
     jq
-    yq
+    # yq
     go_1_18
     gopls
     # atuin

@@ -1,11 +1,11 @@
 local lsp = require("lspconfig")
-local lsp_status = require("lsp-status")
+-- local lsp_status = require("lsp-status")
 -- local sig = require("lsp_signature")
 local illuminate = require("illuminate")
 
 local on_attach_vim = function(client, bufnr)
     vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
-    lsp_status.on_attach(client)
+    -- lsp_status.on_attach(client)
     illuminate.on_attach(client)
     -- sig.on_attach({ bind = false, use_lspsaga = true })
 
@@ -20,8 +20,10 @@ local on_attach_vim = function(client, bufnr)
     vim.api.nvim_buf_set_keymap(bufnr, "n", "gr", "<cmd>lua require('lspsaga.rename').rename()<CR>", opts)
 end
 
-lsp_status.register_progress()
-local capabilities = require("cmp_nvim_lsp").update_capabilities(lsp_status.capabilities)
+-- lsp_status.register_progress()
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities = require("cmp_nvim_lsp").update_capabilities(capabilities)
+-- local capabilities = require("cmp_nvim_lsp").update_capabilities(lsp_status.capabilities)
 local default_lsp_config = { on_attach = on_attach_vim, capabilities = capabilities }
 
 local luaVersion = "LuaJIT"
@@ -39,9 +41,9 @@ if hasWezterm ~= nil then
     luaVersion = "Lua 5.3"
 end
 
-require("rust-tools").setup({
-    server = default_lsp_config,
-})
+-- require("rust-tools").setup({
+--     server = default_lsp_config,
+-- })
 
 local luadev = require("lua-dev").setup({
     library = {

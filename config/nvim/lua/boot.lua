@@ -55,7 +55,7 @@ require("packer").startup({
 
         use("onsails/lspkind-nvim")
 
-        use({ "mrjones2014/dash.nvim", requires = { "nvim-telescope/telescope.nvim" }, run = "make install" })
+        -- use({ "mrjones2014/dash.nvim", requires = { "nvim-telescope/telescope.nvim" }, run = "make install" })
 
         -- use("glepnir/lspsaga.nvim")
         -- Using a fork for now, also could probably just drop at some point

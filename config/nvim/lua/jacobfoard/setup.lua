@@ -12,7 +12,7 @@ require("gitsigns").setup({
     },
 })
 require("nvim-treesitter.configs").setup({ rainbow = { enable = true } })
-require("focus").setup({ cursorline = false })
+require("focus").setup({ cursorline = false, signcolumn = false })
 require("spectre").setup()
 require("Navigator").setup({ auto_save = "current", disable_on_zoom = true })
 require("todo-comments").setup()
