@@ -50,6 +50,7 @@
       "mongodb-community-shell"
       "mongodb-database-tools"
       "pam_reattach"
+      "mongosh"
     ];
   };
 }
