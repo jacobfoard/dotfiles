@@ -68,7 +68,7 @@
 
     google-cloud-sdk
     jq
-    # yq
+    yq-go
     go_1_18
     gopls
     # atuin
