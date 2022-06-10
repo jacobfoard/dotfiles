@@ -7,8 +7,8 @@
     nixpkgs-master.url = "github:nixos/nixpkgs/master";
 
     # Stable for when shit is broken
-    nixpkgs-stable-darwin.url = "github:nixos/nixpkgs/nixpkgs-21.11-darwin";
-    nixos-stable.url = "github:nixos/nixpkgs/nixos-21.11";
+    nixpkgs-stable-darwin.url = "github:nixos/nixpkgs/nixpkgs-22.05-darwin";
+    nixos-stable.url = "github:nixos/nixpkgs/nixos-22.05";
 
     flake-utils.url = "github:numtide/flake-utils";
 
