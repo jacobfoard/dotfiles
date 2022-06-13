@@ -72,7 +72,8 @@
     go_1_18
     gopls
     # atuin
-    operator-sdk
+    # operator-sdk
+    tuc
 
     # wezterm_nvim
 

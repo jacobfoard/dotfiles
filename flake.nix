@@ -81,7 +81,7 @@
               mango_gpsd = mango.defaultPackage.${system};
               inherit (phoenix.packages.${system}) golines;
               graphite = phoenix.packages.${system}.graphite-cli;
-              bazel_4 = phoenix.packages.${system}.bazel_5;
+              bazel_5 = phoenix.packages.${system}.bazel_5;
               tmux-base = oh-my-tmux;
               neovim-nightly = neovim-src.packages.${system}.neovim;
               neovim-unwrapped = neovim-src.packages.${system}.neovim;
@@ -119,6 +119,10 @@
               golangci-lint = prev.golangci-lint.override {
                 # https://nixpk.gs/pr-tracker.html?pr=164292
                 buildGoModule = args: prev.buildGoModule.override { go = prev.go_1_18; } (args);
+              };
+
+              tuc = prev.callPackage ./modules/tuc.nix {
+                inherit (prev.darwin.apple_sdk.frameworks) Security SystemConfiguration;
               };
 
               # "wezterm_nvim" = prev.buildGoModule {
@@ -303,6 +307,7 @@
         stable = stable-pkgs.legacyPackages.${system};
       in
       {
+        # packages.tuc = 
         devShell = pkgs.mkShell {
           nativeBuildInputs = with pkgs; [
             # cachix
