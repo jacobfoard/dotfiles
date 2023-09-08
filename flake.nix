@@ -7,14 +7,13 @@
     nixpkgs-master.url = "github:nixos/nixpkgs/master";
 
     # Stable for when shit is broken
-    nixpkgs-stable-darwin.url = "github:nixos/nixpkgs/nixpkgs-22.05-darwin";
-    nixos-stable.url = "github:nixos/nixpkgs/nixos-22.05";
+    nixpkgs-stable-darwin.url = "github:nixos/nixpkgs/nixpkgs-23.05-darwin";
+    nixos-stable.url = "github:nixos/nixpkgs/nixos-23.05";
 
     flake-utils.url = "github:numtide/flake-utils";
 
     darwin = {
-      # url = "github:LnL7/nix-darwin";
-      url = "github:jacobfoard/nix-darwin/trying-to-fix-segfaults";
+      url = "github:LnL7/nix-darwin";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -23,10 +22,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    neovim-src = {
-      url = "github:neovim/neovim?dir=contrib";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+#    neovim-src = {
+#      url = "github:neovim/neovim?dir=contrib";
+#      inputs.nixpkgs.follows = "nixpkgs";
+#    };
 
     codedark = {
       url = "github:jacobfoard/vim-code-dark/personal-changes";
@@ -67,7 +66,7 @@
   };
 
 
-  outputs = { self, nixpkgs, nixos, darwin, home-manager, flake-utils, mango, phoenix, ... }@inputs:
+  outputs = { self, nixpkgs, nixos, darwin, home-manager, flake-utils, ... }@inputs:
     let
       overlays = with inputs; [
         # neovim-nightly-overlay.overlay
@@ -80,11 +79,9 @@
             rec {
               mango_gpsd = mango.defaultPackage.${system};
               inherit (phoenix.packages.${system}) golines;
-              graphite = phoenix.packages.${system}.graphite-cli;
-              bazel_5 = phoenix.packages.${system}.bazel_5;
               tmux-base = oh-my-tmux;
-              neovim-nightly = neovim-src.packages.${system}.neovim;
-              neovim-unwrapped = neovim-src.packages.${system}.neovim;
+          #    neovim-nightly = neovim-src.packages.${system}.neovim;
+          #    neovim-unwrapped = neovim-src.packages.${system}.neovim;
 
               master = nixpkgs-master.legacyPackages.${system};
               stable = nixpkgs-stable.legacyPackages.${system};
@@ -181,7 +178,7 @@
 
         bootstrapM1 = darwin.lib.darwinSystem {
           system = "aarch64-darwin";
-          modules = [
+          modules = nixDarwinCommonModules { user = "jacobfoard"; } ++ [
             ./darwin/bootstrap.nix
             {
               nixpkgs = nixpkgsConfig;
@@ -215,9 +212,8 @@
               networking.computerName = "MLM1-MBP16-Jacob";
               networking.hostName = "Lovelace";
               networking.knownNetworkServices = [
-                "Ethernet"
+                # "Thunderbolt Ethernet"
                 "Wi-Fi"
-                "USB3.0 5K Graphic Docking"
                 "Tailscale Tunnel"
               ];
             }
@@ -310,13 +306,12 @@
         # packages.tuc = 
         devShell = pkgs.mkShell {
           nativeBuildInputs = with pkgs; [
-            # cachix
+            cachix
             tree
             ncurses
             statix
-            nix-linter
+#             nix-linter
             stylua
-            operator-sdk
           ];
         };
       }

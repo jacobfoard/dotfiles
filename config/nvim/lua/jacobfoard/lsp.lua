@@ -45,7 +45,7 @@ end
 --     server = default_lsp_config,
 -- })
 
-local luadev = require("lua-dev").setup({
+local luadev = require("neodev").setup({
     library = {
         vimruntime = true, -- runtime path
         types = true, -- full signature, docs and completion of vim.api, vim.treesitter, vim.lsp and others

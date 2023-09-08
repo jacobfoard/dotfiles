@@ -14,7 +14,7 @@
   ];
 
   services.nix-daemon.enable = true;
-  users.nix.configureBuildUsers = true;
+  nix.configureBuildUsers = true;
 
   # Install and setup ZSH to work with nix(-darwin) as well
   programs.zsh.enable = true;
@@ -22,6 +22,7 @@
 
   environment.pathsToLink = [ "/share/zsh" ];
   programs.zsh.enableCompletion = false;
+  documentation.enable = false;
 
   system.activationScripts.postActivation.text = ''
     ${pkgs.nix}/bin/nix store \

@@ -41,17 +41,28 @@
 
         fetch.prune = true;
         pull.rebase = true;
+
+        push.autoSetupRemote = true;
+
         rebase.autoStash = true;
         rebase.instructionFormat = "(%an <%ae>) %s";
 
-        commit.gpgsign = true;
-        gpg.program = "${pkgs.gnupg}/bin/gpg2";
-
-        signing = {
-          signByDefault = true;
-          key = "0xFCF95B830FE199A2";
-          gpgPath = "gpg";
+        user.signingkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIB8VqP8fIx2fITGkSURLDUT0ZpbK8lP/Rje49a3p2XId";
+        gpg = {
+          format = "ssh";
+          ssh = {
+            program = "/Applications/1Password.app/Contents/MacOS/op-ssh-sign";
+          };
         };
+
+        commit.gpgsign = true;
+        # gpg.program = "${pkgs.gnupg}/bin/gpg2";
+
+        # signing = {
+        #   signByDefault = true;
+        #   key = "0xFCF95B830FE199A2";
+        #   gpgPath = "gpg";
+        # };
 
         "filter \"lfs\"" = {
           process = "git-lfs filter-process";

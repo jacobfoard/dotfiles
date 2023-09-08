@@ -32,7 +32,7 @@ require("packer").startup({
 
         -- LSP/Snippet Related Things
         use("neovim/nvim-lspconfig")
-        use("folke/lua-dev.nvim")
+        use("folke/neodev.nvim")
         use("OmniSharp/omnisharp-vim")
         use("nvim-lua/lsp-status.nvim")
         use("j-hui/fidget.nvim")

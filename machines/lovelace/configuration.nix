@@ -5,7 +5,7 @@
     # Minimal config of Nix related options and shells
     ../../darwin/bootstrap.nix
 
-    ../../modules/darwin/security/pam.nix
+#    ../../modules/darwin/security/pam.nix
 
     # Other nix-darwin configuration
     ./homebrew.nix
@@ -16,10 +16,10 @@
   ];
 
   # Networking
-  networking.dns = [
-    "1.1.1.1"
-    "8.8.8.8"
-  ];
+  # networking.dns = [
+  #   "1.1.1.1"
+  #   "8.8.8.8"
+  # ];
 
   # Apps
   # `home-manager` currently has issues adding them to `~/Applications`
@@ -35,13 +35,12 @@
     istioctl
     ninja
     mango_gpsd
-    graphite
     openssl
   ];
 
   # Fonts
   fonts = {
-    enableFontDir = true;
+#    fontDir.enable = true;
 
     # TODO: Setup operator mono patched font
     fonts = with pkgs; [

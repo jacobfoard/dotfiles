@@ -8,7 +8,7 @@ in
 {
   programs.neovim = {
     enable = true;
-    package = pkgs.neovim-nightly;
+    # package = pkgs.neovim-nightly;
     withRuby = false;
     viAlias = true;
     vimAlias = true;
@@ -22,16 +22,16 @@ in
     ];
 
 
-    extraConfig = ''
-      set termguicolors
-      let g:do_filetype_lua = 1
-      let g:did_load_filetypes = 0
-      autocmd BufNewFile,BufRead *.json setlocal filetype=jsonc
-
-      lua << EOF
-       require("boot")
-      EOF
-    '';
+    # extraConfig = ''
+      # set termguicolors
+      # let g:do_filetype_lua = 1
+      # let g:did_load_filetypes = 0
+      # autocmd BufNewFile,BufRead *.json setlocal filetype=jsonc
+      #
+      # lua << EOF
+      #  require("boot")
+      # EOF
+    # '';
 
     extraPackages = with pkgs; [
       # neovim-remote
@@ -67,7 +67,7 @@ in
     ];
   };
 
-  xdg.configFile."nvim/lua".source = ../config/nvim/lua;
+  # xdg.configFile."nvim/lua".source = ../config/nvim/lua;
   # Can't use this right now so it is symlinked to lua/boot.lua 
   # and referenced by init.vim
   # xdg.configFile."nvim/init.lua".source = ../config/nvim/init.lua;

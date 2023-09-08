@@ -39,6 +39,7 @@
     EDITOR = "nvim";
   };
 
+  manual.manpages.enable = false;
 
   home.packages = with pkgs; [
     # Some basics
@@ -66,10 +67,11 @@
     python3.pkgs.pyyaml
     # wezterm
 
-    google-cloud-sdk
+    (google-cloud-sdk.withExtraComponents
+      ([pkgs.google-cloud-sdk.components.gke-gcloud-auth-plugin]))
     jq
     yq-go
-    go_1_18
+    go_1_21
     gopls
     # atuin
     # operator-sdk
@@ -80,7 +82,7 @@
     nixpkgs-fmt
   ] ++ lib.optionals stdenv.isDarwin [
     cocoapods
-    bazel_5
+    bazel
 
     # Some things want gnused to be install via brew, which leads to "gsed"
     (writeShellScriptBin "gsed" ''${pkgs.gnused}/bin/sed $@'')

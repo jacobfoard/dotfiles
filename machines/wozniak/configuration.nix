@@ -34,7 +34,6 @@
     istioctl
     ninja
     mango_gpsd
-    graphite
     openssl
     spicetify-cli
     spicetify-theme

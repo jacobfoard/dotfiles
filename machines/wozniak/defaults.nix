@@ -2,7 +2,6 @@ _:
 
 {
   imports = [
-    ../../modules/darwin/defaults/dock.nix
     ../../modules/darwin/defaults/finder.nix
     # TODO Make these actual options instead of just appending the defaults writes
     ../../modules/darwin/defaults/bettertouchtool.nix

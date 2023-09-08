@@ -1,12 +1,12 @@
 {
   homebrew = {
 
-    enable = true;
+    enable = false;
     brewPrefix = "/opt/homebrew/bin";
-    autoUpdate = true;
-    cleanup = "zap";
+    # onActivation.cleanup = "zap";
+    global.autoUpdate = true;
     global.brewfile = true;
-    global.noLock = true;
+    global.lockfiles = true;
 
     taps = [
       "homebrew/cask"
@@ -22,14 +22,14 @@
       Amphetamine = 937984704;
       Clocker = 1056643111;
       Tailscale = 1475387142;
-      Xcode = 497799835;
+      Trello = 1278508951;
+      # Xcode = 497799835;
     };
 
     casks = [
       # "1password"
       # "1password-cli"
       "bettertouchtool"
-      "camo-studio"
       "element"
       "firefox"
       "docker"

@@ -6,7 +6,7 @@
       enable = true;
       enableAutosuggestions = true;
       enableCompletion = false;
-      enableSyntaxHighlighting = true;
+      syntaxHighlighting.enable = true;
       autocd = true;
       dotDir = ".config/zsh";
 
