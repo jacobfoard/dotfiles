@@ -36,6 +36,7 @@
     ninja
     mango_gpsd
     openssl
+    wezterm
   ];
 
   # Fonts
