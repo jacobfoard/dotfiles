@@ -5,7 +5,6 @@
 let
   isDarwin = pkgs.stdenv.isDarwin;
   isLinux = pkgs.stdenv.isLinux;
-
 in
 {
   imports = [
@@ -69,26 +68,35 @@ in
 
     vscode = {
       enable = true;
-      extensions = [
-        pkgs.vscode-extensions.jnoortheen.nix-ide
+      extensions = with pkgs; [
+        vscode-extensions.jnoortheen.nix-ide
+        vscode-extensions.golang.go
+        vscode-extensions.github.copilot
+        vscode-extensions.github.copilot-chat
       ];
     };
 
-  ssh = {
-    enable = true;
+    ssh = {
+      enable = true;
+      forwardAgent = true;
 
-    forwardAgent = true;
-    matchBlocks = {
-      "*" = {
-        extraOptions = lib.optionals isLinux {
-
-          IdentityAgent = "~/.1password/agent.sock";
+      matchBlocks = {
+        "*" = {
+          extraOptions = lib.optionals isLinux {
+            IdentityAgent = "~/.1password/agent.sock";
+          };
         };
       };
     };
   };
 
-  };
+  # TODO: Figure out how to do this better
+  xdg.configFile."wezterm/colors.lua".source = ./wezterm/colors.lua;
+  xdg.configFile."wezterm/init.lua".source = ./wezterm/init.lua;
+  xdg.configFile."wezterm/keys.lua".source = ./wezterm/keys.lua;
+  xdg.configFile."wezterm/mouse.lua".source = ./wezterm/mouse.lua;
+  xdg.configFile."wezterm/status-line.lua".source = ./wezterm/status-line.lua;
+
 
   # This value determines the Home Manager release that your configuration is
   # compatible with. This helps avoid breakage when a new Home Manager release

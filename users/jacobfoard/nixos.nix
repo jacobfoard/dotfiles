@@ -3,7 +3,7 @@
 {
   # Add ~/.local/bin to PATH
   environment.localBinInPath = true;
- 
+
   programs = {
     _1password.enable = true;
     _1password-gui = {
@@ -16,13 +16,12 @@
     zsh.enable = true;
   };
 
- 
- fonts = {
+  fonts = {
     fontDir.enable = true;
 
     packages = with pkgs; [
       recursive
-      (nerdfonts.override { fonts = [ "Hack" "Hasklig" "JetBrainsMono" "VictorMono" ]; })
+      (nerdfonts.override { fonts = [ "JetBrainsMono" "VictorMono" ]; })
     ];
   };
 

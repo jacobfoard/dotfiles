@@ -28,8 +28,9 @@
   environment.systemPackages = with pkgs; [
     cachix
     xclip
+    gnome.gnome-tweaks
   ];
-  
+
   environment.enableAllTerminfo = true;
 
   i18n.defaultLocale = "en_US.UTF-8";
