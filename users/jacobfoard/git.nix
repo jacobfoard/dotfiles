@@ -8,7 +8,7 @@
       gitAndTools.gh
       gitAndTools.glab
       gitAndTools.git-filter-repo
-      (writeShellScriptBin "git-browse" (builtins.readFile ../bin/git-browse))
+      # (writeShellScriptBin "git-browse" (builtins.readFile ../bin/git-browse))
     ];
 
     programs.git = {
@@ -47,15 +47,18 @@
         rebase.autoStash = true;
         rebase.instructionFormat = "(%an <%ae>) %s";
 
-        user.signingkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIB8VqP8fIx2fITGkSURLDUT0ZpbK8lP/Rje49a3p2XId";
-        gpg = {
-          format = "ssh";
-          ssh = {
-            program = "/Applications/1Password.app/Contents/MacOS/op-ssh-sign";
-          };
-        };
+        github.user = "jacobfoard";
 
-        commit.gpgsign = true;
+
+        # user.signingkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIB8VqP8fIx2fITGkSURLDUT0ZpbK8lP/Rje49a3p2XId";
+        # gpg = {
+        #   format = "ssh";
+        #   ssh = {
+        #     program = "/Applications/1Password.app/Contents/MacOS/op-ssh-sign";
+        #   };
+        # };
+
+        # commit.gpgsign = true;
         # gpg.program = "${pkgs.gnupg}/bin/gpg2";
 
         # signing = {
@@ -74,4 +77,3 @@
     };
   };
 }
-

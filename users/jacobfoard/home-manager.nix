@@ -1,0 +1,101 @@
+{ inputs, ... }:
+
+{ config, lib, pkgs, ... }:
+
+let
+  isDarwin = pkgs.stdenv.isDarwin;
+  isLinux = pkgs.stdenv.isLinux;
+
+in
+{
+  imports = [
+    ./git.nix
+    ./zsh.nix
+  ];
+
+  xdg.enable = true;
+
+  home.packages = with pkgs; [
+    coreutils
+    curl
+    du-dust # fancy du
+    lsd # fancy ls
+    parallel
+    procs
+    fd
+    ripgrep
+    termshark
+    unzip
+    wget
+    gnused
+    watch
+    jq
+    yq-go
+    nixpkgs-fmt
+
+    # Node is required for Copilot.vim
+    nodejs
+  ] ++ (lib.optionals isDarwin [
+    # This is automatically setup on Linux
+    cachix
+    tailscale
+    (writeShellScriptBin "gsed" ''${pkgs.gnused}/bin/sed $@'')
+  ]) ++ (lib.optionals isLinux [
+    firefox
+  ]);
+
+  programs = {
+    bat.enable = true;
+
+    direnv = {
+      enable = true;
+      nix-direnv = {
+        enable = true;
+      };
+    };
+
+    htop = {
+      enable = true;
+      settings.show_program_path = true;
+    };
+
+    wezterm = {
+      enable = true;
+      extraConfig = ''
+        local init = require("init");
+        return init;
+      '';
+    };
+
+    vscode = {
+      enable = true;
+      extensions = [
+        pkgs.vscode-extensions.jnoortheen.nix-ide
+      ];
+    };
+
+  ssh = {
+    enable = true;
+
+    forwardAgent = true;
+    matchBlocks = {
+      "*" = {
+        extraOptions = lib.optionals isLinux {
+
+          IdentityAgent = "~/.1password/agent.sock";
+        };
+      };
+    };
+  };
+
+  };
+
+  # This value determines the Home Manager release that your configuration is
+  # compatible with. This helps avoid breakage when a new Home Manager release
+  # introduces backwards incompatible changes.
+  #
+  # You should not change this value, even if you update Home Manager. If you do
+  # want to update the value, then make sure to first check the Home Manager
+  # release notes.
+  home.stateVersion = "23.05"; # Please read the comment before changing.
+}

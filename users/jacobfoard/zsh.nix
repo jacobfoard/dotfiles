@@ -41,13 +41,13 @@
         gl = "~/code/gitlab.com";
       };
 
-      initExtraFirst = builtins.readFile ../config/zsh/initExtraFirst.zsh + (if pkgs.stdenv.system == "aarch64-darwin" then
+      initExtraFirst = builtins.readFile ./zsh/initExtraFirst.zsh + (if pkgs.stdenv.system == "aarch64-darwin" then
         ''
           eval "$(/opt/homebrew/bin/brew shellenv)"
           fpath=(/opt/homebrew/share/zsh/site-functions $fpath) 
         ''
       else "");
-      initExtra = builtins.readFile ../config/zsh/initExtra.zsh;
+      initExtra = builtins.readFile ./zsh/initExtra.zsh;
 
 
 
@@ -82,7 +82,6 @@
       enableZshIntegration = true;
     };
 
-    xdg.configFile."zsh/p10k.zsh".source = ../config/zsh/p10k.zsh;
+    xdg.configFile."zsh/p10k.zsh".source = ./zsh/p10k.zsh;
   };
 }
-

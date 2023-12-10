@@ -1,42 +1,51 @@
 {
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-23.11";
+
+    # We use the unstable nixpkgs repo for some packages.
+    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixpkgs-unstable";
+
     flake-utils.url = "github:numtide/flake-utils";
 
     home-manager = {
-      url = "github:nix-community/home-manager/master";
+      url = "github:nix-community/home-manager/release-23.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # mango = {
-    #   url = "git+ssh://git@github.com/greenpark/mango.git?ref=main";
-    #   inputs = {
-    #     nixpkgs.follows = "nixpkgs";
-    #     flake-utils.follows = "flake-utils";
-    #   };
-    # };
+    darwin = {
+      url = "github:LnL7/nix-darwin";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
-    # phoenix = {
-    #   url = "git+ssh://git@github.com/greenpark/phoenix.git?ref=main";
-    #   # follows = "mango/phoenix";
-    #   inputs = {
-    #     nixpkgs.follows = "nixpkgs";
-    #     flake-utils.follows = "flake-utils";
-    #   };
-    # };
+
+    nixvim = {
+      url = "github:nix-community/nixvim";
+      # If you are not running an unstable channel of nixpkgs, select the corresponding branch of nixvim.
+      # url = "github:nix-community/nixvim/nixos-23.05";
+
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
   };
 
-
-  outputs = { self, nixpkgs, home-manager, flake-utils, ... }@inputs:
+  outputs = { self, nixpkgs, flake-utils, home-manager, darwin, ... }@inputs:
     let
-      # pkgs = import nixpkgs {
-      #   #   inherit system;
-      # };
+      # Overlays is the list of overlays we want to apply from flake inputs.
+      overlays = [ ];
+
+      mkSystem = import ./lib/mksystem.nix {
+        inherit overlays nixpkgs inputs;
+      };
     in
     {
       defaultTemplate = {
         path = ./template;
         description = "nix flake new -t github:jacobfoard/dotfiles .";
+      };
+
+      nixosConfigurations.desktop = mkSystem "desktop" rec {
+        system = "x86_64-linux";
+        user = "jacobfoard";
       };
 
 
@@ -45,27 +54,15 @@
       let
         pkgs = import nixpkgs {
           inherit system;
+          # inherit overlays;
         };
+        # stable-pkgs = if system == "x86_64-darwin" then inputs.nixpkgs-stable-darwin else inputs.nixos-stable;
+        # stable = stable-pkgs.legacyPackages.${system};
       in
-
       {
-        packages.homeConfigurations."jacobfoard" = home-manager.lib.homeManagerConfiguration {
-          inherit pkgs;
-
-          # Specify your home configuration modules here, for example,
-          # the path to your home.nix.
-          modules = [ ./home/home.nix ];
-
-          # Optionally use extraSpecialArgs
-          # to pass through arguments to home.nix
-        };
-
         devShell = pkgs.mkShell {
           nativeBuildInputs = with pkgs; [
             cachix
-            tree
-            statix
-            nixpkgs-fmt
           ];
         };
       }
