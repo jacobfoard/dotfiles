@@ -8,22 +8,24 @@ local dirMap = {
     Down = "j",
 }
 
+local function isViProcess(pane) 
+    -- get_foreground_process_name On Linux, macOS and Windows, 
+    -- the process can be queried to determine this path. Other operating systems 
+    -- (notably, FreeBSD and other unix systems) are not currently supported
+    return pane:get_foreground_process_name():find('n?vim') ~= nil
+    -- return pane:get_title():find("n?vim") ~= nil
+end
+
 local function handleNavigation(direction, window, pane)
-    -- local result = os.execute(
-    --     "env NVIM_LISTEN_ADDRESS=/tmp/nvim"
-    --         .. pane:pane_id()
-    --         -- TODO: figure out how to set $PATH in wezterm
-    --         .. " /Users/jacobfoard/.nix-profile/bin/wezterm.nvim.navigator "
-    --         .. dirMap[direction]
-    -- )
-    -- -- wezterm.log_info(result)
-    -- if result then
-    --     -- wezterm.log_info("sending keys to vim")
-    --     window:perform_action(wezterm.action({ SendString = "\x17" .. dirMap[direction] }), pane)
-    -- else
-        -- wezterm.log_info("sending keys to term")
+    if isViProcess(pane) then
+        window:perform_action(
+            -- This should match the keybinds you set in Neovim.
+            wezterm.action.SendKey({ key = dirMap[direction], mods = 'ALT' }),
+            pane
+        )
+    else
         window:perform_action(wezterm.action({ ActivatePaneDirection = direction }), pane)
-    -- end
+    end
 end
 
 wezterm.on("navigateLeft", function(window, pane)

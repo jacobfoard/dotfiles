@@ -202,6 +202,22 @@
         "type": "github"
       }
     },
+    "nvim-focus": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1697218916,
+        "narHash": "sha256-EL4mzBYxTcd3zMN8HhGOew06eK3bUVsFE7Gm8Jioirs=",
+        "owner": "nvim-focus",
+        "repo": "focus.nvim",
+        "rev": "5269ea70e2003d9dac199584b093323752a472ba",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nvim-focus",
+        "repo": "focus.nvim",
+        "type": "github"
+      }
+    },
     "pre-commit-hooks": {
       "inputs": {
         "flake-compat": "flake-compat",
@@ -234,7 +250,9 @@
         "home-manager": "home-manager",
         "nixpkgs": "nixpkgs",
         "nixpkgs-stable": "nixpkgs-stable",
-        "nixvim": "nixvim"
+        "nixvim": "nixvim",
+        "nvim-focus": "nvim-focus",
+        "windline": "windline"
       }
     },
     "systems": {
@@ -279,6 +297,22 @@
       "original": {
         "owner": "nix-systems",
         "repo": "default",
+        "type": "github"
+      }
+    },
+    "windline": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1699441780,
+        "narHash": "sha256-cPXqmpbX/VwRMT54Ks7NwWpysMz4/cBv2fIpc3B6bKU=",
+        "owner": "windwp",
+        "repo": "windline.nvim",
+        "rev": "0820c1ffbeb923e81eb9da598cd3b9e4c9a65684",
+        "type": "github"
+      },
+      "original": {
+        "owner": "windwp",
+        "repo": "windline.nvim",
         "type": "github"
       }
     }

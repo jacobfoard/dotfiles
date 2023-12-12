@@ -17,18 +17,47 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-
     nixvim = {
       url = "github:nix-community/nixvim";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    nvim-focus = {
+      url = "github:nvim-focus/focus.nvim";
+      flake = false;
+    };
+
+    windline = {
+      url = "github:windwp/windline.nvim";
+      flake = false;
+    };
   };
 
   outputs = { self, nixpkgs, flake-utils, home-manager, darwin, ... }@inputs:
     let
       # Overlays is the list of overlays we want to apply from flake inputs.
-      overlays = [ ];
+      overlays = with inputs; [(
+        final: prev:
+        let
+          inherit (prev.stdenv) system;
+        in 
+        rec {
+          vimPlugins = prev.vimPlugins // {
+            windline = prev.vimUtils.buildVimPlugin {
+              pname = "windline.nvim";
+              src = inputs.windline;
+              version = inputs.windline.lastModifiedDate;
+            };
+
+            focus = prev.vimUtils.buildVimPlugin {
+              pname = "focus.nvim";
+              src = inputs.nvim-focus;
+              version = inputs.nvim-focus.lastModifiedDate;
+            };
+          };
+
+        }
+        ) ];
 
       mkSystem = import ./lib/mksystem.nix {
         inherit overlays nixpkgs inputs;

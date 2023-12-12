@@ -13,6 +13,7 @@ return {
     tab_bar_at_bottom = true,
     use_fancy_tab_bar = false,
 
+    hide_mouse_cursor_when_typing = true,
     font_size = 16,
     -- JetBrainsMono for most things, but some weird things like ⋅ need Hack as the fallback
     font = wezterm.font_with_fallback({
@@ -25,12 +26,12 @@ return {
     mouse_bindings = mouse,
     swallow_mouse_click_on_pane_focus = true,
     set_environment_variables = {
-        TERMINFO_DIRS = '/home/jacobfoard/.nix-profile/share/terminfo',
+        TERMINFO_DIRS = '/etc/profiles/per-user/jacobfoard/share/terminfo',
         WSLENV = 'TERMINFO_DIRS',
       },
     term = "wezterm",
     unzoom_on_switch_pane = false,
-    window_decorations = "RESIZE",
+    window_decorations = "INTEGRATED_BUTTONS|RESIZE",
 
     unix_domains = {
         {

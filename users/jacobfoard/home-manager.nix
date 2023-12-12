@@ -8,7 +8,9 @@ let
 in
 {
   imports = [
+    inputs.nixvim.homeManagerModules.nixvim
     ./git.nix
+    ./neovim.nix
     ./zsh.nix
   ];
 
@@ -41,6 +43,9 @@ in
     (writeShellScriptBin "gsed" ''${pkgs.gnused}/bin/sed $@'')
   ]) ++ (lib.optionals isLinux [
     firefox
+    gopls
+    delve
+    go-tools
   ]);
 
   programs = {
@@ -73,6 +78,7 @@ in
         vscode-extensions.golang.go
         vscode-extensions.github.copilot
         vscode-extensions.github.copilot-chat
+
       ];
     };
 
@@ -96,6 +102,7 @@ in
   xdg.configFile."wezterm/keys.lua".source = ./wezterm/keys.lua;
   xdg.configFile."wezterm/mouse.lua".source = ./wezterm/mouse.lua;
   xdg.configFile."wezterm/status-line.lua".source = ./wezterm/status-line.lua;
+  xdg.configFile."nvim/lua/statusline.lua".source = ./neovim/statusline.lua;
 
 
   # This value determines the Home Manager release that your configuration is
