@@ -17,15 +17,15 @@ local function isViProcess(pane)
 end
 
 local function handleNavigation(direction, window, pane)
-    if isViProcess(pane) then
-        window:perform_action(
-            -- This should match the keybinds you set in Neovim.
-            wezterm.action.SendKey({ key = dirMap[direction], mods = 'ALT' }),
-            pane
-        )
-    else
+    -- if isViProcess(pane) then
+    --     window:perform_action(
+    --         -- This should match the keybinds you set in Neovim.
+    --         wezterm.action.SendKey({ key = dirMap[direction], mods = 'ALT' }),
+    --         pane
+    -- )
+    -- else
         window:perform_action(wezterm.action({ ActivatePaneDirection = direction }), pane)
-    end
+    -- end
 end
 
 wezterm.on("navigateLeft", function(window, pane)

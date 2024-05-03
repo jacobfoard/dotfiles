@@ -74,6 +74,12 @@
         user = "jacobfoard";
       };
 
+      darwinConfigurations.MacBook-Pro-von-Jacob = mkSystem "macbook-pro-polarsteps" {
+      system = "aarch64-darwin";
+      user   = "jacobfoard";
+      darwin = true;
+    };
+
 
     } // # Join the standard configs with a nix shell for every system
     flake-utils.lib.eachDefaultSystem (system:

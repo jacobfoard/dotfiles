@@ -85,14 +85,20 @@ in
     ssh = {
       enable = true;
       forwardAgent = true;
+      extraConfig = ''
+        IdentityAgent "~/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
+      '';
+      # matchBlocks = {
+        # "*" = {
+          # extraOptions = lib.optionals isLinux {
+          #   IdentityAgent = "~/.1password/agent.sock";
+          # };
 
-      matchBlocks = {
-        "*" = {
-          extraOptions = lib.optionals isLinux {
-            IdentityAgent = "~/.1password/agent.sock";
-          };
-        };
-      };
+          # extraOptions = lib.optionals isDarwin {
+          #   IdentityAgent = """\"~/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock\"""";
+          # };
+        # };
+      # };
     };
   };
 

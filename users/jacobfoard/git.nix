@@ -54,7 +54,8 @@
         gpg = {
           format = "ssh";
           ssh = {
-            program = "op-ssh-sign"; # TODO: Check if this works on darwin
+            # program = "op-ssh-sign"; # TODO: Check if this works on darwin
+            program = "/Applications/1Password.app/Contents/MacOS/op-ssh-sign";
           };
         };
 
