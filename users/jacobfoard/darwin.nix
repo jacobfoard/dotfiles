@@ -10,6 +10,7 @@
     casks  = [
       "1password"
       "1password-cli"
+      "dbeaver-community"
       "firefox"
       "itsycal"
       "orbstack"

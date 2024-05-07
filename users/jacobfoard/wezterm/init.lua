@@ -31,7 +31,7 @@ return {
       },
     term = "wezterm",
     unzoom_on_switch_pane = false,
-    window_decorations = "INTEGRATED_BUTTONS|RESIZE",
+    window_decorations = "RESIZE",
 
     unix_domains = {
         {

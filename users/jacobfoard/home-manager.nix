@@ -10,7 +10,7 @@ in
   imports = [
     inputs.nixvim.homeManagerModules.nixvim
     ./git.nix
-    ./neovim.nix
+    # ./neovim.nix
     ./zsh.nix
   ];
 
