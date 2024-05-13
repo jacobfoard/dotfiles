@@ -74,7 +74,7 @@
         user = "jacobfoard";
       };
 
-      darwinConfigurations.MacBook-Pro-von-Jacob = mkSystem "macbook-pro-polarsteps" {
+      darwinConfigurations.Jacobs-MacBook-Pro = mkSystem "macbook-pro-polarsteps" {
       system = "aarch64-darwin";
       user   = "jacobfoard";
       darwin = true;
