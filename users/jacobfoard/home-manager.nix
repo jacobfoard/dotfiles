@@ -10,7 +10,7 @@ in
   imports = [
     inputs.nixvim.homeManagerModules.nixvim
     ./git.nix
-    # ./neovim.nix
+    ./neovim.nix
     ./zsh.nix
   ];
 
@@ -89,15 +89,15 @@ in
         IdentityAgent "~/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
       '';
       # matchBlocks = {
-        # "*" = {
-          # extraOptions = lib.optionals isLinux {
-          #   IdentityAgent = "~/.1password/agent.sock";
-          # };
+      # "*" = {
+      # extraOptions = lib.optionals isLinux {
+      #   IdentityAgent = "~/.1password/agent.sock";
+      # };
 
-          # extraOptions = lib.optionals isDarwin {
-          #   IdentityAgent = """\"~/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock\"""";
-          # };
-        # };
+      # extraOptions = lib.optionals isDarwin {
+      #   IdentityAgent = """\"~/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock\"""";
+      # };
+      # };
       # };
     };
   };

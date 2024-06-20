@@ -55,5 +55,6 @@
     kubernetes-helm
     kubectl
     kubetail
+    awscli2
   ];
 }

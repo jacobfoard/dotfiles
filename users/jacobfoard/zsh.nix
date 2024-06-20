@@ -74,6 +74,7 @@
           "gitignore"
           "golang"
           "git-auto-fetch"
+          "aws"
         ];
       };
     };

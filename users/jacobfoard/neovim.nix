@@ -127,14 +127,14 @@
         nvim-colorizer.enable = true;
         nvim-cmp = {
           enable = true;
-          sources = [
-            { name = "buffer"; }
-            { name = "path"; }
-            { name = "nvim"; }
-            { name = "cmdline"; }
-            { name = "git"; }
-            { name = "dap"; }
-          ];
+          # sources = [
+          #   { name = "buffer"; }
+          #   { name = "path"; }
+          #   { name = "nvim"; }
+          #   { name = "cmdline"; }
+          #   { name = "git"; }
+          #   { name = "dap"; }
+          # ];
           mapping = { }; # TODO: fill it out
         };
         # copilot-cmp.enable = true;
