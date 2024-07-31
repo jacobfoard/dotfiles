@@ -21,7 +21,7 @@ function _nix() {
 }
 
 # export PATH=$PATH:$(go env GOPATH)/bin
-
+fpath+=(/nix/var/nix/profiles/system/sw/share/zsh/site-functions /nix/var/nix/profiles/system/sw/share/zsh/$ZSH_VERSION/functions /nix/var/nix/profiles/system/sw/share/zsh/vendor-completions)
 compdef _nix nix
 source ~/.config/zsh/p10k.zsh
 source ~/.config/zsh/work.zsh
@@ -44,6 +44,8 @@ gh () {
     ~/code/github.com
   fi
 }
+
+source <(wezterm shell-completion --shell zsh)
 
 
 [ -n "$WEZTERM_PANE" ] && export NVIM_LISTEN_ADDRESS="/tmp/nvim$WEZTERM_PANE"

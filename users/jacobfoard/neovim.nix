@@ -7,9 +7,9 @@
       clipboard.register = "unnamedplus";
       colorschemes.catppuccin = {
         enable = true;
-        flavour = "frappe";
+        settings.flavour = "frappe";
       };
-      options = {
+      opts = {
         autoread = true;
         autowrite = true;
         backspace = "indent,eol,start";
@@ -125,7 +125,7 @@
         nix.enable = true;
         nvim-autopairs.enable = true;
         nvim-colorizer.enable = true;
-        nvim-cmp = {
+        cmp = {
           enable = true;
           # sources = [
           #   { name = "buffer"; }
@@ -135,7 +135,7 @@
           #   { name = "git"; }
           #   { name = "dap"; }
           # ];
-          mapping = { }; # TODO: fill it out
+          settings.mapping = { }; # TODO: fill it out
         };
         # copilot-cmp.enable = true;
         # copilot-lua.enable = true;

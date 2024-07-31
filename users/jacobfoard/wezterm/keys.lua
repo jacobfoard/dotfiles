@@ -12,20 +12,20 @@ local function isViProcess(pane)
     -- get_foreground_process_name On Linux, macOS and Windows, 
     -- the process can be queried to determine this path. Other operating systems 
     -- (notably, FreeBSD and other unix systems) are not currently supported
-    return pane:get_foreground_process_name():find('n?vim') ~= nil
-    -- return pane:get_title():find("n?vim") ~= nil
+    -- return pane:get_foreground_process_name():find('n?vim') ~= nil
+    return pane:get_title():find("n?vim") ~= nil
 end
 
 local function handleNavigation(direction, window, pane)
-    -- if isViProcess(pane) then
-    --     window:perform_action(
-    --         -- This should match the keybinds you set in Neovim.
-    --         wezterm.action.SendKey({ key = dirMap[direction], mods = 'ALT' }),
-    --         pane
-    -- )
-    -- else
+    if isViProcess(pane) then
+        window:perform_action(
+            -- This should match the keybinds you set in Neovim.
+            wezterm.action.SendKey({ key = dirMap[direction], mods = 'ALT' }),
+            pane
+    )
+    else
         window:perform_action(wezterm.action({ ActivatePaneDirection = direction }), pane)
-    -- end
+    end
 end
 
 wezterm.on("navigateLeft", function(window, pane)
@@ -46,6 +46,7 @@ return {
     -- tmux things
     { key = "w", mods = "LEADER", action = "ShowTabNavigator" },
     { key = "z", mods = "LEADER", action = "TogglePaneZoomState" },
+    { key = 'L', mods = 'CTRL', action = wezterm.action.ShowDebugOverlay },
     -- want to replicate new tab in tmux but wezterm defaults to CWD of current pane, so we need to manually set it
     { key = "c", mods = "LEADER", action = wezterm.action.SpawnCommandInNewTab({domain = "DefaultDomain", cwd = "~"}) },
     --

@@ -7,7 +7,7 @@
 
   homebrew = {
     enable = true;
-    casks  = [
+    casks = [
       "1password"
       "1password-cli"
       "dbeaver-community"
@@ -32,10 +32,10 @@
   };
 
   fonts = {
-    fontDir.enable = true;
+    # fontDir.enable = true;
 
     # TODO: Setup operator mono patched font
-    fonts = with pkgs; [
+    packages = with pkgs; [
       recursive
       (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
     ];
