@@ -27,13 +27,12 @@
         "clean-up-sqaush-dev" = ''git checkout -q development && git for-each-ref refs/heads/ "--format=%(refname:short)" | while read branch; do mergeBase=$(git merge-base development $branch) && [[ $(git cherry development $(git commit-tree $(git rev-parse $branch\^{tree}) -p $mergeBase -m _)) == "-"* ]] && git branch -D $branch; done'';
         copy = ''tr -d "\n" | pbcopy'';
         gca = "git commit --amend --no-edit";
-        gssh = "TERM=xterm-256color gcloud compute ssh --tunnel-through-iap";
+        ssh = "TERM=xterm-256color ssh";
         k = "kubectl";
         kc = "kubectx";
         kt = "kubetail";
         kns = "kubens";
         mkdir = "mkdir -p";
-        proj = "gcloud config configurations activate";
         r = "cd `git rev-parse --show-toplevel`";
         dots = "~/code/github.com/jacobfoard/dotfiles";
         jf = "~/code/github.com/jacobfoard";

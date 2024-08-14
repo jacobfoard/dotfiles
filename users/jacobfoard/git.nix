@@ -8,7 +8,7 @@
       gitAndTools.gh
       gitAndTools.glab
       gitAndTools.git-filter-repo
-      # (writeShellScriptBin "git-browse" (builtins.readFile ../bin/git-browse))
+      (writeShellScriptBin "git-browse" (builtins.readFile ../../bin/git-browse))
     ];
 
     programs.git = {
