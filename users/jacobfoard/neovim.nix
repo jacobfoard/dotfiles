@@ -161,7 +161,12 @@
         treesitter = {
           enable = true;
           # folding = true;
-          indent = true;
+          # indent = true;
+          settings = {
+            indent = {
+              enable = true;
+            };
+          };
           nixvimInjections = true;
         };
         # treesitter-context.enable = true;
