@@ -7,7 +7,7 @@
   nix = {
     # We need to enable flakes
     extraOptions = ''
-      experimental-features = nix-command flakes repl-flake
+      experimental-features = nix-command flakes
       keep-outputs = true
       keep-derivations = true
       builders-use-substitutes = true

@@ -20,8 +20,10 @@
     fontDir.enable = true;
 
     packages = with pkgs; [
-      recursive
-      (nerdfonts.override { fonts = [ "JetBrainsMono" "VictorMono" ]; })
+      # recursive
+      # (nerdfonts.override { fonts = [ "JetBrainsMono" "VictorMono" ]; })
+      nerd-fonts.jetbrains-mono
+      nerd-fonts.victor-mono
     ];
   };
 
