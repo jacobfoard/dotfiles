@@ -39,12 +39,15 @@
       . '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh'
     fi
     # End Nix
-    '';
-  
+  '';
+
   system.keyboard = {
     enableKeyMapping = true;
     nonUS.remapTilde = true;
   };
+
+  system.defaults.NSGlobalDomain.AppleICUForce24HourTime = true;
+  system.stateVersion = 5;
 
   environment.shells = with pkgs; [ bashInteractive zsh ];
   environment.systemPackages = with pkgs; [

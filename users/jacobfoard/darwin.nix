@@ -7,6 +7,8 @@
 
   homebrew = {
     enable = true;
+    onActivation.cleanup = "zap";
+
     casks = [
       "1password"
       "1password-cli"
@@ -23,18 +25,13 @@
     masApps = {
       Amphetamine = 937984704;
       Clocker = 1056643111;
-      Tailscale = 1475387142;
       Xcode = 497799835;
     };
-
 
     brews = [ ];
   };
 
   fonts = {
-    # fontDir.enable = true;
-
-    # TODO: Setup operator mono patched font
     packages = with pkgs; [
       recursive
       (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
