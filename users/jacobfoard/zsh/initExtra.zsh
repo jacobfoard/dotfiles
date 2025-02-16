@@ -2,7 +2,7 @@ zstyle ':completion:*' use-cache on
 zstyle ':completion:*' cache-path ~/.zsh/cache-path
 zstyle ':completion:*:*:docker:*' option-stacking yes
 zstyle ':completion:*:*:docker-*:*' option-stacking yes
-export EDITOR="nvim"
+export EDITOR="vim"
 
 # adapted from https://github.com/spwhitt/nix-zsh-completions/issues/32#issuecomment-705315356
 function _nix() {

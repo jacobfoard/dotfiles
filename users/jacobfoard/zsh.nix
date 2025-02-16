@@ -38,7 +38,7 @@
         jf = "~/code/github.com/jacobfoard";
         gmi = "pwd | sed 's;.*code/;;' | xargs go mod init";
         gl = "~/code/gitlab.com";
-        vim = "nvim";
+        # vim = "nvim";
       };
 
       initExtraFirst = builtins.readFile ./zsh/initExtraFirst.zsh + (if pkgs.stdenv.system == "aarch64-darwin" then

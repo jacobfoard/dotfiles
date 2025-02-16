@@ -17,47 +17,30 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    nixvim = {
-      url = "github:nix-community/nixvim";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    nvim-focus = {
-      url = "github:nvim-focus/focus.nvim";
-      flake = false;
-    };
-
-    windline = {
-      url = "github:windwp/windline.nvim";
-      flake = false;
-    };
   };
 
-  outputs = { self, nixpkgs, flake-utils, home-manager, darwin, ... }@inputs:
+  outputs =
+    {
+      self,
+      nixpkgs,
+      flake-utils,
+      home-manager,
+      darwin,
+      ...
+    }@inputs:
     let
       # Overlays is the list of overlays we want to apply from flake inputs.
-      overlays = with inputs; [(
-        final: prev:
-        let
-          inherit (prev.stdenv) system;
-        in 
-        rec {
-          vimPlugins = prev.vimPlugins // {
-            windline = prev.vimUtils.buildVimPlugin {
-              pname = "windline.nvim";
-              src = inputs.windline;
-              version = inputs.windline.lastModifiedDate;
-            };
+      overlays = with inputs; [
+        (
+          final: prev:
+          let
+            inherit (prev.stdenv) system;
+          in
+          rec {
 
-            focus = prev.vimUtils.buildVimPlugin {
-              pname = "focus.nvim";
-              src = inputs.nvim-focus;
-              version = inputs.nvim-focus.lastModifiedDate;
-            };
-          };
-
-        }
-        ) ];
+          }
+        )
+      ];
 
       mkSystem = import ./lib/mksystem.nix {
         inherit overlays nixpkgs inputs;
@@ -75,26 +58,28 @@
       };
 
       darwinConfigurations.Jacobs-MacBook-Pro = mkSystem "macbook-pro-polarsteps" {
-      system = "aarch64-darwin";
-      user   = "jacobfoard";
-      darwin = true;
-    };
+        system = "aarch64-darwin";
+        user = "jacobfoard";
+        darwin = true;
+      };
 
-
-    } // # Join the standard configs with a nix shell for every system
-    flake-utils.lib.eachDefaultSystem (system:
+    }
+    # Join the standard configs with a nix shell for every system
+    // flake-utils.lib.eachDefaultSystem (
+      system:
       let
         pkgs = import nixpkgs {
           inherit system;
           # inherit overlays;
         };
-        # stable-pkgs = if system == "x86_64-darwin" then inputs.nixpkgs-stable-darwin else inputs.nixos-stable;
-        # stable = stable-pkgs.legacyPackages.${system};
       in
+      # stable-pkgs = if system == "x86_64-darwin" then inputs.nixpkgs-stable-darwin else inputs.nixos-stable;
+      # stable = stable-pkgs.legacyPackages.${system};
       {
         devShell = pkgs.mkShell {
           nativeBuildInputs = with pkgs; [
             cachix
+            nixfmt-rfc-style
           ];
         };
       }

@@ -31,7 +31,9 @@
 
         delta.features = "side-by-side line-numbers decorations";
         url = {
-          "ssh://git@github.com/" = { insteadOf = "https://github.com/"; };
+          "ssh://git@github.com/" = {
+            insteadOf = "https://github.com/";
+          };
         };
 
         merge.conflictStyle = "diff3";
@@ -49,10 +51,9 @@
 
         github.user = "jacobfoard";
 
-
         user.signingkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIB8VqP8fIx2fITGkSURLDUT0ZpbK8lP/Rje49a3p2XId";
         gpg = {
-          format = "ssh";
+          # format = "ssh";
           ssh = {
             # program = "op-ssh-sign"; # TODO: Check if this works on darwin
             program = "/Applications/1Password.app/Contents/MacOS/op-ssh-sign";

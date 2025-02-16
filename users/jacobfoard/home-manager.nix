@@ -1,6 +1,11 @@
 { inputs, ... }:
 
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
 let
   isDarwin = pkgs.stdenv.isDarwin;
@@ -8,7 +13,7 @@ let
 in
 {
   imports = [
-    inputs.nixvim.homeManagerModules.nixvim
+    # inputs.nixvim.homeManagerModules.nixvim
     ./git.nix
     ./neovim.nix
     ./zsh.nix
@@ -16,37 +21,41 @@ in
 
   xdg.enable = true;
 
-  home.packages = with pkgs; [
-    coreutils
-    curl
-    du-dust # fancy du
-    lsd # fancy ls
-    parallel
-    procs
-    fd
-    ripgrep
-    termshark
-    unzip
-    wget
-    gnused
-    watch
-    jq
-    yq-go
-    nixpkgs-fmt
+  home.packages =
+    with pkgs;
+    [
+      coreutils
+      curl
+      du-dust # fancy du
+      lsd # fancy ls
+      parallel
+      procs
+      fd
+      ripgrep
+      termshark
+      unzip
+      wget
+      gnused
+      watch
+      jq
+      yq-go
+      nixpkgs-fmt
 
-    # Node is required for Copilot.vim
-    nodejs
-  ] ++ (lib.optionals isDarwin [
-    # This is automatically setup on Linux
-    cachix
-    tailscale
-    (writeShellScriptBin "gsed" ''${pkgs.gnused}/bin/sed $@'')
-  ]) ++ (lib.optionals isLinux [
-    firefox
-    gopls
-    delve
-    go-tools
-  ]);
+      # Node is required for Copilot.vim
+      nodejs
+    ]
+    ++ (lib.optionals isDarwin [
+      # This is automatically setup on Linux
+      cachix
+      tailscale
+      (writeShellScriptBin "gsed" ''${pkgs.gnused}/bin/sed $@'')
+    ])
+    ++ (lib.optionals isLinux [
+      firefox
+      gopls
+      delve
+      go-tools
+    ]);
 
   programs = {
     bat.enable = true;
@@ -109,7 +118,6 @@ in
   xdg.configFile."wezterm/mouse.lua".source = ./wezterm/mouse.lua;
   xdg.configFile."wezterm/status-line.lua".source = ./wezterm/status-line.lua;
   xdg.configFile."nvim/lua/statusline.lua".source = ./neovim/statusline.lua;
-
 
   # This value determines the Home Manager release that your configuration is
   # compatible with. This helps avoid breakage when a new Home Manager release
