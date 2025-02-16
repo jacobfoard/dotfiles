@@ -1,4 +1,11 @@
-{ config, pkgs, lib, currentSystem, currentSystemName, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  currentSystem,
+  currentSystemName,
+  ...
+}:
 {
   nix = {
     package = pkgs.nixUnstable;
@@ -34,7 +41,6 @@
   environment.enableAllTerminfo = true;
 
   i18n.defaultLocale = "en_US.UTF-8";
-
 
   services.xserver = {
     enable = true;

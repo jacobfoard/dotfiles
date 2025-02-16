@@ -33,7 +33,10 @@
     isNormalUser = true;
     description = "Jacob";
     shell = pkgs.zsh;
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [
+      "networkmanager"
+      "wheel"
+    ];
     hashedPassword = "$6$0RSKkJrVnzxeD5ie$iia4XxKbx58cGlQUEhVnVbBc94acRd8OIgDX2LmWZkKoPj4XAExw3XeYmntRT077hMCOz09LrFW0e//sRA5m71";
   };
 }

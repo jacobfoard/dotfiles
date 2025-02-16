@@ -4,7 +4,6 @@
   nixpkgs.overlays = import ../../lib/overlays.nix;
   nixpkgs.config.allowUnfree = true;
 
-
   homebrew = {
     enable = true;
     onActivation.cleanup = "zap";
@@ -51,7 +50,6 @@
       "2606:4700:4700::1001"
     ];
   };
-
 
   # Add ability to used TouchID for sudo authentication
   security.pam.enableSudoTouchIdAuth = true;
