@@ -26,6 +26,13 @@
 
       delta.enable = true;
 
+      signing = {
+        format = "ssh";
+        # key = "~/.ssh/id_ed25519.pub";
+        signer = "/Applications/1Password.app/Contents/MacOS/op-ssh-sign";
+        signByDefault = true;
+      };
+
       extraConfig = {
         help.autoCorrect = "prompt";
 
@@ -52,13 +59,13 @@
         github.user = "jacobfoard";
 
         user.signingkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIB8VqP8fIx2fITGkSURLDUT0ZpbK8lP/Rje49a3p2XId";
-        gpg = {
-          # format = "ssh";
-          ssh = {
-            # program = "op-ssh-sign"; # TODO: Check if this works on darwin
-            program = "/Applications/1Password.app/Contents/MacOS/op-ssh-sign";
-          };
-        };
+        # gpg = {
+        # format = "ssh";
+        # ssh = {
+        # program = "op-ssh-sign"; # TODO: Check if this works on darwin
+        # program = "/Applications/1Password.app/Contents/MacOS/op-ssh-sign";
+        # };
+        # };
 
         commit.gpgsign = true;
 
