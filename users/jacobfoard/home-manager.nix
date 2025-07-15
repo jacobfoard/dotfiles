@@ -39,7 +39,8 @@ in
       watch
       jq
       yq-go
-      nixpkgs-fmt
+      # nixpkgs-fmt
+      nixfmt-rfc-style
 
       # Node is required for Copilot.vim
       nodejs
@@ -80,16 +81,16 @@ in
       '';
     };
 
-    vscode = {
-      enable = true;
-      extensions = with pkgs; [
-        vscode-extensions.jnoortheen.nix-ide
-        vscode-extensions.golang.go
-        vscode-extensions.github.copilot
-        vscode-extensions.github.copilot-chat
+    # vscode = {
+    #   enable = true;
+    #   extensions = with pkgs; [
+    #     vscode-extensions.jnoortheen.nix-ide
+    #     vscode-extensions.golang.go
+    #     vscode-extensions.github.copilot
+    #     vscode-extensions.github.copilot-chat
 
-      ];
-    };
+    #   ];
+    # };
 
     ssh = {
       enable = true;

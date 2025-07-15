@@ -50,6 +50,10 @@
   };
 
   system.defaults.NSGlobalDomain.AppleICUForce24HourTime = true;
+  system.defaults.NSGlobalDomain.ApplePressAndHoldEnabled = false;
+
+  nix.enable = false;
+
   system.stateVersion = 5;
 
   environment.shells = with pkgs; [
