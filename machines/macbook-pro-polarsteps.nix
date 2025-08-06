@@ -1,4 +1,9 @@
-{ config, pkgs, ... }:
+{
+  config,
+  pkgs,
+  currentSystemUser,
+  ...
+}:
 {
   # We install Nix using a separate installer so we don't want nix-darwin
   # to manage it for us. This tells nix-darwin to just use whatever is running.
@@ -44,6 +49,8 @@
     # End Nix
   '';
 
+  system.primaryUser = currentSystemUser;
+
   system.keyboard = {
     enableKeyMapping = true;
     nonUS.remapTilde = true;
@@ -69,5 +76,8 @@
     kubectl
     kubetail
     awscli2
+    vault
+    argocd
+    inetutils
   ];
 }

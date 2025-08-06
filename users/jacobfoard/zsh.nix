@@ -1,4 +1,9 @@
-{ config, pkgs, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 
 {
   config = {
@@ -27,8 +32,8 @@
           "git branch -vv | grep origin | grep gone | awk '{print \$1}'|xargs -L 1 git branch -d";
         "clean-up-sqaush-main" =
           ''git checkout -q main && git for-each-ref refs/heads/ "--format=%(refname:short)" | while read branch; do mergeBase=$(git merge-base main $branch) && [[ $(git cherry main $(git commit-tree $(git rev-parse $branch\^{tree}) -p $mergeBase -m _)) == "-"* ]] && git branch -D $branch; done'';
-        "clean-up-sqaush-dev" =
-          ''git checkout -q development && git for-each-ref refs/heads/ "--format=%(refname:short)" | while read branch; do mergeBase=$(git merge-base development $branch) && [[ $(git cherry development $(git commit-tree $(git rev-parse $branch\^{tree}) -p $mergeBase -m _)) == "-"* ]] && git branch -D $branch; done'';
+        "clean-up-sqaush-master" =
+          ''git checkout -q master && git for-each-ref refs/heads/ "--format=%(refname:short)" | while read branch; do mergeBase=$(git merge-base master $branch) && [[ $(git cherry master $(git commit-tree $(git rev-parse $branch\^{tree}) -p $mergeBase -m _)) == "-"* ]] && git branch -D $branch; done'';
         copy = ''tr -d "\n" | pbcopy'';
         gca = "git commit --amend --no-edit";
         ssh = "TERM=xterm-256color ssh";
@@ -45,18 +50,21 @@
         # vim = "nvim";
       };
 
-      initExtraFirst =
-        builtins.readFile ./zsh/initExtraFirst.zsh
-        + (
-          if pkgs.stdenv.system == "aarch64-darwin" then
-            ''
-              eval "$(/opt/homebrew/bin/brew shellenv)"
-              fpath=(/opt/homebrew/share/zsh/site-functions $fpath) 
-            ''
-          else
-            ""
-        );
-      initExtra = builtins.readFile ./zsh/initExtra.zsh;
+      initContent = lib.mkMerge [
+        (lib.mkBefore (
+          builtins.readFile ./zsh/initExtraFirst.zsh
+          + (
+            if pkgs.stdenv.system == "aarch64-darwin" then
+              ''
+                eval "$(/opt/homebrew/bin/brew shellenv)"
+                fpath=(/opt/homebrew/share/zsh/site-functions $fpath) 
+              ''
+            else
+              ""
+          )
+        ))
+        (builtins.readFile ./zsh/initExtra.zsh)
+      ];
 
       plugins = [
         {
@@ -77,10 +85,14 @@
           "gitfast"
           "kubectl"
           "docker"
-          "gitignore"
+          # "gitignore"
           "golang"
           "git-auto-fetch"
           "aws"
+          "argocd"
+          "poetry"
+          "tailscale"
+          "opentofu"
         ];
       };
     };
