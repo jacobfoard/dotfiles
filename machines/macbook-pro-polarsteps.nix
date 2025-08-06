@@ -78,6 +78,6 @@
     awscli2
     vault
     argocd
-    inetutils
+    k9s
   ];
 }

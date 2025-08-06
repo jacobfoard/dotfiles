@@ -25,6 +25,7 @@ in
     with pkgs;
     [
       coreutils
+      inetutils
       curl
       du-dust # fancy du
       lsd # fancy ls
@@ -41,6 +42,8 @@ in
       yq-go
       # nixpkgs-fmt
       nixfmt-rfc-style
+
+      jjui
 
       # Node is required for Copilot.vim
       nodejs
@@ -73,6 +76,40 @@ in
       settings.show_program_path = true;
     };
 
+    jujutsu = {
+      enable = true;
+      settings = {
+        user = {
+          name = "Jacob Foard";
+          email = "jacobfoard@gmail.com";
+        };
+
+        diff = {
+          tool = "delta";
+        };
+
+        ui = {
+          diff-formatter = ":git";
+          pager = [
+            "delta"
+            "--pager"
+            "less -FRX"
+          ];
+        };
+        "--scope" = [
+          {
+            "--when.commands" = [
+              "diff"
+              "show"
+            ];
+          }
+        ];
+        "--scope.ui" = {
+          pager = [ "delta" ];
+        };
+      };
+    };
+
     wezterm = {
       enable = true;
       extraConfig = ''
@@ -81,16 +118,13 @@ in
       '';
     };
 
-    # vscode = {
-    #   enable = true;
-    #   extensions = with pkgs; [
-    #     vscode-extensions.jnoortheen.nix-ide
-    #     vscode-extensions.golang.go
-    #     vscode-extensions.github.copilot
-    #     vscode-extensions.github.copilot-chat
-
-    #   ];
-    # };
+    neovim = {
+      enable = true;
+      defaultEditor = true;
+      viAlias = true;
+      vimAlias = true;
+      vimdiffAlias = true;
+    };
 
     ssh = {
       enable = true;
