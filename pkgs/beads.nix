@@ -48,6 +48,6 @@ buildGoModule rec {
   meta = {
     description = "A memory upgrade for your coding agent";
     mainProgram = "bd";
-    homepage = "https://github.com/steveyegge/gastown";
+    homepage = "https://github.com/steveyegge/beads";
   };
 }

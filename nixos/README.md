@@ -1,6 +1,8 @@
 # NixOS configurations
 
-This sub-flake contains all NixOS system configurations for Linux machines.
+This sub-flake contains NixOS system configurations for Linux machines.
+
+**Note**: This is currently a placeholder with no active configurations. The structure is ready for when NixOS machines are added.
 
 ## Structure
 
@@ -15,7 +17,7 @@ This sub-flake contains all NixOS system configurations for Linux machines.
 
 ## Usage
 
-Machines are exposed via `nixosConfigurations` output and consumed by the main v7 flake.
+Machines are exposed via `nixosConfigurations` output and consumed by the root flake.
 
 Build a configuration:
 ```bash
@@ -27,8 +29,10 @@ Deploy to current system:
 nixos-rebuild switch --flake .#<machine-name>
 ```
 
-## Tips
+## Adding a Machine
 
-- Use `nixos-generate-config` to create initial hardware configuration
-- Keep hardware-specific settings in machine directories
-- Share common system configuration via modules
+1. Run `nixos-generate-config` to create initial hardware configuration
+2. Create `machines/<hostname>/default.nix` with system config
+3. Add to `nixosConfigurations` in `flake.nix`
+4. Keep hardware-specific settings in machine directories
+5. Share common configuration via modules

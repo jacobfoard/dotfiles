@@ -41,21 +41,23 @@ This:
    - `useUserPackages = true` - Install packages to user profile
    - Loads the user module from `home.homeModules.default`
 
+**Important**: The `darwinConfigurations` key must match the system's actual hostname (output of `hostname`), not the machines/ directory name. For example, `"Jacobs-MacBook-Pro"` is the config key, while `macbook-pro-polarsteps` is the machines/ directory.
+
 ## Usage
 
-Build a configuration:
+Deploy to current system (from repo root):
 ```bash
-nix build .#darwinConfigurations.macbook-pro-polarsteps.system
+darwin-rebuild switch --flake .
 ```
 
-Deploy to current system:
+Or target a specific config:
 ```bash
-darwin-rebuild switch --flake .#macbook-pro-polarsteps
+darwin-rebuild switch --flake .#Jacobs-MacBook-Pro
 ```
 
-Or from the parent v7 flake:
+Build without deploying:
 ```bash
-darwin-rebuild switch --flake /path/to/v7#macbook-pro-polarsteps
+nix build .#darwinConfigurations.Jacobs-MacBook-Pro.system
 ```
 
 ## Adding a New Machine
@@ -64,11 +66,11 @@ darwin-rebuild switch --flake /path/to/v7#macbook-pro-polarsteps
 2. Add to `darwinConfigurations` in `flake.nix`:
    ```nix
    darwinConfigurations = {
-     "macbook-pro-polarsteps" = mkDarwinSystem {
+     "Jacobs-MacBook-Pro" = mkDarwinSystem {
        hostname = "macbook-pro-polarsteps";
      };
-     "new-machine" = mkDarwinSystem {
-       hostname = "new-machine";
+     "New-Hostname" = mkDarwinSystem {
+       hostname = "new-machine-dir";
        # optional: system = "x86_64-darwin";
        # optional: username = "different-user";
      };
@@ -79,10 +81,7 @@ darwin-rebuild switch --flake /path/to/v7#macbook-pro-polarsteps
 
 This flake does **NOT** include `inputs.determinate` or use the Determinate nix-darwin module.
 
-**Why**: Determinate Nix is installed system-wide (not via Nix), and we only need standard nix-darwin config options. The Determinate flake module is only needed for advanced features like:
-- `buildMachines` (complex remote builder configs)
-- `determinateNixd` (memory/CPU tuning)
-- Custom Linux builder VMs
+**Why**: Determinate Nix is installed system-wide (not via Nix), and we only need standard nix-darwin config options. `nix.enable = false` because Determinate manages the daemon, but `nix.settings` and `nix.extraOptions` are still configured and picked up by Determinate's nixd.
 
 **Configuration**: Use standard nix-darwin options in machine configs:
 ```nix
@@ -94,6 +93,3 @@ This flake does **NOT** include `inputs.determinate` or use the Determinate nix-
   '';
 }
 ```
-
-See [v7/NOTES.md](../NOTES.md) for full details.
-

@@ -18,7 +18,7 @@ in
       dust
       lsd
       # parallel
-      # procs
+      procs
       fd
       ripgrep
       # termshark
@@ -45,7 +45,7 @@ in
       # This is automatically setup on Linux
       # cachix
       # tailscale
-      (writeShellScriptBin "gsed" "${pkgs.gnused}/bin/sed $@")
+      (writeShellScriptBin "gsed" ''${pkgs.gnused}/bin/sed "$@"'')
       # tmux
     ])
     ++ (lib.optionals isLinux [
