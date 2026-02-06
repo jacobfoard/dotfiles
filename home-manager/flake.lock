@@ -5,6 +5,7 @@
         "flake-parts": "flake-parts",
         "import-tree": "import-tree",
         "nixpkgs": [
+          "pkgs",
           "nixpkgs"
         ],
         "systems": "systems",
@@ -24,34 +25,6 @@
         "type": "github"
       }
     },
-    "darwin": {
-      "inputs": {
-        "darwin": [
-          "nix-darwin"
-        ],
-        "home": [
-          "home"
-        ],
-        "home-manager": [
-          "home-manager"
-        ],
-        "nixpkgs": [
-          "nixpkgs"
-        ],
-        "pkgs": [
-          "pkgs"
-        ]
-      },
-      "locked": {
-        "path": "./darwin",
-        "type": "path"
-      },
-      "original": {
-        "path": "./darwin",
-        "type": "path"
-      },
-      "parent": []
-    },
     "flake-parts": {
       "inputs": {
         "nixpkgs-lib": "nixpkgs-lib"
@@ -69,28 +42,6 @@
         "repo": "flake-parts",
         "type": "github"
       }
-    },
-    "home": {
-      "inputs": {
-        "home-manager": [
-          "home-manager"
-        ],
-        "nixpkgs": [
-          "nixpkgs"
-        ],
-        "pkgs": [
-          "pkgs"
-        ]
-      },
-      "locked": {
-        "path": "./home-manager",
-        "type": "path"
-      },
-      "original": {
-        "path": "./home-manager",
-        "type": "path"
-      },
-      "parent": []
     },
     "home-manager": {
       "inputs": {
@@ -126,42 +77,6 @@
         "repo": "import-tree",
         "type": "github"
       }
-    },
-    "nix-darwin": {
-      "inputs": {
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1770184146,
-        "narHash": "sha256-DsqnN6LvXmohTRaal7tVZO/AKBuZ02kPBiZKSU4qa/k=",
-        "owner": "LnL7",
-        "repo": "nix-darwin",
-        "rev": "0d7874ef7e3ba02d58bebb871e6e29da36fa1b37",
-        "type": "github"
-      },
-      "original": {
-        "owner": "LnL7",
-        "repo": "nix-darwin",
-        "type": "github"
-      }
-    },
-    "nixos": {
-      "inputs": {
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "path": "./nixos",
-        "type": "path"
-      },
-      "original": {
-        "path": "./nixos",
-        "type": "path"
-      },
-      "parent": []
     },
     "nixpkgs": {
       "locked": {
@@ -212,36 +127,26 @@
     },
     "pkgs": {
       "inputs": {
-        "bun2nix": [
-          "bun2nix"
-        ],
+        "bun2nix": "bun2nix",
         "nixpkgs": [
           "nixpkgs"
         ],
-        "nixpkgs-staging": [
-          "nixpkgs-staging"
-        ]
+        "nixpkgs-staging": "nixpkgs-staging"
       },
       "locked": {
-        "path": "./pkgs",
+        "path": "../pkgs",
         "type": "path"
       },
       "original": {
-        "path": "./pkgs",
+        "path": "../pkgs",
         "type": "path"
       },
       "parent": []
     },
     "root": {
       "inputs": {
-        "bun2nix": "bun2nix",
-        "darwin": "darwin",
-        "home": "home",
         "home-manager": "home-manager",
-        "nix-darwin": "nix-darwin",
-        "nixos": "nixos",
         "nixpkgs": "nixpkgs",
-        "nixpkgs-staging": "nixpkgs-staging",
         "pkgs": "pkgs"
       }
     },
@@ -263,6 +168,7 @@
     "treefmt-nix": {
       "inputs": {
         "nixpkgs": [
+          "pkgs",
           "bun2nix",
           "nixpkgs"
         ]

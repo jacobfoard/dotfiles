@@ -1,324 +1,116 @@
 {
   description = "Jacob's dotfiles";
+
   inputs = {
-    # Generally living on the edge
-    nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
-    nixos.url = "github:NixOS/nixpkgs/nixos-unstable";
-    nixpkgs-master.url = "github:nixos/nixpkgs/master";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
 
-    # Stable for when shit is broken
-    nixpkgs-stable-darwin.url = "github:nixos/nixpkgs/nixpkgs-22.05-darwin";
-    nixos-stable.url = "github:nixos/nixpkgs/nixos-22.05";
+    home-manager.url = "github:nix-community/home-manager";
+    home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
-    flake-utils.url = "github:numtide/flake-utils";
+    nix-darwin.url = "github:LnL7/nix-darwin";
+    nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
+
+    bun2nix.url = "github:nix-community/bun2nix";
+    bun2nix.inputs.nixpkgs.follows = "nixpkgs";
+
+    # Temporary: staging has Go 1.25.6, unstable is still on 1.25.5
+    nixpkgs-staging.url = "github:NixOS/nixpkgs/staging";
+
+    # Sub-flakes using nix 2.26 path syntax
+    pkgs = {
+      url = "path:./pkgs";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nixpkgs-staging.follows = "nixpkgs-staging";
+      inputs.bun2nix.follows = "bun2nix";
+    };
 
     darwin = {
-      # url = "github:LnL7/nix-darwin";
-      url = "github:jacobfoard/nix-darwin/trying-to-fix-segfaults";
+      url = "path:./darwin";
       inputs.nixpkgs.follows = "nixpkgs";
+      inputs.darwin.follows = "nix-darwin";
+      inputs.home-manager.follows = "home-manager";
+      inputs.pkgs.follows = "pkgs";
+      inputs.home.follows = "home";
     };
 
-    home-manager = {
-      url = "github:nix-community/home-manager/master";
+    home = {
+      url = "path:./home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
+      inputs.home-manager.follows = "home-manager";
+      inputs.pkgs.follows = "pkgs";
     };
 
-    neovim-src = {
-      url = "github:neovim/neovim?dir=contrib";
+    nixos = {
+      url = "path:./nixos";
       inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    codedark = {
-      url = "github:jacobfoard/vim-code-dark/personal-changes";
-      flake = false;
-    };
-
-    oh-my-tmux = {
-      url = "github:gpakosz/.tmux";
-      flake = false;
-    };
-
-    # wezterm-nvim = {
-    #   url = "github:aca/wezterm.nvim";
-    #   flake = false;
-    # };
-
-    # nvim-tree-sitter = {
-    #   url = "github:nvim-treesitter/nvim-treesitter?ref=b05803402965395cfab2c3e9c0258f494dac377d";
-    #   flake = false;
-    # };
-
-    mango = {
-      url = "git+ssh://git@github.com/greenpark/mango.git?ref=main";
-      inputs = {
-        nixpkgs.follows = "nixpkgs";
-        flake-utils.follows = "flake-utils";
-      };
-    };
-
-    phoenix = {
-      url = "git+ssh://git@github.com/greenpark/phoenix.git?ref=main";
-      # follows = "mango/phoenix";
-      inputs = {
-        nixpkgs.follows = "nixpkgs";
-        flake-utils.follows = "flake-utils";
-      };
     };
   };
 
-
-  outputs = { self, nixpkgs, nixos, darwin, home-manager, flake-utils, mango, phoenix, ... }@inputs:
+  outputs =
+    {
+      nixpkgs,
+      pkgs,
+      darwin,
+      home,
+      nixos,
+      ...
+    }:
     let
-      overlays = with inputs; [
-        # neovim-nightly-overlay.overlay
-        (
-          final: prev:
-            let
-              inherit (prev.stdenv) system;
-              nixpkgs-stable = if prev.stdenv.isDarwin then nixpkgs-stable-darwin else nixos-stable;
-            in
-            rec {
-              mango_gpsd = mango.defaultPackage.${system};
-              inherit (phoenix.packages.${system}) golines;
-              graphite = phoenix.packages.${system}.graphite-cli;
-              bazel_5 = phoenix.packages.${system}.bazel_5;
-              tmux-base = oh-my-tmux;
-              neovim-nightly = neovim-src.packages.${system}.neovim;
-              neovim-unwrapped = neovim-src.packages.${system}.neovim;
-
-              master = nixpkgs-master.legacyPackages.${system};
-              stable = nixpkgs-stable.legacyPackages.${system};
-
-              # Install colorscheme via input so it just works
-              vimPlugins = prev.vimPlugins // {
-                codedark = prev.vimUtils.buildVimPluginFrom2Nix {
-                  pname = "vim-code-dark";
-                  version = inputs.codedark.lastModifiedDate;
-                  src = inputs.codedark;
-                };
-
-                # nvim-treesitter = prev.vimPlugins.nvim-treesitter.overrideAttrs (old: {
-                #   version = inputs.nvim-tree-sitter.lastModifiedDate;
-                #   src = inputs.nvim-tree-sitter;
-                # });
-              };
-
-              tmux-darwin = prev.runCommand prev.tmux.name
-                { buildInputs = [ prev.makeWrapper ]; }
-                ''
-                  source $stdenv/setup
-                  mkdir -p $out/bin
-                  makeWrapper ${prev.tmux}/bin/tmux $out/bin/tmux \
-                    --set __ETC_BASHRC_SOURCED "" \
-                    --set __ETC_ZPROFILE_SOURCED  "" \
-                    --set __ETC_ZSHENV_SOURCED "" \
-                    --set __ETC_ZSHRC_SOURCED "" \
-                    --set __NIX_DARWIN_SET_ENVIRONMENT_DONE ""
-                '';
-
-              golangci-lint = prev.golangci-lint.override {
-                # https://nixpk.gs/pr-tracker.html?pr=164292
-                buildGoModule = args: prev.buildGoModule.override { go = prev.go_1_18; } (args);
-              };
-
-              tuc = prev.callPackage ./modules/tuc.nix {
-                inherit (prev.darwin.apple_sdk.frameworks) Security SystemConfiguration;
-              };
-
-              # "wezterm_nvim" = prev.buildGoModule {
-              #   pname = "wezterm.nvim";
-              #   version = "0.0.1";
-              #   src = wezterm-nvim;
-              #   vendorSha256 = "sha256-ZmVi9sitr62uQqPCoxmkABZ6frSUaUI1nOd4mPJs4x0=";
-              #   subPackages = [ "wezterm.nvim.navigator" ];
-              # };
-            }
-        )
+      supportedSystems = [
+        "x86_64-linux"
+        "aarch64-linux"
+        "x86_64-darwin"
+        "aarch64-darwin"
       ];
+      forAllSystems = nixpkgs.lib.genAttrs supportedSystems;
 
-      nixpkgsConfig = with inputs; {
-        config = { allowUnfree = true; };
-        inherit overlays;
-      };
-
-      homeManagerCommonConfig = with self; {
-        imports = [
-          ./home/home.nix
-        ];
-      };
-
-      # Modules shared by most `nix-darwin` personal configurations.
-      nixDarwinCommonModules = { user }: [
-        home-manager.darwinModules.home-manager
-        {
-          nixpkgs = nixpkgsConfig;
-          users.users.${user}.home = "/Users/${user}";
-          home-manager.useGlobalPkgs = true;
-          home-manager.users.${user} = homeManagerCommonConfig;
-        }
-      ];
+      # Helper to get pkgs with our overlay applied
+      getPkgs =
+        system:
+        import nixpkgs {
+          inherit system;
+          overlays = [ pkgs.overlays.default ];
+        };
     in
     {
-      defaultTemplate = {
+      # Re-export the overlay for downstream consumers
+      overlays.default = pkgs.overlays.default;
+
+      # Re-export darwinConfigurations from darwin sub-flake
+      darwinConfigurations = darwin.darwinConfigurations or { };
+
+      # Re-export nixosConfigurations from nixos sub-flake
+      nixosConfigurations = nixos.nixosConfigurations or { };
+
+      # Re-export homeConfigurations from home-manager sub-flake (if standalone)
+      homeConfigurations = home.homeConfigurations or { };
+
+      # Re-export home modules for integration with darwin/nixos
+      homeModules = home.homeModules or { };
+
+      # Flake template for new projects
+      templates.default = {
         path = ./template;
         description = "nix flake new -t github:jacobfoard/dotfiles .";
       };
 
-      defaultIso = self.nixosConfigurations.defaultIso.config.system.build.isoImage;
-      linodeIso = self.nixosConfigurations.linodeIso.config.system.build.isoImage;
-
-      darwinConfigurations = {
-        # darwin requires an inital bootstrapping
-        bootstrap = darwin.lib.darwinSystem {
-          system = "x86_64-darwin";
-          modules = [
-            ./darwin/bootstrap.nix
-            {
-              nixpkgs = nixpkgsConfig;
-            }
-          ];
-        };
-
-        bootstrapM1 = darwin.lib.darwinSystem {
-          system = "aarch64-darwin";
-          modules = [
-            ./darwin/bootstrap.nix
-            {
-              nixpkgs = nixpkgsConfig;
-            }
-          ];
-        };
-
-        Wozniak = darwin.lib.darwinSystem {
-          system = "x86_64-darwin";
-          modules = nixDarwinCommonModules { user = "jacobfoard"; } ++ [
-            ./machines/wozniak/configuration.nix
-            {
-              networking.computerName = "Jacob’s 💻";
-              networking.hostName = "Wozniak";
-              networking.knownNetworkServices = [
-                "Ethernet"
-                "Wi-Fi"
-                "USB3.0 5K Graphic Docking"
-                "Tailscale Tunnel"
-              ];
-            }
-          ];
-        };
-
-        Lovelace = darwin.lib.darwinSystem {
-          system = "aarch64-darwin";
-          modules = nixDarwinCommonModules { user = "jacobfoard"; } ++ [
-            ./machines/lovelace/configuration.nix
-            {
-              # I don't love the name but not my choice
-              networking.computerName = "MLM1-MBP16-Jacob";
-              networking.hostName = "Lovelace";
-              networking.knownNetworkServices = [
-                "Ethernet"
-                "Wi-Fi"
-                "USB3.0 5K Graphic Docking"
-                "Tailscale Tunnel"
-              ];
-            }
-          ];
-        };
-      };
-
-      nixosConfigurations = {
-        linode = nixpkgs.lib.nixosSystem {
-          system = "x86_64-linux";
-          modules = [
-            ./machines/linode/configuration.nix
-            {
-              nixpkgs = nixpkgsConfig;
-            }
-          ];
-        };
-
-        # General Server for experimentation
-        cerf = nixpkgs.lib.nixosSystem {
-          system = "x86_64-linux";
-          modules = [
-            ./machines/cerf/configuration.nix
-            home-manager.nixosModules.home-manager
-            {
-              nixpkgs = nixpkgsConfig;
-              home-manager.useGlobalPkgs = true;
-              home-manager.useUserPackages = true;
-              home-manager.users.jacobfoard = import ./home/home.nix;
-            }
-          ];
-        };
-
-        # Media Server
-        cohen = nixpkgs.lib.nixosSystem {
-          system = "x86_64-linux";
-          modules = [
-            ./machines/cohen/configuration.nix
-            home-manager.nixosModules.home-manager
-            {
-              nixpkgs = nixpkgsConfig;
-              home-manager.useGlobalPkgs = true;
-              home-manager.useUserPackages = true;
-              home-manager.users.jacobfoard = import ./home/home.nix;
-            }
-          ];
-        };
-
-        defaultIso = nixos.lib.nixosSystem {
-          system = "x86_64-linux";
-          modules = [
-            "${nixos}/nixos/modules/installer/cd-dvd/installation-cd-base.nix"
-            ./isos/general
-            home-manager.nixosModules.home-manager
-            {
-              nixpkgs = nixpkgsConfig;
-              home-manager.useGlobalPkgs = true;
-              home-manager.useUserPackages = true;
-              home-manager.users.nixos = import ./home/home.nix;
-            }
-          ];
-        };
-
-        linodeIso = nixos.lib.nixosSystem {
-          system = "x86_64-linux";
-          modules = [
-            "${nixos}/nixos/modules/installer/cd-dvd/installation-cd-base.nix"
-            ./isos/linode
-            home-manager.nixosModules.home-manager
-            {
-              nixpkgs = nixpkgsConfig;
-              home-manager.useGlobalPkgs = true;
-              home-manager.useUserPackages = true;
-              home-manager.users.nixos = import ./home/home.nix;
-            }
-          ];
-        };
-      };
-    } // # Join the standard configs with a nix shell for every system
-    flake-utils.lib.eachDefaultSystem (system:
-      let
-        pkgs = import nixpkgs {
-          inherit system;
-          # inherit overlays;
-        };
-        stable-pkgs = if system == "x86_64-darwin" then inputs.nixpkgs-stable-darwin else inputs.nixos-stable;
-        stable = stable-pkgs.legacyPackages.${system};
-      in
-      {
-        # packages.tuc = 
-        devShell = pkgs.mkShell {
-          nativeBuildInputs = with pkgs; [
-            # cachix
-            tree
-            ncurses
-            statix
-            nix-linter
-            stylua
-            operator-sdk
-          ];
-        };
-      }
-    );
+      # Dev shell with all custom packages for testing
+      devShells = forAllSystems (
+        system:
+        let
+          nixpkgsWithOverlay = getPkgs system;
+        in
+        {
+          default = nixpkgsWithOverlay.mkShell {
+            packages = with nixpkgsWithOverlay; [
+              argocd-mcp
+              beads
+              # gastown # TODO: disabled until sandbox build fixed
+              kubectl-cnpg
+              nix-update
+            ];
+          };
+        }
+      );
+    };
 }
