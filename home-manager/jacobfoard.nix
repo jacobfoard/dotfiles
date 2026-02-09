@@ -5,7 +5,6 @@
 {
   imports = [
     # inputs.nixvim.homeManagerModules.nixvim
-    ./claude.nix
     ./git.nix
     ./neovim.nix
     ./zsh.nix

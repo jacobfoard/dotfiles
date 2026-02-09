@@ -21,6 +21,11 @@
       url = "path:../pkgs";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    private = {
+      url = "git+file:///Users/jacobfoard/code/github.com/jacobfoard/dotfiles-private";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -31,6 +36,7 @@
       home-manager,
       home,
       pkgs,
+      private,
       ...
     }:
     let
@@ -49,10 +55,18 @@
           };
           modules = [
             # Apply custom packages overlay
-            { nixpkgs.overlays = [ pkgs.overlays.default ]; }
+            {
+              nixpkgs.overlays = [
+                pkgs.overlays.default
+                private.overlays.default
+              ];
+            }
 
             # Common darwin configuration
             ./modules/common.nix
+
+            # Private darwin configuration
+            private.darwinModules.default
 
             # Machine-specific configuration
             ./machines/${hostname}
@@ -70,6 +84,8 @@
         };
     in
     {
+      lib.mkDarwinSystem = mkDarwinSystem;
+
       darwinConfigurations = {
         # Key must match system hostname; hostname must match machines/ directory
         "Jacobs-MacBook-Pro" = mkDarwinSystem {

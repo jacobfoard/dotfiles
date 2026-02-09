@@ -13,6 +13,11 @@
       url = "path:../pkgs";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    private = {
+      url = "git+file:///Users/jacobfoard/code/github.com/jacobfoard/dotfiles-private";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -21,6 +26,7 @@
       nixpkgs,
       home-manager,
       pkgs,
+      private,
       ...
     }:
     let
@@ -41,7 +47,12 @@
           overlays = [ pkgs.overlays.default ];
         };
 
-      homeModule = import ./jacobfoard.nix { };
+      homeModule = {
+        imports = [
+          (import ./jacobfoard.nix { })
+          private.homeModules.default
+        ];
+      };
 
       baseModule =
         { pkgs, ... }:

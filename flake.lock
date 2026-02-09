@@ -40,6 +40,9 @@
         ],
         "pkgs": [
           "pkgs"
+        ],
+        "private": [
+          "private"
         ]
       },
       "locked": {
@@ -80,6 +83,9 @@
         ],
         "pkgs": [
           "pkgs"
+        ],
+        "private": [
+          "private"
         ]
       },
       "locked": {
@@ -232,6 +238,26 @@
       },
       "parent": []
     },
+    "private": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1770639712,
+        "narHash": "sha256-nT7G1fER8MmkSVsNwTunTHbGvY1FxSZikGR0fAnFiW8=",
+        "ref": "refs/heads/main",
+        "rev": "d7b3c131f06d668313a173ce26f9342ad82079de",
+        "revCount": 1,
+        "type": "git",
+        "url": "file:///Users/jacobfoard/code/github.com/jacobfoard/dotfiles-private"
+      },
+      "original": {
+        "type": "git",
+        "url": "file:///Users/jacobfoard/code/github.com/jacobfoard/dotfiles-private"
+      }
+    },
     "root": {
       "inputs": {
         "bun2nix": "bun2nix",
@@ -242,7 +268,8 @@
         "nixos": "nixos",
         "nixpkgs": "nixpkgs",
         "nixpkgs-staging": "nixpkgs-staging",
-        "pkgs": "pkgs"
+        "pkgs": "pkgs",
+        "private": "private"
       }
     },
     "systems": {

@@ -16,6 +16,11 @@
     # Temporary: staging has Go 1.25.6, unstable is still on 1.25.5
     nixpkgs-staging.url = "github:NixOS/nixpkgs/staging";
 
+    private = {
+      url = "git+file:///Users/jacobfoard/code/github.com/jacobfoard/dotfiles-private";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     # Sub-flakes using nix 2.26 path syntax
     pkgs = {
       url = "path:./pkgs";
@@ -31,6 +36,7 @@
       inputs.home-manager.follows = "home-manager";
       inputs.pkgs.follows = "pkgs";
       inputs.home.follows = "home";
+      inputs.private.follows = "private";
     };
 
     home = {
@@ -38,6 +44,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.home-manager.follows = "home-manager";
       inputs.pkgs.follows = "pkgs";
+      inputs.private.follows = "private";
     };
 
     nixos = {
@@ -73,6 +80,9 @@
         };
     in
     {
+      # Re-export lib from darwin sub-flake
+      lib = darwin.lib or { };
+
       # Re-export the overlay for downstream consumers
       overlays.default = pkgs.overlays.default;
 
