@@ -6,13 +6,13 @@
 
 buildGoModule rec {
   pname = "av";
-  version = "0.1.15";
+  version = "0.1.16";
 
   src = fetchFromGitHub {
     owner = "aviator-co";
     repo = pname;
     rev = "v${version}";
-    sha256 = "sha256-GkYsQouncVrYp0Gg0vinKrPSlT9UKJi2RZ4zp1M9BbE=";
+    sha256 = "sha256-6sPy59M9Up5+MePfs6dXp+zZX2L3BzYvawZcaQHQWaI=";
   };
 
   subPackages = [ "cmd/av" ];
