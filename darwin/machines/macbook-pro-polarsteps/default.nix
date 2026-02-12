@@ -15,7 +15,6 @@
     casks = [
       "1password"
       "1password-cli"
-      "claude-code"
       "dbeaver-community"
       "firefox"
       "itsycal"
@@ -72,7 +71,7 @@
     kubetail
     awscli2
     vault
-    argocd
+    # argocd # TODO: broken upstream -- UI build missing git in nativeBuildInputs
     k9s
     cmctl
     argo-rollouts
@@ -81,10 +80,12 @@
     # Custom packages from pkgs overlay
     kubectl-cnpg
     beads
+    #  entire-cli
     # gastown # TODO: disabled until sandbox build fixed
     kubectl-evict-pod
     postgresql
     hey
     dive
+    terramate
   ];
 }

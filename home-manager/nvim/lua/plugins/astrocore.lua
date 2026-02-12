@@ -75,6 +75,19 @@ return {
 
         -- setting a mapping to false will disable it
         -- ["<C-S>"] = false,
+
+        -- cmd+/ to toggle comment
+        ["<D-/>"] = {
+          function() require("Comment.api").toggle.linewise.current() end,
+          desc = "Toggle comment line",
+        },
+      },
+      v = {
+        -- cmd+/ to toggle comment in visual mode
+        ["<D-/>"] = {
+          "<esc><cmd>lua require('Comment.api').toggle.linewise(vim.fn.visualmode())<cr>",
+          desc = "Toggle comment",
+        },
       },
     },
   },

@@ -10,12 +10,6 @@
     nix-darwin.url = "github:LnL7/nix-darwin";
     nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
 
-    bun2nix.url = "github:nix-community/bun2nix";
-    bun2nix.inputs.nixpkgs.follows = "nixpkgs";
-
-    # Temporary: staging has Go 1.25.6, unstable is still on 1.25.5
-    nixpkgs-staging.url = "github:NixOS/nixpkgs/staging";
-
     private = {
       url = "git+file:///Users/jacobfoard/code/github.com/jacobfoard/dotfiles-private";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -25,8 +19,6 @@
     pkgs = {
       url = "path:./pkgs";
       inputs.nixpkgs.follows = "nixpkgs";
-      inputs.nixpkgs-staging.follows = "nixpkgs-staging";
-      inputs.bun2nix.follows = "bun2nix";
     };
 
     darwin = {

@@ -29,7 +29,6 @@ in
       jq
       yq-go
       av
-      ccstatusline
       home-manager
       # nixpkgs-fmt
       # nixfmt-rfc-style

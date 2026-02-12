@@ -44,7 +44,10 @@
         import nixpkgs {
           inherit system;
           config.allowUnfree = true;
-          overlays = [ pkgs.overlays.default ];
+          overlays = [
+            pkgs.overlays.default
+            private.overlays.default
+          ];
         };
 
       homeModule = {

@@ -17,6 +17,8 @@
         "result"
         ".DS_Store"
         ".idea"
+        ".claude"
+        ".mcp.json"
       ];
 
       signing = {

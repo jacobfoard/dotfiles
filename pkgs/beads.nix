@@ -3,9 +3,10 @@
   fetchFromGitHub,
   installShellFiles,
   pkgs,
+  go_1_26,
 }:
 
-buildGoModule rec {
+buildGoModule.override { go = go_1_26; } rec {
   pname = "beads";
   version = "0.49.4";
 
