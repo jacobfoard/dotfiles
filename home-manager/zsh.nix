@@ -47,6 +47,7 @@
         jf = "~/code/github.com/jacobfoard";
         gmi = "pwd | sed 's;.*code/;;' | xargs go mod init";
         gl = "~/code/gitlab.com";
+        code = "/Applications/Visual\\ Studio\\ Code.app/Contents/Resources/app/bin/code";
         # vim = "nvim";
       };
 

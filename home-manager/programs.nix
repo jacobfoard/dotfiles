@@ -24,6 +24,13 @@
             email = "jacobfoard@gmail.com";
           };
 
+          signing = {
+            backend = "ssh";
+            key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIB8VqP8fIx2fITGkSURLDUT0ZpbK8lP/Rje49a3p2XId";
+            sign-all = true;
+            backends.ssh.program = "/Applications/1Password.app/Contents/MacOS/op-ssh-sign";
+          };
+
           # Make jj use delta for diffs
           # https://github.com/jj-vcs/jj/discussions/4690#discussioncomment-13902914
           diff.tool = "delta";

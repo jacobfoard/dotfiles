@@ -36,8 +36,6 @@ return {
   -- want to replicate new tab in tmux but wezterm defaults to CWD of current pane, so we need to manually set it
   { key = "c", mods = "LEADER", action = wezterm.action.SpawnCommandInNewTab({ domain = "DefaultDomain", cwd = "~" }) },
 
-  -- Send comment command
-  { key = "/", mods = "SUPER", action = wezterm.action({ SendString = "\x1f\x1f" }) },
   { key = "w", mods = "CMD", action = wezterm.action({ CloseCurrentPane = { confirm = true } }) },
 
   -- Create splits with LEADER+Arrow

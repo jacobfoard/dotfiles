@@ -192,11 +192,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1770882387,
-        "narHash": "sha256-bAlIOwH2JzHma6hyRSKUkwkgjbIDWrTH7CqT/EHQ8AM=",
+        "lastModified": 1770882720,
+        "narHash": "sha256-LlZIF5AEri+ePysj/tqdD6IZy9IwGVQUGJClZCEM2oY=",
         "ref": "refs/heads/main",
-        "rev": "e346ee6ccedfb39e125ec9037cbf4065e00b63ce",
-        "revCount": 7,
+        "rev": "07274a514df69b8044e0f1c25d4dbd7a2c8443d2",
+        "revCount": 8,
         "type": "git",
         "url": "file:///Users/jacobfoard/code/github.com/jacobfoard/dotfiles-private"
       },

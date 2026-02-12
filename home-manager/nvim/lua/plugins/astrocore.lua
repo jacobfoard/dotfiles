@@ -69,25 +69,14 @@ return {
           desc = "Close buffer from tabline",
         },
 
-        -- tables with just a `desc` key will be registered with which-key if it's installed
-        -- this is useful for naming menus
-        -- ["<Leader>b"] = { desc = "Buffers" },
-
-        -- setting a mapping to false will disable it
-        -- ["<C-S>"] = false,
-
-        -- cmd+/ to toggle comment
-        ["<D-/>"] = {
-          function() require("Comment.api").toggle.linewise.current() end,
-          desc = "Toggle comment line",
-        },
+        -- option+arrow to move lines
+        ["<M-Down>"] = { "<cmd>m .+1<cr>==", desc = "Move line down" },
+        ["<M-Up>"] = { "<cmd>m .-2<cr>==", desc = "Move line up" },
       },
       v = {
-        -- cmd+/ to toggle comment in visual mode
-        ["<D-/>"] = {
-          "<esc><cmd>lua require('Comment.api').toggle.linewise(vim.fn.visualmode())<cr>",
-          desc = "Toggle comment",
-        },
+        -- option+arrow to move selected lines
+        ["<M-Down>"] = { ":m '>+1<cr>gv=gv", desc = "Move line down" },
+        ["<M-Up>"] = { ":m '<-2<cr>gv=gv", desc = "Move line up" },
       },
     },
   },
