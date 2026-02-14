@@ -33,6 +33,9 @@
         "home-manager": [
           "home-manager"
         ],
+        "mcp-servers-nix": [
+          "mcp-servers-nix"
+        ],
         "nixpkgs": [
           "nixpkgs"
         ],
@@ -155,6 +158,26 @@
         "type": "github"
       }
     },
+    "mcp-servers-nix": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1771072392,
+        "narHash": "sha256-CY4Z0OJBl22cvm1+isW0yLbmF/ccQ7wuQ5IfGoSBqOc=",
+        "owner": "natsukium",
+        "repo": "mcp-servers-nix",
+        "rev": "db183a9b2286e4eef5176d6c40af6a99f2a0555b",
+        "type": "github"
+      },
+      "original": {
+        "owner": "natsukium",
+        "repo": "mcp-servers-nix",
+        "type": "github"
+      }
+    },
     "nix-darwin": {
       "inputs": {
         "nixpkgs": [
@@ -265,6 +288,7 @@
         "home": "home",
         "home-manager": "home-manager",
         "mcp-nixos": "mcp-nixos",
+        "mcp-servers-nix": "mcp-servers-nix",
         "nix-darwin": "nix-darwin",
         "nixos": "nixos",
         "nixpkgs": "nixpkgs",

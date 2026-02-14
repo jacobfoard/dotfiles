@@ -77,10 +77,15 @@
     argo-rollouts
     eks-node-viewer
     ssm-session-manager-plugin
+    # MCP servers from mcp-servers-nix overlay
+    mcp-server-memory
+    context7-mcp
+    mcp-server-sequential-thinking
+    serena
     # Custom packages from pkgs overlay
     kubectl-cnpg
     beads
-    #  entire-cli
+    entire-cli
     # gastown # TODO: disabled until sandbox build fixed
     kubectl-evict-pod
     postgresql

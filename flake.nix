@@ -19,6 +19,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    mcp-servers-nix = {
+      url = "github:natsukium/mcp-servers-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     private = {
       url = "git+file:///Users/jacobfoard/code/github.com/jacobfoard/dotfiles-private";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -38,6 +43,7 @@
       inputs.pkgs.follows = "pkgs";
       inputs.home.follows = "home";
       inputs.private.follows = "private";
+      inputs.mcp-servers-nix.follows = "mcp-servers-nix";
     };
 
     home = {

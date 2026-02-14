@@ -26,6 +26,11 @@
       url = "git+file:///Users/jacobfoard/code/github.com/jacobfoard/dotfiles-private";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    mcp-servers-nix = {
+      url = "github:natsukium/mcp-servers-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -37,6 +42,7 @@
       home,
       pkgs,
       private,
+      mcp-servers-nix,
       ...
     }:
     let
@@ -59,6 +65,7 @@
               nixpkgs.overlays = [
                 pkgs.overlays.default
                 private.overlays.default
+                mcp-servers-nix.overlays.default
               ];
             }
 
