@@ -4,6 +4,12 @@ return {
   opts = function(_, opts)
     local events = require "neo-tree.events"
     opts.event_handlers = opts.event_handlers or {}
+    opts.filesystem = opts.filesystem or {}
+    opts.filesystem.filtered_items = {
+      visible = true,
+      hide_dotfiles = false,
+      hide_gitignored = false,
+    }
   end,
   init = function()
     -- Auto-open neo-tree when nvim is started without a file argument
