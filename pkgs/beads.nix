@@ -8,13 +8,13 @@
 
 buildGoModule.override { go = go_1_26; } rec {
   pname = "beads";
-  version = "0.49.4";
+  version = "0.49.6";
 
   src = fetchFromGitHub {
     owner = "steveyegge";
     repo = pname;
     rev = "v${version}";
-    sha256 = "sha256-ktVhZlTIF2DgRoxNGyQjgPeBQJoBAQU/gtmYygaD/w0=";
+    sha256 = "sha256-zopOpBqaHC2t+tGYtrHyalOUsFDZai2NmZZOKJs2vfQ=";
   };
 
   subPackages = [ "cmd/bd" ];
