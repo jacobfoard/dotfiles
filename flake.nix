@@ -4,11 +4,20 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
 
-    home-manager.url = "github:nix-community/home-manager";
-    home-manager.inputs.nixpkgs.follows = "nixpkgs";
+    home-manager = {
+      url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
-    nix-darwin.url = "github:LnL7/nix-darwin";
-    nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
+    nix-darwin = {
+      url = "github:LnL7/nix-darwin";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    mcp-nixos = {
+      url = "github:utensils/mcp-nixos";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     private = {
       url = "git+file:///Users/jacobfoard/code/github.com/jacobfoard/dotfiles-private";
@@ -48,6 +57,7 @@
   outputs =
     {
       nixpkgs,
+      mcp-nixos,
       pkgs,
       darwin,
       home,
@@ -109,6 +119,7 @@
               beads
               # gastown # TODO: disabled until sandbox build fixed
               kubectl-cnpg
+              mcp-nixos.packages.${system}.default
               nix-update
             ];
           };
