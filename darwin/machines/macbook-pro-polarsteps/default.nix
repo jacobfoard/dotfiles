@@ -79,10 +79,11 @@
     ssm-session-manager-plugin
     # MCP servers from mcp-servers-nix overlay
     mcp-server-memory
-    context7-mcp
+    # context7-mcp
     mcp-server-sequential-thinking
-    serena
+    #  serena
     # Custom packages from pkgs overlay
+    cozempic
     kubectl-cnpg
     beads
     entire-cli

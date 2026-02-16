@@ -31,6 +31,8 @@
       url = "github:natsukium/mcp-servers-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    determinate.url = "https://flakehub.com/f/DeterminateSystems/determinate/*";
   };
 
   outputs =
@@ -43,6 +45,7 @@
       pkgs,
       private,
       mcp-servers-nix,
+      determinate,
       ...
     }:
     let
@@ -68,6 +71,9 @@
                 mcp-servers-nix.overlays.default
               ];
             }
+
+            # Determinate Nix module (manages /etc/nix/nix.custom.conf)
+            determinate.darwinModules.default
 
             # Common darwin configuration
             ./modules/common.nix
