@@ -8,17 +8,17 @@
 
 buildGoModule.override { go = go_1_26; } rec {
   pname = "beads";
-  version = "0.49.6";
+  version = "0.50.3";
 
   src = fetchFromGitHub {
     owner = "steveyegge";
     repo = pname;
     rev = "v${version}";
-    sha256 = "sha256-zopOpBqaHC2t+tGYtrHyalOUsFDZai2NmZZOKJs2vfQ=";
+    sha256 = "sha256-vWPQuhKUHsikSvmHGqp96LpcBiFYH2nev2LzEHyLrV8=";
   };
 
   subPackages = [ "cmd/bd" ];
-  vendorHash = "sha256-RyOxrW0C+2E+ULhGeF2RbUhaUFt58sux7neHPei5QJI=";
+  vendorHash = "sha256-s9ELOxDHHk+RyImrPxm9DPos7Wb4AFWaNKsrgU4soow=";
 
   env = {
     CGO_ENABLED = 1;

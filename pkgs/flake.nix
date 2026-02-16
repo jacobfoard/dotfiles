@@ -23,6 +23,7 @@
         argocd-mcp = final.callPackage ./argocd-mcp.nix { };
         av = final.callPackage ./av.nix { };
         beads = final.callPackage ./beads.nix { };
+        cozempic = final.callPackage ./cozempic.nix { };
         entire-cli = final.callPackage ./entire-cli.nix { };
         # gastown = final.callPackage ./gastown.nix { }; # TODO: gt completion fails in sandbox (bd version timeout)
         kubectl-cnpg = final.callPackage ./kubectl-cnpg.nix { };
@@ -41,6 +42,7 @@
           argocd-mcp = pkgs.argocd-mcp;
           av = pkgs.av;
           beads = pkgs.beads;
+          cozempic = pkgs.cozempic;
           entire-cli = pkgs.entire-cli;
           # gastown = pkgs.gastown; # TODO: disabled until sandbox build fixed
           kubectl-cnpg = pkgs.kubectl-cnpg;
