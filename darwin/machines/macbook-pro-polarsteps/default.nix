@@ -15,6 +15,7 @@
     casks = [
       "1password"
       "1password-cli"
+      "claude-code"
       "dbeaver-community"
       "firefox"
       "itsycal"
@@ -31,7 +32,8 @@
       Xcode = 497799835;
     };
 
-    brews = [ ];
+    brews = [
+    ];
   };
 
   # Fonts
@@ -93,5 +95,7 @@
     hey
     dive
     terramate
+    uv
+    python314
   ];
 }

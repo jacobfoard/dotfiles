@@ -24,11 +24,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    private = {
-      url = "git+file:///Users/jacobfoard/code/github.com/jacobfoard/dotfiles-private";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     # Sub-flakes using nix 2.26 path syntax
     pkgs = {
       url = "path:./pkgs";
@@ -42,7 +37,6 @@
       inputs.home-manager.follows = "home-manager";
       inputs.pkgs.follows = "pkgs";
       inputs.home.follows = "home";
-      inputs.private.follows = "private";
       inputs.mcp-servers-nix.follows = "mcp-servers-nix";
     };
 
@@ -51,7 +45,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.home-manager.follows = "home-manager";
       inputs.pkgs.follows = "pkgs";
-      inputs.private.follows = "private";
     };
 
     nixos = {

@@ -22,11 +22,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    private = {
-      url = "git+file:///Users/jacobfoard/code/github.com/jacobfoard/dotfiles-private";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     mcp-servers-nix = {
       url = "github:natsukium/mcp-servers-nix";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -43,7 +38,6 @@
       home-manager,
       home,
       pkgs,
-      private,
       mcp-servers-nix,
       determinate,
       ...
@@ -67,7 +61,6 @@
             {
               nixpkgs.overlays = [
                 pkgs.overlays.default
-                private.overlays.default
                 mcp-servers-nix.overlays.default
               ];
             }
@@ -77,9 +70,6 @@
 
             # Common darwin configuration
             ./modules/common.nix
-
-            # Private darwin configuration
-            private.darwinModules.default
 
             # Machine-specific configuration
             ./machines/${hostname}
