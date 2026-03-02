@@ -14,6 +14,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    llm-agents-nix.url = "github:numtide/llm-agents.nix";
   };
 
   outputs =
@@ -22,6 +23,7 @@
       nixpkgs,
       home-manager,
       pkgs,
+      llm-agents-nix,
       ...
     }:
     let
@@ -41,6 +43,7 @@
           config.allowUnfree = true;
           overlays = [
             pkgs.overlays.default
+            llm-agents-nix.overlays.default
           ];
         };
 

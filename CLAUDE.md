@@ -97,7 +97,7 @@ nix develop
 ## Key Conventions
 
 - **Nix formatter**: `nixfmt` (RFC-style) is used. Run `nixfmt` on `.nix` files before committing.
-- **Determinate Nix**: The system uses Determinate Nix (installed outside Nix). `nix.enable = false` in darwin config because Determinate manages the daemon. The `nix.settings`, `nix.extraOptions`, etc. are still configured and picked up by Determinate's nixd. Do not add `inputs.determinate` to the flakes.
+- **Determinate Nix (CRITICAL)**: The system uses Determinate Nix, which manages the Nix daemon and `/etc/nix/nix.conf`. In `darwin/modules/common.nix`, `determinateNix.enable = true` **must always be set** -- this automatically sets `nix.enable = false`. **`nix.enable` defaults to `true` in nix-darwin**, so without `determinateNix.enable = true` the default kicks in and conflicts with Determinate's daemon management, causing breakage (broken nix daemon, failed rebuilds, etc.). **Before committing any changes to darwin modules**, verify that `determinateNix.enable = true` is present in `darwin/modules/common.nix` and that nothing explicitly sets `nix.enable = true`. The `determinate` input in `darwin/flake.nix` and `determinate.darwinModules.default` in the module list are also required.
 - **1Password SSH agent**: Git signing and SSH keys use 1Password's agent socket. The signing key is configured in `home-manager/git.nix`.
 - **Homebrew casks**: GUI apps are managed via Homebrew in `darwin/machines/<hostname>/default.nix`, with `onActivation.cleanup = "zap"` -- unlisted casks will be removed on rebuild.
 - **Custom packages as overlay**: All custom packages go in `pkgs/` as individual `.nix` files and are wired into `pkgs/flake.nix` as both overlay entries and direct package outputs.

@@ -27,6 +27,8 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    llm-agents-nix.url = "github:numtide/llm-agents.nix";
+
     determinate.url = "https://flakehub.com/f/DeterminateSystems/determinate/*";
   };
 
@@ -39,6 +41,7 @@
       home,
       pkgs,
       mcp-servers-nix,
+      llm-agents-nix,
       determinate,
       ...
     }:
@@ -62,6 +65,7 @@
               nixpkgs.overlays = [
                 pkgs.overlays.default
                 mcp-servers-nix.overlays.default
+                llm-agents-nix.overlays.default
               ];
             }
 

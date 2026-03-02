@@ -1,4 +1,4 @@
-{ ... }:
+{ config, ... }:
 
 {
   config = {
@@ -10,6 +10,7 @@
     xdg.configFile."wezterm/mouse.lua".source = ./wezterm/mouse.lua;
     xdg.configFile."wezterm/status-line.lua".source = ./wezterm/status-line.lua;
 
-    xdg.configFile."ghostty/config".source = ./ghostty;
+    xdg.configFile."ghostty/config".source = config.lib.file.mkOutOfStoreSymlink
+      /Users/jacobfoard/code/github.com/jacobfoard/dotfiles/home-manager/ghostty;
   };
 }

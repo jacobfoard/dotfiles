@@ -66,6 +66,9 @@ mouse-hide-while-typing = true
 # Window decorations
 window-theme = dark
 
+
+macos-titlebar-style = tabs
+
 # ============================================================
 # Colors (ported from WezTerm custom "JF" color scheme)
 # ============================================================

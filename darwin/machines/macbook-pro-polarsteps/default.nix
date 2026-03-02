@@ -16,6 +16,7 @@
       "1password"
       "1password-cli"
       "claude-code"
+      "coderabbit"
       "dbeaver-community"
       "firefox"
       "itsycal"
@@ -24,6 +25,7 @@
       "rectangle"
       "slack"
       "spotify"
+      # "vivid-app"
     ];
 
     masApps = {
@@ -73,22 +75,19 @@
     kubetail
     awscli2
     vault
-    # argocd # TODO: broken upstream -- UI build missing git in nativeBuildInputs
+    argocd
     k9s
     cmctl
     argo-rollouts
     eks-node-viewer
     ssm-session-manager-plugin
     # MCP servers from mcp-servers-nix overlay
-    mcp-server-memory
+    # mcp-server-memory
     # context7-mcp
-    mcp-server-sequential-thinking
-    #  serena
+    # mcp-server-sequential-thinking
     # Custom packages from pkgs overlay
-    cozempic
     kubectl-cnpg
-    beads
-    entire-cli
+    # beads
     # gastown # TODO: disabled until sandbox build fixed
     kubectl-evict-pod
     postgresql
@@ -97,5 +96,6 @@
     terramate
     uv
     python314
+    ghostty-bin
   ];
 }

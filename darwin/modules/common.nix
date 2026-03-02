@@ -12,22 +12,35 @@
   ids.gids.nixbld = 30000;
 
   # Determinate Nix manages the daemon and /etc/nix/nix.conf.
-  # determinateNix.enable = true sets nix.enable = false automatically.
-  determinateNix.customSettings = {
-    keep-outputs = true;
-    keep-derivations = true;
-    builders-use-substitutes = true;
-    trusted-users = [
-      "root"
-      username
-    ];
-    extra-substituters = [
-      "https://jacobfoard-dotfiles.cachix.org"
-      "https://nix-community.cachix.org"
-    ];
-    extra-trusted-public-keys = [
-      "jacobfoard-dotfiles.cachix.org-1:z/Be4vrLZ+whXwYP+/zwPKSrYo2z84BqMKBuapPjVao="
-      "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+  determinateNix = {
+    enable = true; # sets nix.enable = false automatically.
+    customSettings = {
+      keep-outputs = true;
+      keep-derivations = true;
+      builders-use-substitutes = true;
+      trusted-users = [
+        "root"
+        username
+      ];
+      extra-substituters = [
+        "https://jacobfoard-dotfiles.cachix.org"
+        "https://nix-community.cachix.org"
+        "https://cache.numtide.com"
+        "https://nix.polarsteps.dev/polarsteps"
+      ];
+      extra-trusted-public-keys = [
+        "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+        "niks3.numtide.com-1:DTx8wZduET09hRmMtKdQDxNNthLQETkc/yaX7M4qK0g="
+        "polarsteps:a/7IrMg5O5OBLfq/nftLZspDjnNAsCexdveqDd3FeF4="
+        "jacobfoard-dotfiles.cachix.org-1:z/Be4vrLZ+whXwYP+/zwPKSrYo2z84BqMKBuapPjVao="
+      ];
+    };
+  };
+
+  # Attic cache auth via Determinate's netrc merging
+  environment.etc."determinate/config.json".text = builtins.toJSON {
+    authentication.additionalNetrcSources = [
+      "/Users/${username}/.config/nix/netrc"
     ];
   };
 

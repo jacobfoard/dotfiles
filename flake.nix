@@ -24,6 +24,8 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    llm-agents-nix.url = "github:numtide/llm-agents.nix";
+
     # Sub-flakes using nix 2.26 path syntax
     pkgs = {
       url = "path:./pkgs";
@@ -38,6 +40,7 @@
       inputs.pkgs.follows = "pkgs";
       inputs.home.follows = "home";
       inputs.mcp-servers-nix.follows = "mcp-servers-nix";
+      inputs.llm-agents-nix.follows = "llm-agents-nix";
     };
 
     home = {
@@ -45,6 +48,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.home-manager.follows = "home-manager";
       inputs.pkgs.follows = "pkgs";
+      inputs.llm-agents-nix.follows = "llm-agents-nix";
     };
 
     nixos = {
@@ -114,8 +118,8 @@
         {
           default = nixpkgsWithOverlay.mkShell {
             packages = with nixpkgsWithOverlay; [
-              argocd-mcp
-              beads
+              # argocd-mcp
+              # beads
               # gastown # TODO: disabled until sandbox build fixed
               kubectl-cnpg
               mcp-nixos.packages.${system}.default
