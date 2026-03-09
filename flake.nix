@@ -119,8 +119,6 @@
           default = nixpkgsWithOverlay.mkShell {
             packages = with nixpkgsWithOverlay; [
               # argocd-mcp
-              # beads
-              # gastown # TODO: disabled until sandbox build fixed
               kubectl-cnpg
               mcp-nixos.packages.${system}.default
               nix-update

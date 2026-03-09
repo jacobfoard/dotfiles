@@ -87,8 +87,6 @@
     # mcp-server-sequential-thinking
     # Custom packages from pkgs overlay
     kubectl-cnpg
-    # beads
-    # gastown # TODO: disabled until sandbox build fixed
     kubectl-evict-pod
     postgresql
     hey

@@ -10,5 +10,4 @@ update-all-flakes:
 # Update all standard packages (excludes argocd-mcp which needs extra steps)
 update-pkgs:
 	cd pkgs && nix-update --commit --flake av
-	cd pkgs && nix-update --commit --flake beads
 	cd pkgs && nix-update --commit --flake kubectl-cnpg

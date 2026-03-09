@@ -33,11 +33,8 @@ The repo uses a **modular sub-flake architecture**. The root `flake.nix` compose
 ├── pkgs/                  # Custom package definitions + overlay
 │   ├── flake.nix          # Sub-flake: overlays.default, packages.<system>.*
 │   ├── av.nix             # av (Aviator stacking tool)
-│   ├── beads.nix          # beads
-│   ├── ccstatusline.nix   # ccstatusline (Bun-based, uses bun2nix)
 │   ├── argocd-mcp.nix     # argocd-mcp
 │   ├── kubectl-cnpg.nix   # kubectl-cnpg plugin
-│   └── gastown.nix        # gastown (currently disabled -- sandbox build issue)
 └── template/              # Flake template for new projects (nix flake new -t)
 ```
 
@@ -86,7 +83,6 @@ make update-ccstatusline [VERSION=x.y.z]   # bun-based package (extra steps)
 **Build a specific custom package:**
 ```bash
 nix build ./pkgs#av
-nix build ./pkgs#beads
 ```
 
 **Enter dev shell with custom packages:**
