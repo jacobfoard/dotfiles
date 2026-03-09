@@ -35,13 +35,12 @@
         "jacobfoard-dotfiles.cachix.org-1:z/Be4vrLZ+whXwYP+/zwPKSrYo2z84BqMKBuapPjVao="
       ];
     };
-  };
-
-  # Attic cache auth via Determinate's netrc merging
-  environment.etc."determinate/config.json".text = builtins.toJSON {
-    authentication.additionalNetrcSources = [
-      "/Users/${username}/.config/nix/netrc"
-    ];
+    # Attic cache auth via Determinate's netrc merging
+    determinateNixd = {
+      authentication.additionalNetrcSources = [
+        "/Users/${username}/.config/nix/netrc"
+      ];
+    };
   };
 
   # Set the primary user for system configuration
