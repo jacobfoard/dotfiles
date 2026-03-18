@@ -15,6 +15,7 @@
     casks = [
       "1password"
       "1password-cli"
+      "cleanshot"
       "claude-code"
       "coderabbit"
       "dbeaver-community"
@@ -95,5 +96,6 @@
     uv
     python314
     ghostty-bin
+    atuin-desktop
   ];
 }

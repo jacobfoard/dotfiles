@@ -44,6 +44,8 @@ in
       # This is automatically setup on Linux
       # cachix
       # tailscale
+      yaml-language-server
+      helm-ls
       (writeShellScriptBin "gsed" ''${pkgs.gnused}/bin/sed "$@"'')
       # tmux
     ])

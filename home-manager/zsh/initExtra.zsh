@@ -38,13 +38,20 @@ nixify() {
 }
 
 gh () {
-  if [[ -n $1 ]]
-  then
+  if [[ "$1" == "repo" && "$2" == "clone" && -n "$3" ]]; then
+    local repo="$3"
+    local target="$HOME/code/github.com/$repo"
+    shift 3
+    mkdir -p "$(dirname "$target")"
+    /usr/bin/env gh repo clone "$repo" "$target" "$@"
+    cd "$target"
+  elif [[ -n $1 ]]; then
     /usr/bin/env gh "$@"
   else
-    ~/code/github.com
+    cd ~/code/github.com
   fi
 }
+compdef _gh gh
 
 source <(wezterm shell-completion --shell zsh)
 

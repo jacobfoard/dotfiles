@@ -3,6 +3,12 @@
 {
   config = {
     programs = {
+      atuin = {
+        enable = true;
+        enableZshIntegration = true;
+        flags = [ "--disable-up-arrow" ];
+      };
+
       bat.enable = true;
       # home-manager.enable = true;
 

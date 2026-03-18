@@ -2,7 +2,7 @@
 
 {
   home.packages = with pkgs.llm-agents; [
-    agent-browser
+    # agent-browser
     ccstatusline
   ];
 

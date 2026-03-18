@@ -3,11 +3,18 @@
 
 ---@type LazySpec
 return {
-  "nvim-treesitter/nvim-treesitter",
-  opts = {
-    auto_install = false, -- Nix handles parser installation
-    ensure_installed = {}, -- Don't install any parsers via treesitter
-    highlight = { enable = true },
-    indent = { enable = true },
+  {
+    "nvim-treesitter/nvim-treesitter",
+    opts = {
+      auto_install = false, -- Nix handles parser installation
+      ensure_installed = {}, -- Don't install any parsers via treesitter
+      highlight = { enable = true },
+      indent = { enable = true },
+    },
+  },
+  {
+    -- Force main branch: master branch requires removed nvim-treesitter.configs module
+    "nvim-treesitter/nvim-treesitter-textobjects",
+    branch = "main",
   },
 }

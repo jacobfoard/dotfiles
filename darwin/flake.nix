@@ -74,6 +74,7 @@
 
             # Common darwin configuration
             ./modules/common.nix
+            ./modules/defaults.nix
 
             # Machine-specific configuration
             ./machines/${hostname}

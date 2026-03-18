@@ -65,6 +65,18 @@
     nonUS.remapTilde = true;
   };
 
+  # Persist key mapping across reboots (activation script only runs during rebuild)
+  # Requires granting /usr/bin/hidutil Input Monitoring in System Settings > Privacy
+  launchd.user.agents.keyboard-remap.serviceConfig = {
+    ProgramArguments = [
+      "/usr/bin/hidutil"
+      "property"
+      "--set"
+      ''{"UserKeyMapping":${builtins.toJSON config.system.keyboard.userKeyMapping}}''
+    ];
+    RunAtLoad = true;
+  };
+
   # Global system defaults
   system.defaults.NSGlobalDomain.AppleICUForce24HourTime = true;
   system.defaults.NSGlobalDomain.ApplePressAndHoldEnabled = false;
