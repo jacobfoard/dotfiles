@@ -454,6 +454,17 @@
         startAtLogin = 1;
       };
 
+      # Amphetamine
+      "com.if.Amphetamine" = {
+        "Icon Style" = 2;
+        "Hide Dock Icon" = 1;
+        "Show Welcome Window" = 0;
+        "Enable Mouse Movement" = 1;
+        "Mouse Movement Interval" = 60;
+        "Mouse Movement Inactivity Delay" = 300;
+        "Mouse Movement Smoothness" = 1;
+      };
+
       # NSGlobalDomain options not exposed as typed nix-darwin options
       NSGlobalDomain = {
         AppleMiniaturizeOnDoubleClick = false;
@@ -477,6 +488,12 @@
         ShowAMPM = 0;
         ShowDate = 0;
         ShowDayOfWeek = 1;
+      };
+
+      # Siri — hide from menu bar and disable voice trigger
+      "com.apple.Siri" = {
+        StatusMenuVisible = 0;
+        VoiceTriggerUserEnabled = 0;
       };
 
       # TimeMachine in menu bar
